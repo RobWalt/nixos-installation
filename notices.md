@@ -50,8 +50,6 @@ this:
    |--sda2 ...
    ...
 ```
-
-
 Next we need to wipe the current partitioning scheme, if one exists, and create
 a new GPT partition table:
 `$ parted /dev/sda -- mklabel gpt`
@@ -208,3 +206,12 @@ Finally it is time to run
 
 After that, you are asked to set your password and we can reboot into our freshly installed
 `$ reboot`
+
+# Configuration guide
+
+You can use the configuration of this repository at your own risk. It might not
+work for your machine. However, you can at least reuse some parts you like and
+which work for you
+
+Download the configuration with curl, i.e.
+`$ curl https://raw.githubusercontent.com/RobWalt/nixos-installation/main/configuration.nix`
