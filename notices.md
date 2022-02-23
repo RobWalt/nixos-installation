@@ -214,4 +214,6 @@ work for your machine. However, you can at least reuse some parts you like and
 which work for you
 
 Download the configuration with curl, i.e.
-`$ curl https://raw.githubusercontent.com/RobWalt/nixos-installation/main/configuration.nix`
+```
+   $ curl https://raw.githubusercontent.com/RobWalt/nixos-installation/main/configuration.nix
+```
