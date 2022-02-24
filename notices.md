@@ -206,9 +206,9 @@ vim /mnt/etc/nixos/configuration.nix
 
 I'm in UEFI mode, so I need to check
 ```nix
-   # /mnt/etc/nixos/configuration.nix
-   boot.loader.systemd-boot.enable = true;
-   boot.loader.efi.canTouchEfiVariables = true;
+# /mnt/etc/nixos/configuration.nix
+boot.loader.systemd-boot.enable = true;
+boot.loader.efi.canTouchEfiVariables = true;
 ```
 
 Since we installed NixOS with an encrypted device, we need to adjust the config
@@ -217,14 +217,14 @@ device on boot. It, however, is not visible since the device is still encrypted
 on boot. That's why we need to point NixOS to the unencrypted device containing
 the encrypted container.
 ```nix
-   # /mnt/etc/nixos/configuration.nix
-   boot.initrd.enable = true;
-   boot.initrd.luks.devices = {
-     luksroot = {
-       device = "/dev/disk/by-uuid/<UUID of /dev/sda1>";
-       preLVM = true;
-     };
-   };
+# /mnt/etc/nixos/configuration.nix
+boot.initrd.enable = true;
+boot.initrd.luks.devices = {
+  luksroot = {
+    device = "/dev/disk/by-uuid/<UUID of /dev/sda1>";
+    preLVM = true;
+  };
+};
 ```
 
 (You might want to scroll through the rest of the configuration and look
@@ -243,6 +243,8 @@ reboot
 
 # Configuration guide
 
+## 0. Cheating
+
 You can use the configuration of this repository at your own risk. It might not
 work for your machine. However, you can at least reuse some parts you like and
 which work for you
@@ -250,4 +252,77 @@ which work for you
 Download the configuration with curl, i.e.
 ```console
 curl https://raw.githubusercontent.com/RobWalt/nixos-installation/main/configuration.nix
+```
+
+Some of the configurations below have to be made regardless. (Just saying)
+
+## 1. Networking
+
+The easiest way to get a working internet connection on the installed system on
+every boot without manual intervention is to use `networkmanager`.
+
+Its configuration is quite simple. Just add the following two things to your
+`configuration.nix` file:
+
+```nix
+...
+# /etc/nixos/configuration.nix
+networking.networkmanager.enable = true;
+...
+users.users.<YOURUSERNAME>.extraGroups = [
+    <OTHER_GROUPS>
+    "networkmanager"
+];
+...
+```
+
+I also removed the line `networking.wireless.enable = true` since it kind of
+clashes with networkmanager in some cases. For more information look at the
+networking section in the nixos manual.
+
+After rebuilding your system with
+```console
+nixos-rebuild switch -p Now_With_Wifi
+```
+you can reboot. Once rebooted, you can establish a connection via the command line with
+```console
+nmcli device wifi connect <SSID> password <PASSWORD>
+```
+
+<!-- TODO look if the test of time holds on this assumption -->
+... and that's it. The connection details seem to be saved even after the next rebuild.
+
+# 2. Editor (Neovim)
+
+I use neovim as my personal favourite editor. To install neovim add it to the
+system packages in the `configuration.nix` file.
+
+```nix
+# /etc/nixos/configuration.nix
+environment.systemPackages = with pkgs; [
+...
+neovim
+...
+];
+```
+
+We can set neovim as the default editor for the whole system such that we don't
+have to look at nano ever again!
+
+```nix
+# /etc/nixos/configuration.nix
+environment.variables.EDITOR = "nvim";
+```
+
+We can also overwrite the `vi` and `vim` commands to open neovim instead
+```nix
+# /etc/nixos/configuration.nix
+nixpkgs.overlays = [
+  (self: super: {
+   neovim = super.neovim.override {
+     viAlias = true;
+     vimAlias = true;
+   };
+   })
+];
 ```
