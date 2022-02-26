@@ -5,7 +5,7 @@ in
 {
   environment.variables.EDITOR = "nvim";
 
-  environment.systemPackages = with pkgs;
+  nixpkgs.overlays =
     let
       general_settings = ''
         set nocompatible
@@ -167,43 +167,49 @@ in
         nnoremap <silent> ga <cmd>lua vim.lsp.buf.code_action()<CR>
         vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
       '';
-      myneovim = (unstable.neovim.override {
-        viAlias = true;
-        vimAlias = true;
-        configure = {
-          plug.plugins = with pkgs.vimPlugins;
-            [
-              vim-nix
-              gruvbox
-              rust-tools-nvim
-              nvim-lspconfig
-              cmp-nvim-lsp
-              cmp-buffer
-              nvim-cmp
-              cmp-vsnip
-              vim-vsnip
-              plenary-nvim
-              nvim-dap
-              popup-nvim
-              telescope-nvim
-              nvim-treesitter
-              nerdtree
-              auto-pairs
-              ctrlp-vim
-            ];
-          customRC = general_settings
-            + cmp_settings
-            + lsp_settings
-            + colorscheme_settings
-            + nerdtree_settings
-            + treesitter-settings
-            + rust-tools-settings
-            + keybindings;
-        };
-      });
     in
     [
-      myneovim
+      (self: super: {
+        neovim = unstable.neovim.override {
+          viAlias = true;
+          vimAlias = true;
+          configure = {
+            plug.plugins = with pkgs.vimPlugins;
+              [
+                vim-nix
+                gruvbox
+                rust-tools-nvim
+                nvim-lspconfig
+                cmp-nvim-lsp
+                cmp-buffer
+                nvim-cmp
+                cmp-vsnip
+                vim-vsnip
+                plenary-nvim
+                nvim-dap
+                popup-nvim
+                telescope-nvim
+                nvim-treesitter
+                nerdtree
+                auto-pairs
+                ctrlp-vim
+              ];
+            customRC = general_settings
+              + cmp_settings
+              + lsp_settings
+              + colorscheme_settings
+              + nerdtree_settings
+              + treesitter-settings
+              + rust-tools-settings
+              + keybindings;
+          };
+        };
+      })
+    ];
+
+  environment.systemPackages = with pkgs;
+    [
+      neovim
       gcc # needed for treesitter compilation
       clang # needed for rust-tools
       git # needed for treesitter download
