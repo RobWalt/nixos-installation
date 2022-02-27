@@ -8,7 +8,8 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./nvim.nix
+      ./neovim/init_nvim.nix
+      ./home.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
@@ -22,8 +23,6 @@
       preLVM = true;
     };
   };
-
-  # unblock rf-kill
 
   networking.hostName = "robw"; # Define your hostname.
   networking.networkmanager.enable = true; # Enable NetworkManager
