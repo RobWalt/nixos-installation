@@ -395,22 +395,29 @@ environment.systemPackages = with pkgs;
 ...
 ```
 
-Next we can start configuring this instance of `neovim` by using `override` in
-a defintion in the following way
+Next we can start configuring this instance of `neovim` by using `overlay` and
+`override` in a defintion. Overlays have the benefit of changing the definition
+of the `neovim` package everywhere in our system. Without that, `neovim` would
+be the default version anywhere else in our configs. We do so in the following
+way
 
 ```nix
 # /etc/nixos/nvim.nix
 ...
 environment.variables.EDITOR = "nvim";
+
+nixpkgs.overlays = [
+  (self: super: {
+    neovim = unstable.neovim.override {
+      viAlias = true;
+      vimAlias = true;
+    };
+  })
+];
+
 environment.systemPackages = with pkgs;
-let 
-myneovim = (unstable.neovim.override {
-    viAlias = true;
-    vimAlias = true;
-  });
-in
 [
-  myneovim           # neovim 
+  neovim             # neovim 
   clang              # needed for rust-analyzer
   gcc                # needed for tree sitter plugin (doesn't work with clang) 
   git                # needed for tree sitter to download parsers
@@ -432,36 +439,40 @@ Anyways, here is the next version of `nvim.nix` with plugins added to neovim. Oh
 # /etc/nixos/nvim.nix
 ...
 environment.variables.EDITOR = "nvim";
-environment.systemPackages = with pkgs;
-let 
-myneovim = (unstable.neovim.override {
-    viAlias = true;
-    vimAlias = true;
-    configure = {
-      plug.plugins = with pkgs.vimPlugins;
-      [
-        vim-nix
-        gruvbox
-        rust-tools-nvim
-        nvim-lspconfig
-        cmp-nvim-lsp
-        cmp-buffer
-        nvim-cmp
-        cmp-vsnip
-        plenary-nvim
-        nvim-dap
-        popup-nvim
-        telescope-nvim
-        nvim-treesitter
-        nerdtree
-        auto-pairs
-        ctrlp-vim
-      ];
+
+nixpkgs.overlays = [
+  (self: super: {
+    neovim = unstable.neovim.override {
+      viAlias = true;
+      vimAlias = true;
+      configure = {
+        plug.plugins = with pkgs.vimPlugins;
+        [
+          vim-nix
+          gruvbox
+          rust-tools-nvim
+          nvim-lspconfig
+          cmp-nvim-lsp
+          cmp-buffer
+          nvim-cmp
+          cmp-vsnip
+          plenary-nvim
+          nvim-dap
+          popup-nvim
+          telescope-nvim
+          nvim-treesitter
+          nerdtree
+          auto-pairs
+          ctrlp-vim
+        ];
+      };
     };
-  });
-in
+  })
+];
+
+environment.systemPackages = with pkgs;
 [
-  myneovim           # neovim 
+  neovim             # neovim 
   clang              # needed for rust-analyzer
   gcc                # needed for tree sitter plugin (doesn't work with clang) 
   git                # needed for tree sitter to download parsers
@@ -489,68 +500,75 @@ The final version of `nvim.nix`.
 # /etc/nixos/nvim.nix
 ...
 environment.variables.EDITOR = "nvim";
-environment.systemPackages = with pkgs;
-let 
-myneovim = (unstable.neovim.override {
-    viAlias = true;
-    vimAlias = true;
-    configure = {
-      plug.plugins = with pkgs.vimPlugins;
-      [
-        vim-nix
-        gruvbox
-        rust-tools-nvim
-        nvim-lspconfig
-        cmp-nvim-lsp
-        cmp-buffer
-        nvim-cmp
-        cmp-vsnip
-        plenary-nvim
-        nvim-dap
-        popup-nvim
-        telescope-nvim
-        nvim-treesitter
-        nerdtree
-        auto-pairs
-        ctrlp-vim
-      ];
-    };
-    general_settings = ''...'' ;
-    ...
-      lsp_settings = ''
-        autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
-        autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
 
-        lua << EOF
-          require('lspconfig').rnix.setup();
-          require('lspconfig').rust_analyzer.setup{
-            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-            settings = {
-              ["rust-analyzer"] = {
-                assist = {
-                  importGranularity = "module",
-                  importPrefix = "by_self",
-                },
-                cargo = {
-                  loadOutDirsFromCheck = true,
-                },
-                procMacro = {
-                  enable = true,
-                },
-              },
+nixpkgs.overlays = 
+let 
+  general_settings = ''...'' ;
+  ...
+  lsp_settings = ''
+    autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
+    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
+
+    lua << EOF
+      require('lspconfig').rnix.setup();
+      require('lspconfig').rust_analyzer.setup{
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        settings = {
+          ["rust-analyzer"] = {
+            assist = {
+              importGranularity = "module",
+              importPrefix = "by_self",
             },
-          };
-        EOF
-      '';
-    ...
-    customRC = general_settings 
-      + ...
-      + lsp_settings
-      + ...;
-  });
+            cargo = {
+              loadOutDirsFromCheck = true,
+            },
+            procMacro = {
+              enable = true,
+            },
+          },
+        },
+      };
+    EOF
+  '';
+  ...
 in
 [
-  myneovim           # neovim 
+  (self: super: {
+    neovim = unstable.neovim.override {
+      viAlias = true;
+      vimAlias = true;
+      configure = {
+        plug.plugins = with pkgs.vimPlugins;
+        [
+          vim-nix
+          gruvbox
+          rust-tools-nvim
+          nvim-lspconfig
+          cmp-nvim-lsp
+          cmp-buffer
+          nvim-cmp
+          cmp-vsnip
+          plenary-nvim
+          nvim-dap
+          popup-nvim
+          telescope-nvim
+          nvim-treesitter
+          nerdtree
+          auto-pairs
+          ctrlp-vim
+        ];
+        customRC = general_settings 
+          + ...
+          + lsp_settings
+          + ...;
+        };
+    };
+  })
+];
+
+environment.systemPackages = with pkgs;
+[
+  neovim             # neovim 
   clang              # needed for rust-analyzer
   gcc                # needed for tree sitter plugin (doesn't work with clang) 
   git                # needed for tree sitter to download parsers
