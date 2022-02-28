@@ -3,10 +3,6 @@ let
   unstable = import <nixos-unstable> { };
 in
 {
-  environment.variables.EDITOR = "nvim";
-
-
-
   nixpkgs.overlays =
     let
       # function to reduce redundancy

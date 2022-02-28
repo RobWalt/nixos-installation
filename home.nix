@@ -16,5 +16,9 @@ in
       email = "robwalter96@gmail.com";
     };
 
+    programs.alacritty = {
+      enable = true;
+    };
+
   };
 }

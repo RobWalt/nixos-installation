@@ -10,35 +10,23 @@
       ./hardware-configuration.nix
       ./neovim/init_nvim.nix
       ./home.nix
+      ./windowmanager.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  nixpkgs.config.allowUnfree = true;
 
-  # Point to the encrypted device when starting
-  boot.initrd.enable = true;
-  boot.initrd.luks.devices = {
-    luksroot = {
-      device = "/dev/disk/by-uuid/b1b613db-c5b7-49e1-a5ec-148108a77277";
-      preLVM = true;
-    };
+  environment.variables = {
+    EDITOR = "nvim";
+    TERM = "alacritty";
   };
 
   networking.hostName = "robw"; # Define your hostname.
   networking.networkmanager.enable = true; # Enable NetworkManager
 
-  # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.wlp1s0.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -47,16 +35,6 @@
     keyMap = "de-latin1";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
-
-
-  # Configure keymap in X11
-  # services.xserver.layout = "de-latin1";
-  # services.xserver.xkbOptions = "eurosign:e";
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -64,20 +42,16 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.robw = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-
   environment.systemPackages = with pkgs;
     [
+      alacritty
+      rofi
       gcc
       clang
       git
@@ -106,9 +80,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # High DPI settings
-  hardware.video.hidpi.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

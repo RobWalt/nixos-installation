@@ -5,27 +5,44 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" ];
+      kernelModules = [ "dm-snapshot" ];
+      enable = true;
+      luks.devices = {
+        luksroot = {
+          device = "/dev/disk/by-uuid/b1b613db-c5b7-49e1-a5ec-148108a77277";
+          preLVM = true;
+        };
+      };
+    };
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
+  };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/eec047a8-ac11-4fcf-8214-d0a302feba68";
+    {
+      device = "/dev/disk/by-uuid/eec047a8-ac11-4fcf-8214-d0a302feba68";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/04C2-59FF";
+    {
+      device = "/dev/disk/by-uuid/04C2-59FF";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/24fdefb9-1fe8-445e-a583-89fe47d1c347"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/24fdefb9-1fe8-445e-a583-89fe47d1c347"; }];
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
