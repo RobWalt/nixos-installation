@@ -10,10 +10,13 @@ in
   home-manager.users.robw = {
     programs.home-manager.enable = true;
 
-    # git
-    programs.git = import ./git.nix {
-      name = "RobWalt";
-      email = "robwalter96@gmail.com";
+    programs.git = {
+      enable = true;
+      userName = "RobWalt";
+      userEmail = "robwalter96@gmail.com";
+      extraConfig = {
+        pull.rebase = false;
+      };
     };
 
     programs.alacritty = {

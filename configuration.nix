@@ -21,7 +21,8 @@
   };
 
   networking.hostName = "robw"; # Define your hostname.
-  networking.networkmanager.enable = true; # Enable NetworkManager
+  networking.wireless.enable = true;
+  #networking.networkmanager.enable = true; # Enable NetworkManager
 
   time.timeZone = "Europe/Berlin";
 
@@ -45,7 +46,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.robw = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   environment.systemPackages = with pkgs;
@@ -59,7 +60,6 @@
       gh
       wget
       firefox
-      wpa_supplicant
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
