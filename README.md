@@ -579,3 +579,153 @@ environment.systemPackages = with pkgs;
 ```
 
 And that's it. Neovim should work fine now :)
+
+We can increase readability even more, by modularizing the configuration a bit
+more. The settings could be their own modules for instance. I crafted the
+following solution to reduce the individual file line counts:
+
+```nix
+# /etc/nixos/nvim.nix
+...
+environment.variables.EDITOR = "nvim";
+environment.systemPackages = with pkgs;
+let 
+myneovim = (unstable.neovim.override {
+    viAlias = true;
+    vimAlias = true;
+    configure = {
+      plug.plugins = with pkgs.vimPlugins;
+      [
+        vim-nix
+        gruvbox
+        rust-tools-nvim
+        nvim-lspconfig
+        cmp-nvim-lsp
+        cmp-buffer
+        nvim-cmp
+        cmp-vsnip
+        plenary-nvim
+        nvim-dap
+        popup-nvim
+        telescope-nvim
+        nvim-treesitter
+        nerdtree
+        auto-pairs
+        ctrlp-vim
+      ];
+    };
+
+    neovim_pwd = builtins.toString ./.;
+    settings_fn = name : (import "${neovim_pwd}/${name}_settings.nix" {}).content;
+
+    general_settings = settings_fn "general" ;
+    ...
+    lsp_settings = settings_fn "lsp";
+    ...
+    customRC = general_settings 
+      + ...
+      + lsp_settings
+      + ...;
+  });
+in
+[
+  myneovim           # neovim 
+  clang              # needed for rust-analyzer
+  gcc                # needed for tree sitter plugin (doesn't work with clang) 
+  git                # needed for tree sitter to download parsers
+  rust-analyzer      # rust-analyzer, rust lsp
+  rnix-lsp           # nix lsp
+];
+...
+```
+
+And then create `lsp_settings.nix` as follows:
+```nix
+{}:
+{
+  content = ''
+        autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
+        autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
+
+        lua << EOF
+          require('lspconfig').rnix.setup();
+          require('lspconfig').rust_analyzer.setup{
+            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+            settings = {
+              ["rust-analyzer"] = {
+                assist = {
+                  importGranularity = "module",
+                  importPrefix = "by_self",
+                },
+                cargo = {
+                  loadOutDirsFromCheck = true,
+                },
+                procMacro = {
+                  enable = true,
+                },
+              },
+            },
+          };
+        EOF
+        '';
+}
+```
+
+# 3. Home Manager 
+
+## 3.1. Setting Home Manager Up
+
+Home manager is a convenient way of managing files which would be located in
+the home directory on normal systems.
+
+To install home-manager, we first start with a whole new module called
+`home.nix` and insert this boilerplate into it:
+
+(don't forget to import it in the `configuration.nix` file)
+
+```nix
+# /etc/nixos/home.nix
+{ pkgs, ... }:
+let 
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
+{
+  import = [
+    (import "${home-manager}/nixos")
+  ];
+
+  home-manager.users.YOURUSERNAMEHERE_LOL = {
+    programs.home-manager.enable = true;
+  };
+}
+```
+
+If you did everything the right way, this should throw no errors on `nixos-rebuild switch`.
+
+Next, we can add a little example configuration for git.
+
+```nix
+# /etc/nixos/home.nix
+{ pkgs, ... }:
+let 
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
+{
+  import = [
+    (import "${home-manager}/nixos")
+  ];
+
+  home-manager.users.YOUR_USERNAME_HERE = {
+    programs.home-manager.enable = true;
+
+    programs.git = {
+      enable = true;
+      userName = "YOUR_GIT_USERNAME_HERE";
+      userEmail = "YOUR_GIT_EMAIL_HERE";
+    };
+  };
+}
+```
+
+Congrats, this should also work and now your git information will automatically
+be filled in on every rebuild of your system.
