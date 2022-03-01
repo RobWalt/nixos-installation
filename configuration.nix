@@ -7,25 +7,26 @@
   imports =
     [
       # Include the results of the hardware scan.
+      ./env.nix
       ./hardware-configuration.nix
       ./neovim/init_nvim.nix
       ./home.nix
       ./windowmanager.nix
+      ./packages.nix
+      ./nvimos.nix
     ];
+
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.variables = {
-    EDITOR = "nvim";
-    TERM = "alacritty";
-  };
-
-  networking.hostName = "robw"; # Define your hostname.
-  networking.wireless.enable = true;
-  #networking.networkmanager.enable = true; # Enable NetworkManager
-
   time.timeZone = "Europe/Berlin";
 
+  networking.wireless.enable = true;
+  networking.wireless.networks = {
+    CoolanXD.pskRaw = "a59a39d392ed3a162784400836235fa155c43c03d48ebfd4b5315852f93f526d";
+  };
+  networking.wireless.userControlled.enable = true;
+  networking.hostName = "robw"; # Define your hostname.
   networking.useDHCP = false;
   networking.interfaces.wlp1s0.useDHCP = true;
 
@@ -48,19 +49,6 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
-
-  environment.systemPackages = with pkgs;
-    [
-      alacritty
-      rofi
-      gcc
-      clang
-      git
-      rustup
-      gh
-      wget
-      firefox
-    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -90,4 +78,3 @@
   system.stateVersion = "21.11"; # Did you read the comment?
 
 }
-                 

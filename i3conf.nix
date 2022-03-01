@@ -14,11 +14,14 @@
   bindsym $mod+Shift+q kill
 
   # start dmenu (a program launcher)
-  bindsym $mod+d exec "rofi -combi-modi window,drun,ssh -show combi"
+  bindsym $mod+d exec "rofi -dpi 190 -combi-modi window,drun,ssh -show combi"
   # There also is the (new) i3-dmenu-desktop which only displays applications
   # shipping a .desktop file. It is a wrapper around dmenu, so you need that
   # installed.
   # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+  # polybar
+  exec_always --no-startup-id polybar main -c $HOME/.config/polybar/config &
 
   # change focus
   bindsym $mod+j focus left
@@ -139,4 +142,5 @@
   client.background       #FFFFFF
 
   for_window [class=".*"] border pixel 0
+
 ''

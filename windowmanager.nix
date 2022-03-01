@@ -2,11 +2,11 @@
 {
   # High DPI settings
   hardware.video.hidpi.enable = true;
-  services.xserver.dpi = 180;
+  services.xserver.dpi = 190;
   environment.variables = {
     GDK_SCALE = "2";
     GDK_DPI_SCALE = "0.5";
-    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+    _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2.0";
   };
 
   environment.pathsToLink = [ "/libexec" ];
@@ -21,6 +21,10 @@
 
     displayManager = {
       lightdm.enable = true;
+      autoLogin = {
+        enable = true;
+        user = "robw";
+      };
       defaultSession = "none+i3";
     };
 
@@ -39,7 +43,6 @@
         i3blocks
       ];
     };
-
   };
 
   environment.etc."i3.conf".text = pkgs.callPackage ./i3conf.nix { };

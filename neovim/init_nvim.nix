@@ -12,11 +12,12 @@ in
       # init.nvim parts
       general_settings = settings_fn "general";
       cmp_settings = settings_fn "cmp";
-      lsp_settings = settings_fn "lsp";
       colorscheme_settings = settings_fn "colorscheme";
+      lsp_settings = settings_fn "lsp";
       nerdtree_settings = settings_fn "nerdtree";
-      treesitter_settings = settings_fn "treesitter";
       rusttools_settings = settings_fn "rusttools";
+      toggleterm_settings = settings_fn "toggleterm";
+      treesitter_settings = settings_fn "treesitter";
       keybindings = settings_fn "keybindings";
     in
     [
@@ -27,31 +28,36 @@ in
           configure = {
             plug.plugins = with pkgs.vimPlugins;
               [
-                vim-nix
-                gruvbox
-                rust-tools-nvim
-                nvim-lspconfig
-                cmp-nvim-lsp
-                cmp-buffer
-                nvim-cmp
-                cmp-vsnip
-                vim-vsnip
-                plenary-nvim
-                nvim-dap
-                popup-nvim
-                telescope-nvim
-                nvim-treesitter
-                nerdtree
                 auto-pairs
+                cmp-buffer
+                cmp-nvim-lsp
+                cmp-vsnip
                 ctrlp-vim
+                gruvbox
+                nerdtree
+                nvim-cmp
+                nvim-dap
+                nvim-lspconfig
+                nvim-treesitter
+                plenary-nvim
+                popup-nvim
+                rust-tools-nvim
+                telescope-nvim
+                toggleterm-nvim
+                vim-airline
+                vim-airline-themes
+                vim-nix
+                vim-vsnip
               ];
-            customRC = general_settings
+            customRC =
+              general_settings
               + cmp_settings
-              + lsp_settings
               + colorscheme_settings
+              + lsp_settings
               + nerdtree_settings
-              + treesitter_settings
               + rusttools_settings
+              + toggleterm_settings
+              + treesitter_settings
               + keybindings;
           };
         };
@@ -61,8 +67,8 @@ in
   environment.systemPackages = with pkgs;
     [
       neovim
-      gcc # needed for treesitter compilation
       clang # needed for rust-tools
+      gcc # needed for treesitter compilation
       git # needed for treesitter download
       rnix-lsp # nix lsp
       rust-analyzer # rust lsp

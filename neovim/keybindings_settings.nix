@@ -4,7 +4,6 @@
     ''
       nnoremap <silent> <C-d> :NERDTree<CR>
       nnoremap <silent> <C-f> :NERDTreeFind<CR>
-      nnoremap <silent> <C-t> :NERDTreeToggle<CR>
       nnoremap <silent> <C-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
       nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
       nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
