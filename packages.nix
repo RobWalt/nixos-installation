@@ -25,10 +25,38 @@
       fd
 
       mypolybar
+      polybar
+      zsh
 
       rustup
       clang
 
+      pamixer
+      brightnessctl
       wpa_supplicant
+      rmapi
+      just
+      tree
+
+      pkg-config
+
+      hyperfine
+      cargo-edit
+      cargo-make
+      cargo-deny
+      cargo-audit
+      cargo-fuzz
+      cargo-expand
+      cargo-llvm-lines
+      cargo-watch
+      cargo-udeps
+      cargo-outdated
+      cargo-bloat
+      # not available yet
+      #cargo-hack
+      #cargo-nextest
+
+      nodejs
+      docker-compose
     ];
 }

@@ -14,14 +14,14 @@
   bindsym $mod+Shift+q kill
 
   # start dmenu (a program launcher)
-  bindsym $mod+d exec "rofi -dpi 190 -combi-modi window,drun,ssh -show combi"
+  bindsym $mod+d exec "rofi -dpi 170 -combi-modi window,drun,ssh -show combi"
   # There also is the (new) i3-dmenu-desktop which only displays applications
   # shipping a .desktop file. It is a wrapper around dmenu, so you need that
   # installed.
   # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
   # polybar
-  exec_always --no-startup-id polybar main -c $HOME/.config/polybar/config &
+  exec_always --no-startup-id polybar main -c $HOME/.config/polybar/config
 
   # change focus
   bindsym $mod+j focus left
@@ -99,8 +99,8 @@
   # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
   bindsym $mod+Shift+r restart
 
-  bindsym XF86MonBrightnessUp exec brightnessctl s 10+  # increase screen brightness
-  bindsym XF86MonBrightnessDown exec brightnessctl s 10-  # decrease screen brightness
+  bindsym XF86MonBrightnessUp exec brightnessctl s +10%  # increase screen brightness
+  bindsym XF86MonBrightnessDown exec brightnessctl s 10%-  # decrease screen brightness
   # Pulse Audio controls
   bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
   bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume

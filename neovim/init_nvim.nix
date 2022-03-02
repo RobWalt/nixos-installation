@@ -29,6 +29,7 @@ in
             plug.plugins = with pkgs.vimPlugins;
               [
                 auto-pairs
+                barbar-nvim
                 cmp-buffer
                 cmp-nvim-lsp
                 cmp-vsnip
@@ -39,6 +40,7 @@ in
                 nvim-dap
                 nvim-lspconfig
                 nvim-treesitter
+                nvim-web-devicons
                 plenary-nvim
                 popup-nvim
                 rust-tools-nvim

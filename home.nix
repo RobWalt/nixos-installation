@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in
@@ -15,12 +15,33 @@ in
 
     programs.home-manager.enable = true;
 
-    programs.bash = {
+    programs.zsh = {
+      enable = true;
+
+      enableAutosuggestions = true;
+
       shellAliases = {
         l = "ls -l";
         ll = "ls -alh";
         ls = "ls --color=tty";
+        grep = "rg";
+        find = "fd";
       };
+      history = {
+        size = 100000;
+        path = ".zhistory";
+      };
+      zplug = {
+        enable = true;
+        plugins = [
+          { name = "zsh-users/zsh-autosuggestions"; }
+          { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
+        ];
+      };
+
+      initExtra = ''
+        source /home/robw/.p10k.zsh
+      '';
     };
 
     programs.git = {
@@ -47,7 +68,7 @@ in
         enable = true;
         package = homepolybar;
         script = ''
-          polybar top --config=/home/robw/.config/polybar/config
+          polybar main --config=/home/robw/.config/polybar/config
         '';
         config = {
           "global/wm" = {
@@ -103,7 +124,7 @@ in
             internal = "1.0";
             time = " %a, %d %b %Y - %H:%M";
             format = "<label>";
-            format-background = "\${color.shade3}";
+            format-background = "\${color.shade6}";
             format-padding = 2;
             label = "%time%";
           };
@@ -130,17 +151,17 @@ in
             label-focused = "%index%";
             label-focused-foreground = "#ffffff";
             label-focused-background = "#3f3f3f";
-            label-focused-underline = "#fba922";
-            label-focused-padding = 4;
+            label-focused-underline = "\${color.shade8}";
+            label-focused-padding = 2;
             label-unfocused = "%index%";
-            label-unfocused-padding = 4;
+            label-unfocused-padding = 2;
             label-visible = "%index%";
-            label-visible-underline = "#555555";
-            label-visible-padding = 4;
+            label-visible-underline = "\${color.foreground-alt}";
+            label-visible-padding = 2;
             label-urgent = "%index%";
             label-urgent-foreground = "#000000";
             label-urgent-background = "#bd2c40";
-            label-urgent-padding = 4;
+            label-urgent-padding = 2;
           };
           "module/network" = {
             type = "internal/network";
@@ -149,7 +170,7 @@ in
             accumulate-stats = true;
             unknown-as-up = true;
             format-connected = "<ramp-signal> <label-connected>";
-            format-connected-background = "\${color.shade4}";
+            format-connected-background = "\${color.shade6}";
             format-connected-padding = 2;
             format-disconnected = "<label-disconnected>";
             format-disconnected-prefix = "睊";
@@ -165,14 +186,14 @@ in
             background = "#282828";
             foreground = "#ebdbb2";
             foreground-alt = "#a89984";
-            shade1 = "#2b3a25";
-            shade2 = "#47603e";
-            shade3 = "#638657";
-            shade4 = "#729a63";
-            shade5 = "#80ad70";
-            shade6 = "#8ec07c";
-            shade7 = "#99c689";
-            shade8 = "#a5cd96";
+            shade1 = "#162736";
+            shade2 = "#25425a";
+            shade3 = "#345c7e";
+            shade4 = "#4376a2";
+            shade5 = "#5d90bc";
+            shade6 = "#81a9cb";
+            shade7 = "#a5c1da";
+            shade8 = "#a9dae9";
           };
           "bar/main" = {
             monitor = "";
@@ -214,7 +235,7 @@ in
             tray-offset-y = 0;
             tray-padding = 0;
             tray-scale = "1.0";
-            dpi = 190;
+            dpi = 170;
             enable-ipc = true;
             click-left = "";
             click-middle = "";
