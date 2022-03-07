@@ -14,7 +14,9 @@ in
       cmp_settings = settings_fn "cmp";
       colorscheme_settings = settings_fn "colorscheme";
       lsp_settings = settings_fn "lsp";
-      nerdtree_settings = settings_fn "nerdtree";
+      lualine_settings = settings_fn "lualine";
+      luatab_settings = settings_fn "luatab";
+      nvimtree_settings = settings_fn "nvimtree";
       rusttools_settings = settings_fn "rusttools";
       toggleterm_settings = settings_fn "toggleterm";
       treesitter_settings = settings_fn "treesitter";
@@ -29,16 +31,17 @@ in
             plug.plugins = with pkgs.vimPlugins;
               [
                 auto-pairs
-                barbar-nvim
                 cmp-buffer
                 cmp-nvim-lsp
                 cmp-vsnip
                 ctrlp-vim
-                gruvbox
-                nerdtree
+                lualine-nvim
+                luatab-nvim
+                nord-vim
                 nvim-cmp
                 nvim-dap
                 nvim-lspconfig
+                nvim-tree-lua
                 nvim-treesitter
                 nvim-web-devicons
                 plenary-nvim
@@ -46,8 +49,7 @@ in
                 rust-tools-nvim
                 telescope-nvim
                 toggleterm-nvim
-                vim-airline
-                vim-airline-themes
+                vim-highlightedyank
                 vim-nix
                 vim-vsnip
               ];
@@ -56,7 +58,9 @@ in
               + cmp_settings
               + colorscheme_settings
               + lsp_settings
-              + nerdtree_settings
+              + lualine_settings
+              + luatab_settings
+              + nvimtree_settings
               + rusttools_settings
               + toggleterm_settings
               + treesitter_settings

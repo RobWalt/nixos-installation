@@ -19,14 +19,16 @@
 
   time.timeZone = "Europe/Berlin";
 
-  networking.wireless.enable = true;
-  networking.wireless.networks = {
-    CoolanXD.pskRaw = "a59a39d392ed3a162784400836235fa155c43c03d48ebfd4b5315852f93f526d";
+  networking = {
+    wireless.enable = true;
+    wireless.networks = {
+      CoolanXD.pskRaw = "a59a39d392ed3a162784400836235fa155c43c03d48ebfd4b5315852f93f526d";
+    };
+    #wireless.userControlled.enable = true;
+    hostName = "robw"; # Define your hostname.
+    useDHCP = false;
+    interfaces.wlp1s0.useDHCP = true;
   };
-  networking.wireless.userControlled.enable = true;
-  networking.hostName = "robw"; # Define your hostname.
-  networking.useDHCP = false;
-  networking.interfaces.wlp1s0.useDHCP = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";

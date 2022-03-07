@@ -31,7 +31,6 @@
       rustup
       clang
 
-      pamixer
       brightnessctl
       wpa_supplicant
       rmapi
@@ -39,6 +38,7 @@
       tree
 
       pkg-config
+      pamixer
 
       hyperfine
       cargo-edit
