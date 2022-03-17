@@ -31,7 +31,6 @@
       rustup
       clang
 
-      pamixer
       brightnessctl
       wpa_supplicant
       rmapi
@@ -39,6 +38,7 @@
       tree
 
       pkg-config
+      pamixer
 
       hyperfine
       cargo-edit
@@ -58,5 +58,12 @@
 
       nodejs
       docker-compose
+
+      # everything needed for neovim
+      clang # needed for rust-tools
+      gcc # needed for treesitter compilation
+      git # needed for treesitter download
+      rnix-lsp # nix lsp
+      rust-analyzer # rust lsp
     ];
 }
