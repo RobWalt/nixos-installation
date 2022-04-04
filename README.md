@@ -21,93 +21,16 @@ After that, change the keymap if needed
 loadkeys de-latin1
 ```
 
-## 2.-1 Wifi Setup - Setup
-On my machine, my wlan is blocked by `rfkill` by default. To unblock I need to run
-```console
-rfkill unblock all
-```
-My wireless interface is also down by default. I need to bring it up with 
-```console
-ip link set <INTERFACE-NAME> up
-```
+## 2.1 Partitioning and encryption
 
-## 2.1 Wifi Setup
+### 2.1.1 Erase old stuff
 
-We're going to use an oldschool way of connecting to the internet for the
-installation. We are going to connect with wpa_supplicant directly in the
-command line.
-```console
-wpa_supplicant -B -i <INTERFACE-NAME> -c <(wpa_passphrase <SSID> <PASSPHRASE>)
-```
+If you have your hard drive encrypted and you are lazy like I am, just use an
+Ubuntu image or something to zap everything (including the encryption) from the
+hard drive.
 
-Congratulations, you have established a internet connection now!
-
-## 2.2 Partitioning and encryption
-
-### 2.2.1 Erase old stuff
-
-I'm going to install my system on a single block device and I'm going to use
-`sda` for this guide. Apply changes to all of the commands below as needed.
-
-First of all, check the current status of the block device. Mine looks like
-this:
-```console
-lsblk
-   Name MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
-   ...
-   sda  ...
-   |--sda1 ...
-   |--sda2 ...
-   ...
-```
-Next we need to wipe the current partitioning scheme, if one exists, and create
-a new GPT partition table:
-```console
-parted /dev/sda -- mklabel gpt
-```
-This is effectively just a deletion step. We need to create the partition table again later
-
-After that, the `lsblk` output should look like this:
-```console
-lsblk
-   Name MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
-   ...
-   sda  ...
-   ...
-```
-
-Next we need to securely erase everything on the block-device we
-want to use for our new encrpyted setup. For this, we are going to create a
-temporary encrypted container on the device which is going to be encrypted:
-```console
-cryptsetup open --type plain -d /dev/urandom /dev/sda to_be_wiped
-```
-This is going to help us overwrite that entrie block device with random data to
-prevent cryptographic attacks. After that we can check again, that the new
-temporary container exists:
-```console
-lsblk
-   Name MAJ:MIN RM SIZE RO TYPE MOUNTPOINTS
-   ...
-   sda  …..
-   |--to_be_wiped
-```
-
-Now its time to wipe the container with zeros:
-```console
-dd if=/dev/zero of=/dev/mapper/to_be_wiped status=progress
-```
-This overrides everything on that device starting from our temporary container,
-which is everything since nothing comes before the container. This might take a
-while. No seriously. Go for a walk or something.
-
-When everything is done, we can close the temporary container and start
-partitioning the block device:
-```console
-cryptsetup close to_be_wiped
-```
-
-### 2.2.2 Actually creating partitions (encrpyted ones)
+If you know what you're doing, go ahead and do it your way.
+### 2.1.2 Creating partitions (encrpyted ones)
 
 My partition layout here is very simplistic. Feel free to deviate here.
 
@@ -227,6 +150,11 @@ boot.initrd.luks.devices = {
 };
 ```
 
+You can check the UUID of your hard drive with
+```console
+lsblk -f
+```
+
 (You might want to scroll through the rest of the configuration and look
 through the comments. You probably should uncomment a few things there to
 enable and install stuff. Otherwise your system will be rather empty.)
@@ -253,44 +181,6 @@ Download the configuration with curl, i.e.
 ```console
 curl https://raw.githubusercontent.com/RobWalt/nixos-installation/main/configuration.nix
 ```
-
-Some of the configurations below have to be made regardless. (Just saying)
-
-## 1. Networking
-
-The easiest way to get a working internet connection on the installed system on
-every boot without manual intervention is to use `networkmanager`.
-
-Its configuration is quite simple. Just add the following two things to your
-`configuration.nix` file:
-
-```nix
-...
-# /etc/nixos/configuration.nix
-networking.networkmanager.enable = true;
-...
-users.users.<YOURUSERNAME>.extraGroups = [
-    <OTHER_GROUPS>
-    "networkmanager"
-];
-...
-```
-
-I also removed the line `networking.wireless.enable = true` since it kind of
-clashes with networkmanager in some cases. For more information look at the
-networking section in the nixos manual.
-
-After rebuilding your system with
-```console
-nixos-rebuild switch -p Now_With_Wifi
-```
-you can reboot. Once rebooted, you can establish a connection via the command line with
-```console
-nmcli device wifi connect <SSID> password <PASSWORD>
-```
-
-<!-- TODO look if the test of time holds on this assumption -->
-... and that's it. The connection details seem to be saved even after the next rebuild.
 
 # 2. Editor (Neovim)
 
@@ -385,7 +275,7 @@ way after this step
 environment.variables.EDITOR = "nvim";
 environment.systemPackages = with pkgs;
 [
-  unstable.neovim    # neovim 
+  neovim             # neovim 
   clang              # needed for rust-analyzer
   gcc                # needed for tree sitter plugin (doesn't work with clang) 
   git                # needed for tree sitter to download parsers
@@ -590,6 +480,11 @@ following solution to reduce the individual file line counts:
 environment.variables.EDITOR = "nvim";
 environment.systemPackages = with pkgs;
 let 
+
+...
+general_settings = pkgs.callPackage ./general.nix {};
+...
+
 myneovim = (unstable.neovim.override {
     viAlias = true;
     vimAlias = true;
@@ -615,16 +510,7 @@ myneovim = (unstable.neovim.override {
       ];
     };
 
-    neovim_pwd = builtins.toString ./.;
-    settings_fn = name : (import "${neovim_pwd}/${name}_settings.nix" {}).content;
-
-    general_settings = settings_fn "general" ;
-    ...
-    lsp_settings = settings_fn "lsp";
-    ...
     customRC = general_settings 
-      + ...
-      + lsp_settings
       + ...;
   });
 in
@@ -642,34 +528,36 @@ in
 And then create `lsp_settings.nix` as follows:
 ```nix
 {}:
-{
-  content = ''
-        autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
-        autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
+''
+  autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
+  autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
 
-        lua << EOF
-          require('lspconfig').rnix.setup();
-          require('lspconfig').rust_analyzer.setup{
-            capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-            settings = {
-              ["rust-analyzer"] = {
-                assist = {
-                  importGranularity = "module",
-                  importPrefix = "by_self",
-                },
-                cargo = {
-                  loadOutDirsFromCheck = true,
-                },
-                procMacro = {
-                  enable = true,
-                },
-              },
-            },
-          };
-        EOF
-        '';
-}
+  lua << EOF
+    require('lspconfig').rnix.setup();
+    require('lspconfig').rust_analyzer.setup{
+      capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      settings = {
+        ["rust-analyzer"] = {
+          assist = {
+            importGranularity = "module",
+            importPrefix = "by_self",
+          },
+          cargo = {
+            loadOutDirsFromCheck = true,
+          },
+          procMacro = {
+            enable = true,
+          },
+        },
+      },
+    };
+  EOF
+''
 ```
+
+While this approach may seem to be a bit more complex in comparison to
+installing neovim just with Home-Manager, we retain more control and the setup
+is done system wide, so this configuration is also used by the root user
 
 # 3. Home Manager 
 
@@ -694,7 +582,7 @@ in
     (import "${home-manager}/nixos")
   ];
 
-  home-manager.users.YOURUSERNAMEHERE_LOL = {
+  home-manager.users.YOUR_USERNAME_HERE = {
     programs.home-manager.enable = true;
   };
 }

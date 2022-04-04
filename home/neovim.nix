@@ -19,6 +19,52 @@ in
       vimAlias = true;
       vimdiffAlias = true;
 
+      extraConfig = ''
+          "general settings
+          set nocompatible
+          set showmatch
+          set hlsearch
+          set incsearch
+          set background=dark
+          set clipboard=unnamedplus
+          set completeopt=menu,menuone,noselect
+          set cursorline
+          set hidden
+          set inccommand=split
+          set number relativenumber
+          set splitbelow splitright
+          set termguicolors
+          set title
+          set wildmenu
+          set cc=120
+          set expandtab
+          set shiftwidth=4
+          set tabstop=4
+          set softtabstop=4
+          set autoindent
+          filetype plugin indent on
+          
+          "Key bindings
+          nnoremap <silent> <C-f> :NvimTreeFindFileToggle<CR>
+          nnoremap <silent> <C-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
+          nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+          nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+          nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+          nnoremap <silent> gD <cmd>Telescope diagnostics theme=ivy initial_mode=normal<CR>
+          nnoremap <silent> gd <cmd>Telescope lsp_definitions theme=ivy initial_mode=normal<CR>
+          nnoremap <silent> gi <cmd>Telescope lsp_implementations theme=ivy initial_mode=normal<CR>
+          nnoremap <silent> gr <cmd>Telescope lsp_references theme=ivy initial_mode=normal<CR>
+          nnoremap <silent> ga <cmd>lua vim.lsp.buf.code_action()<CR>
+          nnoremap <silent> <C-m> <cmd>lua vim.lsp.buf.rename()<CR>
+          nnoremap <silent> <C-q> <cmd>Telescope current_buffer_fuzzy_find theme=cursor<CR>
+          nnoremap <silent> <C-g> <cmd>Telescope live_grep<CR>
+          vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+          nnoremap <silent> <A-,> :tabprevious<CR>
+          nnoremap <silent> <A-.> :tabnext<CR>
+          nnoremap <silent> <A-h> :tabmove -1<CR>
+          nnoremap <silent> <A-l> :tabmove +1<CR>
+	'';
+
       plugins = with pkgs.vimPlugins; [
         auto-pairs
         cmp-nvim-lsp
@@ -155,12 +201,11 @@ in
             EOF
           '';
         }
-        lualine-nvim
         {
           plugin = luatab-nvim;
           config = ''
             lua << EOF
-              require('luatab').setup()
+              require('luatab').setup({})
             EOF
           '';
         }
@@ -373,12 +418,12 @@ in
               })
             EOF
 
-            au! CursorHold * call AutoDiagnosis()
-            set updatetime=500
-
-            func AutoDiagnosis()
-              lua vim.diagnostic.open_float(nil, { focusable = false })
-            endfunc
+            " au! CursorHold * call AutoDiagnosis()
+            " set updatetime=500
+            " 
+            " func AutoDiagnosis()
+            "   lua vim.diagnostic.open_float(nil, { focusable = false })
+            " endfunc
           '';
         }
         telescope-nvim
@@ -420,50 +465,5 @@ in
           '';
         }
       ];
-      extraConfig = ''
-        "general settings
-        set nocompatible
-        set showmatch
-        set hlsearch
-        set incsearch
-        set background=dark
-        set clipboard=unnamedplus
-        set completeopt=menu,menuone,noselect
-        set cursorline
-        set hidden
-        set inccommand=split
-        set number relativenumber
-        set splitbelow splitright
-        set termguicolors
-        set title
-        set wildmenu
-        set cc=120
-        set expandtab
-        set shiftwidth=4
-        set tabstop=4
-        set softtabstop=4
-        set autoindent
-        filetype plugin indent on
-
-        "Key bindings
-        nnoremap <silent> <C-f> :NvimTreeFindFileToggle<CR>
-        nnoremap <silent> <C-K> <cmd>lua vim.lsp.buf.signature_help()<CR>
-        nnoremap <silent> <C-n> <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-        nnoremap <silent> <C-p> <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-        nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-        nnoremap <silent> gD <cmd>Telescope diagnostics theme=ivy initial_mode=normal<CR>
-        nnoremap <silent> gd <cmd>Telescope lsp_definitions theme=ivy initial_mode=normal<CR>
-        nnoremap <silent> gi <cmd>Telescope lsp_implementations theme=ivy initial_mode=normal<CR>
-        nnoremap <silent> gr <cmd>Telescope lsp_references theme=ivy initial_mode=normal<CR>
-        nnoremap <silent> ga <cmd>lua vim.lsp.buf.code_action()<CR>
-        nnoremap <silent> <C-m> <cmd>lua vim.lsp.buf.rename()<CR>
-        nnoremap <silent> <C-q> <cmd>Telescope current_buffer_fuzzy_find theme=cursor<CR>
-        nnoremap <silent> <C-g> <cmd>Telescope live_grep<CR>
-        vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-        nnoremap <silent> <A-,> :tabprevious<CR>
-        nnoremap <silent> <A-.> :tabnext<CR>
-        nnoremap <silent> <A-h> :tabmove -1<CR>
-        nnoremap <silent> <A-l> :tabmove +1<CR>
-      '';
     };
 }

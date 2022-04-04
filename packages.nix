@@ -7,38 +7,58 @@
           i3Support = true;
         };
       })
+      (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
     ];
 
   environment.systemPackages = with pkgs;
     [
+      # apps
       alacritty
-      rofi
       qutebrowser
+      rmapi
+      restream
+      teamspeak_client
+      zathura
 
+      # cli utils
+      zsh
+      du-dust
       gh
-
       git
-      wget
-      killall
-
+      git-lfs
       ripgrep
       fd
-
-      mypolybar
-      polybar
-      zsh
-
-      rustup
-      clang
-
-      brightnessctl
-      wpa_supplicant
-      rmapi
       just
       tree
+      zk
 
+      # ui
+      mypolybar
+      polybar
+      brightnessctl
+      rofi
+
+      # stuff
+      wget
+      killall
+      clang
+      wpa_supplicant
       pkg-config
+
+      # audio
+      pulseaudio
       pamixer
+      pavucontrol
+
+      # rust
+      (fenix.complete.withComponents [
+        "cargo"
+        "clippy"
+        "rust-src"
+        "rustc"
+        "rustfmt"
+      ])
+      rust-analyzer-nightly
 
       hyperfine
       cargo-edit
@@ -56,14 +76,9 @@
       #cargo-hack
       #cargo-nextest
 
+      pass
+
       nodejs
       docker-compose
-
-      # everything needed for neovim
-      clang # needed for rust-tools
-      gcc # needed for treesitter compilation
-      git # needed for treesitter download
-      rnix-lsp # nix lsp
-      rust-analyzer # rust lsp
     ];
 }

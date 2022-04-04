@@ -14,7 +14,7 @@ in
       ./polybar.nix
       ./zsh.nix
       ./alacritty.nix
-      ./neovim.nix
+      # ./neovim.nix
     ];
 
     home.packages = [
@@ -32,5 +32,6 @@ in
         merge.tool = "nvimdiff";
       };
     };
+
   };
 }

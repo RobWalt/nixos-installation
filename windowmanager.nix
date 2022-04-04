@@ -1,13 +1,15 @@
 { pkgs, config, ... }:
 {
   # High DPI settings
-  hardware.video.hidpi.enable = true;
+  # hardware.video.hidpi.enable = true;
 
   environment.pathsToLink = [ "/libexec" ];
 
   services.xserver = {
     # general settings
     enable = true;
+
+    videoDrivers = [ "amdgpu" ];
 
     # input
     libinput.enable = true;

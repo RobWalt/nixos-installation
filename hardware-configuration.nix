@@ -15,34 +15,54 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" ];
-      kernelModules = [ "dm-snapshot" ];
+      availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
+      kernelModules = [ "dm-snapshot" "amdgpu" ];
       enable = true;
       luks.devices = {
         luksroot = {
-          device = "/dev/disk/by-uuid/b1b613db-c5b7-49e1-a5ec-148108a77277";
+          device = "/dev/disk/by-uuid/4efa4377-ddcd-4ff3-97b8-637ee1425be8";
           preLVM = true;
         };
       };
     };
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
   };
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/eec047a8-ac11-4fcf-8214-d0a302feba68";
+      device = "/dev/disk/by-uuid/a9546c65-7276-4606-acb2-3e58cf089c70";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/04C2-59FF";
+      device = "/dev/disk/by-uuid/F1F5-3861";
       fsType = "vfat";
     };
 
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/24fdefb9-1fe8-445e-a583-89fe47d1c347"; }];
+  swapDevices = [ ];
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # ==== SOUND ====
+  # Enable sound.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  #sound.enable = true;
+  #hardware.pulseaudio.enable = true;
+  #hardware.pulseaudio.support32Bit = true;
 }
