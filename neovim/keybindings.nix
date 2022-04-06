@@ -34,4 +34,7 @@
   nnoremap <silent> <Leader>zn <cmd>ZkNew { dir = vim.fn.input("Dir: "), date = "today" }<CR>
 
   inoremap <silent> <C-s> <space><ESC>hi<cmd>lua require("telescope.builtin").symbols({sources = {"math"}})<CR>
+
+  inoremap <silent> <C-k> <cmd> lua if require("luasnip").expand_or_jumpable() then require("luasnip").expand_or_jump() end<CR>
+  inoremap <silent> <C-j> <cmd> lua if require("luasnip").jumpable(-1) then require("luasnip").jump(-1) end<CR>
 ''

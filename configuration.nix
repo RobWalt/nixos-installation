@@ -34,6 +34,12 @@
     keyMap = "de-latin1";
   };
 
+  fonts.fonts = with pkgs; [
+    terminus_font
+    corefonts
+    (pkgs.nerdfonts.override { fonts = [ "Meslo" "Iosevka" ]; })
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
   users.users.robw = {

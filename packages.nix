@@ -21,6 +21,7 @@
       zathura
 
       # cli utils
+      btop
       zsh
       du-dust
       gh
@@ -36,7 +37,6 @@
       mypolybar
       polybar
       brightnessctl
-      rofi
 
       # stuff
       wget

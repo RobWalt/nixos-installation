@@ -30,6 +30,12 @@
           white = "#d3c6aa";
         };
       };
+      font = {
+        normal = {
+          family = "Iosevka Nerd Font Mono";
+          style = "Regular";
+        };
+      };
     };
   };
 }

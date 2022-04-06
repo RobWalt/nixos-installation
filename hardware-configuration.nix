@@ -44,7 +44,18 @@
   swapDevices = [ ];
 
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    opengl.driSupport = true;
+    opengl.driSupport32Bit = true;
+
+    opengl.extraPackages = with pkgs; [
+      amdvlk
+    ];
+    opengl.extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
+  };
 
   # ==== SOUND ====
   # Enable sound.

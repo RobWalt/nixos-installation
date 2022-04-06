@@ -24,7 +24,6 @@ in
       gitsigns = pkgs.callPackage ./gitsigns.nix { };
       lualine = pkgs.callPackage ./lualine.nix { };
       luatab = pkgs.callPackage ./luatab.nix { };
-      notify = pkgs.callPackage ./notify.nix { };
       indent-blankline = pkgs.callPackage ./indent-blankline.nix { };
       nvim-tree = pkgs.callPackage ./nvim-tree.nix { };
       rust-tools = pkgs.callPackage ./rust-tools.nix { };
@@ -51,10 +50,16 @@ in
                 auto-pairs
                 cmp-buffer
                 cmp-nvim-lsp
-                cmp-vsnip
+                cmp-nvim-lua
+                cmp-path
+                luasnip
+                friendly-snippets
+                cmp_luasnip
                 gitsigns-nvim
                 indent-blankline-nvim
                 lsp_signature-nvim
+                lspkind-nvim
+                lsp-status-nvim
                 lualine-nvim
                 luatab-nvim
                 nvim-cmp
@@ -62,7 +67,6 @@ in
                 nvim-dap
                 nvim-gps
                 nvim-lspconfig
-                nvim-notify
                 nvim-tree-lua
                 nvim-treesitter
                 nvim-web-devicons
@@ -73,12 +77,10 @@ in
                 toggleterm-nvim
                 vim-highlightedyank
                 vim-nix
-                vim-vsnip
               ];
             customRC = general
               + colorscheme
               + colorizer
-              + notify
               + cmp
               + dressing
               + gitsigns
