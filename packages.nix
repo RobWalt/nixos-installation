@@ -19,6 +19,7 @@
       restream
       teamspeak_client
       zathura
+      libresprite
 
       # cli utils
       btop
@@ -31,9 +32,11 @@
       fd
       just
       tree
+      unzip
       zk
 
       # ui
+      i3lock-fancy
       mypolybar
       polybar
       brightnessctl

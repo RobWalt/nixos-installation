@@ -4,6 +4,9 @@
     enable = true;
     settings = {
       # Define
+      window = {
+        opacity = 0.9;
+      };
       colors = {
         primary = {
           background = "#2b3339";

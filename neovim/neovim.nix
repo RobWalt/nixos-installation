@@ -47,6 +47,7 @@ in
                 (plugin "nvim-telescope/telescope-symbols.nvim")
                 (plugin "sainnhe/everforest")
                 (plugin "stevearc/dressing.nvim")
+                (plugin "xiyaowong/nvim-transparent")
                 auto-pairs
                 cmp-buffer
                 cmp-nvim-lsp

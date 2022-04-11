@@ -1,4 +1,4 @@
-{ rofi }:
+{ rofi, feh, picom }:
 ''
   set $mod Mod4
 
@@ -21,7 +21,13 @@
   # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
   # polybar
-  exec_always --no-startup-id polybar main -c $HOME/.config/polybar/config
+  exec_always --no-startup-id "(killall -q .polybar-wrappe || true) && polybar main -c $HOME/.config/polybar/config"
+
+  # feh
+  exec_always --no-startup-id "feh /home/robw/wallpaper/ -z --bg-fill"
+
+  # picom
+  exec_always --no-startup-id "(killall -q picom || true) && picom -bcf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
 
   # change focus
   bindsym $mod+j focus left
@@ -49,9 +55,6 @@
 
   # split in vertical orientation
   bindsym $mod+v split v
-
-  # enter fullscreen mode for the focused container
-  bindsym $mod+f fullscreen
 
   # change container layout (stacked, tabbed, toggle split)
   bindsym $mod+s layout stacking
@@ -106,41 +109,40 @@
   bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
   bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-  # resize window (you can also use the mouse for that)
-  mode "resize" {
-          # These bindings trigger as soon as you enter the resize mode
+  mode "adjust" {
+    bindsym h move left
+    bindsym k move up
+    bindsym j move down
+    bindsym l move right
 
-          # Pressing left will shrink the window’s width.
-          # Pressing right will grow the window’s width.
-          # Pressing up will shrink the window’s height.
-          # Pressing down will grow the window’s height.
-          bindsym j resize shrink width 10 px or 10 ppt
-          bindsym k resize grow height 10 px or 10 ppt
-          bindsym l resize shrink height 10 px or 10 ppt
-          bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym Shift+l resize grow width 10 px or 10 ppt
+    bindsym Shift+h resize shrink width 10 px or 10 ppt
+    bindsym Shift+j resize grow height 10 px or 10 ppt
+    bindsym Shift+k resize shrink height 10 px or 10 ppt
 
-          # same bindings, but for the arrow keys
-          bindsym Left resize shrink width 10 px or 10 ppt
-          bindsym Down resize grow height 10 px or 10 ppt
-          bindsym Up resize shrink height 10 px or 10 ppt
-          bindsym Right resize grow width 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
 
-          # back to normal: Enter or Escape
-          bindsym Return mode "default"
-          bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
   }
 
-  bindsym $mod+r mode "resize"
+  mode "fullscreen" {
+    bindsym $mod+f exec "i3 fullscreen && picom -bcf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5 && i3 mode default"
+  }
+
+  bindsym $mod+m mode "adjust"
+  bindsym $mod+f exec "i3 fullscreen && killall -q picom && i3 mode fullscreen"
 
   # class                 border  bground text    indicator child_border
-  client.focused          #DD8500 #DD8500 #FFFFFF #DD8500   #875100
-  client.focused_inactive #5F676A #5F676A #FFFFFF #5F676A   #545B5E
-  client.unfocused        #000000 #000000 #888888 #000000   #222222
-  client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
-  client.placeholder      #000000 #000000 #FFFFFF #000000   #000000
+  client.focused          #dbbc7f #dbbc7f #FFFFFF #dbbc7f   #dbbc7f
+  client.focused_inactive #4b565c #4b565c #FFFFFF #4b565c   #4b565c
+  client.unfocused        #2b3339 #2b3339 #d3c6aa #2b3339   #2b3339
+  client.urgent           #e67e80 #e67e80 #FFFFFF #e67e80   #e67e80
+  client.placeholder      #2b3339 #2b3339 #d3c6aa #2b3339   #2b3339
 
   client.background       #FFFFFF
 
-  for_window [class=".*"] border pixel 0
+  for_window [class=".*"] border pixel 5
 
+  gaps inner 25 
 ''
