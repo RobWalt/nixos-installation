@@ -1,4 +1,4 @@
-{ rofi, feh, picom }:
+{}:
 ''
   set $mod Mod4
 
@@ -24,10 +24,10 @@
   exec_always --no-startup-id "(killall -q .polybar-wrappe || true) && polybar main -c $HOME/.config/polybar/config"
 
   # feh
-  exec_always --no-startup-id "feh /home/robw/wallpaper/ -z --bg-fill"
+  exec_always --no-startup-id "feh /home/robw/wallpaper/desktopwp.png -z --bg-fill"
 
   # picom
-  exec_always --no-startup-id "(killall -q picom || true) && picom -bcf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
+  exec_always --no-startup-id "(killall -q picom || true) && picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
 
   # change focus
   bindsym $mod+j focus left
@@ -126,12 +126,9 @@
     bindsym Escape mode "default"
   }
 
-  mode "fullscreen" {
-    bindsym $mod+f exec "i3 fullscreen && picom -bcf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5 && i3 mode default"
-  }
-
   bindsym $mod+m mode "adjust"
-  bindsym $mod+f exec "i3 fullscreen && killall -q picom && i3 mode fullscreen"
+  bindsym $mod+f fullscreen
+  bindsym $mod+t exec "killall -q picom || picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
 
   # class                 border  bground text    indicator child_border
   client.focused          #dbbc7f #dbbc7f #FFFFFF #dbbc7f   #dbbc7f

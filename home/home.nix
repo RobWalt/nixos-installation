@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  unstable = import <nixos-unstable> { };
 in
 {
   imports = [
@@ -26,11 +27,17 @@ in
         extraConfig = {
           pull.rebase = false;
           merge.tool = "nvimdiff";
+          core.pager = "delta";
+          interactive.diffFilter = "delta --color-only";
+          delta.navigate = true;
+          merge.conflictstyle = "diff3";
+          diff.colorMoved = "default";
         };
       };
 
       services.picom = {
         enable = true;
+        package = unstable.picom;
       };
 
     };

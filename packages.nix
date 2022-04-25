@@ -1,4 +1,8 @@
 { pkgs, ... }:
+let
+  unstable = import <nixos-unstable> { };
+  stable = import <nixos> { };
+in
 {
   nixpkgs.overlays = with pkgs;
     [
@@ -14,44 +18,66 @@
     [
       # apps
       alacritty
+      discord
+      libresprite
       qutebrowser
-      rmapi
       restream
       teamspeak_client
       zathura
-      libresprite
+      spotify
+      zk
+      unstable.appflowy
 
       # cli utils
+      bat
       btop
-      zsh
+      loc
+      lsof
+      delta
+      difftastic
       du-dust
+      duf
+      exa
+      fd
+      fzf
       gh
       git
       git-lfs
-      ripgrep
-      fd
       just
+      pass
+      pciutils
+      ripgrep
+      sd
+      tldr
       tree
+      zip
       unzip
-      zk
+      zoxide
+      zsh
+      helix
+
+      # graphics 
+      vulkan-headers
+      vulkan-tools
+      vulkan-loader
+      vulkan-extension-layer
 
       # ui
+      brightnessctl
       i3lock-fancy
       mypolybar
       polybar
-      brightnessctl
 
       # stuff
-      wget
-      killall
       clang
-      wpa_supplicant
+      killall
       pkg-config
+      wget
+      wpa_supplicant
+      graphviz
 
       # audio
-      pulseaudio
-      pamixer
-      pavucontrol
+      stable.pamixer
 
       # rust
       (fenix.complete.withComponents [
@@ -63,23 +89,24 @@
       ])
       rust-analyzer-nightly
 
-      hyperfine
-      cargo-edit
-      cargo-make
-      cargo-deny
+      wasm-bindgen-cli
+
       cargo-audit
-      cargo-fuzz
-      cargo-expand
-      cargo-llvm-lines
-      cargo-watch
-      cargo-udeps
-      cargo-outdated
       cargo-bloat
+      cargo-deny
+      cargo-generate
+      cargo-edit
+      cargo-expand
+      cargo-fuzz
+      cargo-llvm-lines
+      cargo-make
+      unstable.cargo-nextest
+      cargo-outdated
+      cargo-udeps
+      cargo-watch
+      hyperfine
       # not available yet
       #cargo-hack
-      #cargo-nextest
-
-      pass
 
       nodejs
       docker-compose

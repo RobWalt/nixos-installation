@@ -21,9 +21,9 @@ in
       dressing = pkgs.callPackage ./dressing.nix { };
       hlargs = pkgs.callPackage ./hlargs.nix { };
       lsp = pkgs.callPackage ./lsp.nix { };
-      gitsigns = pkgs.callPackage ./gitsigns.nix { };
       lualine = pkgs.callPackage ./lualine.nix { };
       luatab = pkgs.callPackage ./luatab.nix { };
+      todo-highlight = pkgs.callPackage ./todo-highlight.nix { };
       indent-blankline = pkgs.callPackage ./indent-blankline.nix { };
       nvim-tree = pkgs.callPackage ./nvim-tree.nix { };
       rust-tools = pkgs.callPackage ./rust-tools.nix { };
@@ -56,7 +56,6 @@ in
                 luasnip
                 friendly-snippets
                 cmp_luasnip
-                gitsigns-nvim
                 indent-blankline-nvim
                 lsp_signature-nvim
                 lspkind-nvim
@@ -66,7 +65,7 @@ in
                 nvim-cmp
                 nvim-colorizer-lua
                 nvim-dap
-                nvim-gps
+                todo-comments-nvim
                 nvim-lspconfig
                 nvim-tree-lua
                 nvim-treesitter
@@ -84,7 +83,6 @@ in
               + colorizer
               + cmp
               + dressing
-              + gitsigns
               + lsp
               + hlargs
               + lualine
@@ -93,6 +91,7 @@ in
               + nvim-tree
               + rust-tools
               + toggleterm
+              + todo-highlight
               + telescope
               + tree-sitter
               + zk

@@ -1,8 +1,6 @@
 {}:
 ''
   lua << EOF
-    require("nvim-gps").setup()
-    local gps = require("nvim-gps")
     local lspstatus = require("lsp-status")
 
     lspstatus.config({
@@ -21,13 +19,10 @@
       diagnostics = true,
     })
 
+    lspstatus.register_progress()
+
     require("lualine").setup({
       sections = {
-        lualine_b = {
-          {
-            gps.get_location, cond = gps.is_available 
-          },
-        },
         lualine_x = {
           'filetype'
         },

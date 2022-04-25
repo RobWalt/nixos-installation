@@ -24,14 +24,10 @@
   nnoremap <silent> <A-h> :tabmove -1<CR>
   nnoremap <silent> <A-l> :tabmove +1<CR>
 
-  nnoremap <silent> <Leader>h <cmd>Gitsigns preview_hunk<CR>
-  nnoremap <silent> <Leader>n <cmd>Gitsigns next_hunk<CR>
-  nnoremap <silent> <Leader>m <cmd>Gitsigns prev_hunk<CR>
-  nnoremap <silent> <Leader>b <cmd>Gitsigns toggle_current_line_blame<CR>
-  nnoremap <silent> <Leader>d <cmd>Gitsigns diffthis<CR>
+  nnoremap <silent> <Leader>k <cmd>ZkNotes { tags = {vim.fn.input("Tag: ")} }<CR>
+  nnoremap <silent> <Leader>n <cmd>ZkNew { dir = vim.fn.input("Dir: "), date = "today" }<CR>
 
-  nnoremap <silent> <Leader>zk <cmd>ZkNotes { tags = {vim.fn.input("Tag: ")} }<CR>
-  nnoremap <silent> <Leader>zn <cmd>ZkNew { dir = vim.fn.input("Dir: "), date = "today" }<CR>
+  nnoremap <silent> <Leader>t <cmd>TodoTelescope<CR>
 
   inoremap <silent> <C-s> <space><ESC>hi<cmd>lua require("telescope.builtin").symbols({sources = {"math"}})<CR>
 

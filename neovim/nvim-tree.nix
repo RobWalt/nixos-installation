@@ -1,8 +1,9 @@
 {}:
 ''
+  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+
   lua << EOF
     require('nvim-tree').setup {
-      auto_close = true,
       diagnostics = {
         enable = true,
       },

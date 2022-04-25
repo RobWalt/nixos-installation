@@ -26,7 +26,7 @@
       },
       server = {
         capabilities = capabilities,
-        on_attack = require('lsp-status').on_attach,
+        on_attach = require('lsp-status').on_attach,
         standalone = true,
         settings = {
           ["rust-analyzer"] = {
