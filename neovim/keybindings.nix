@@ -13,19 +13,16 @@
   nnoremap <silent> gi <cmd>Telescope lsp_implementations theme=ivy initial_mode=normal<CR>
   nnoremap <silent> gr <cmd>Telescope lsp_references theme=ivy initial_mode=normal<CR>
   nnoremap <silent> ga <cmd>lua vim.lsp.buf.code_action() initial_mode=normal<CR>
-  nnoremap <silent> <C-m> <cmd>lua vim.lsp.buf.rename()<CR>
   nnoremap <silent> <C-q> <cmd>Telescope current_buffer_fuzzy_find theme=cursor<CR>
   nnoremap <silent> <C-g> <cmd>Telescope live_grep<CR>
   nnoremap <silent> <C-s> <cmd>Telescope git_status initial_mode=normal<CR>
   nnoremap <silent> <C-c> <cmd>Telescope git_commits initial_mode=normal<CR>
+  nnoremap <silent> <Leader>m <cmd>lua vim.lsp.buf.rename()<CR>
   vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
   nnoremap <silent> <A-,> :tabprevious<CR>
   nnoremap <silent> <A-.> :tabnext<CR>
   nnoremap <silent> <A-h> :tabmove -1<CR>
   nnoremap <silent> <A-l> :tabmove +1<CR>
-
-  nnoremap <silent> <Leader>k <cmd>ZkNotes { tags = {vim.fn.input("Tag: ")} }<CR>
-  nnoremap <silent> <Leader>n <cmd>ZkNew { dir = vim.fn.input("Dir: "), date = "today" }<CR>
 
   nnoremap <silent> <Leader>t <cmd>TodoTelescope<CR>
 

@@ -25,7 +25,7 @@ in
       teamspeak_client
       zathura
       spotify
-      zk
+      element-desktop
       unstable.appflowy
 
       # cli utils
@@ -43,6 +43,7 @@ in
       gh
       git
       git-lfs
+      git-cliff
       just
       pass
       pciutils

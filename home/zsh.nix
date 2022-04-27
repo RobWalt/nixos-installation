@@ -66,35 +66,35 @@
       #   format = "[[  $time ](bg:#7fbbb3 fg:#323d43)]($style)";
       # };
       format = lib.concatStrings [
-        "[ ](bg:#9fc193)"
+        "[ ](bg:#d699b6)"
         "$username"
-        "[](fg:#9fc193 bg:#bec39a)"
-        "[](fg:#bec39a bg:#d3c6aa)"
+        "[](fg:#d699b6 bg:#dd9ab0)"
+        "[](fg:#dd9ab0 bg:#e39ba9)"
         "$directory"
-        "[](fg:#d3c6aa bg:#bec39a)"
-        "[](fg:#bec39a bg:#9fc193)"
+        "[](fg:#e39ba9 bg:#e89da2)"
+        "[](fg:#e89da2 bg:#eba09b)"
         "$git_branch"
         "$git_status"
-        "[](fg:#9fc193 bg:#bec39a)"
-        "[](fg:#bec39a bg:#d3c6aa)"
+        "[](fg:#eba09b bg:#eca394)"
+        "[](fg:#eca394 bg:#eca78e)"
         "$rust"
-        "[](fg:#d3c6aa bg:#bec39a)"
-        "[](fg:#bec39a bg:#9fc193)"
+        "[](fg:#eca78e bg:#eaac88)"
+        "[](fg:#eaac88 bg:#e6b184)"
         "$time"
-        "[](fg:#9fc193 bg:#bec39a)"
-        "[](fg:#bec39a bg:#d3c6aa)"
-        "[  ](bg:#d3c6aa fg:#323d43)"
-        "[ ](fg:#d3c6aa)"
+        "[](fg:#e6b184 bg:#e1b681)"
+        "[](fg:#e1b681 bg:#dbbc7f)"
+        "[  ](bg:#dbbc7f fg:#323d43)"
+        "[ ](fg:#dbbc7f)"
       ];
       add_newline = false;
       username = {
         show_always = true;
-        style_user = "bg:#9fc193 fg:#323d43";
-        style_root = "bg:#9fc193 fg:#323d43";
+        style_user = "bg:#d699b6 fg:#323d43";
+        style_root = "bg:#d699b6 fg:#323d43";
         format = "[ $user ]($style)";
       };
       directory = {
-        style = "bg:#d3c6aa fg:#323d43";
+        style = "bg:#e39ba9 fg:#323d43";
         format = "[  $path ]($style)";
         truncation_length = 3;
         truncation_symbol = "…/";
@@ -108,23 +108,23 @@
       };
       git_branch = {
         symbol = "";
-        style = "bg:#9fc193 fg:#323d43";
-        format = "[[ $symbol $branch ](bg:#9fc193 fg:#323d43)]($style)";
+        style = "bg:#eba09b fg:#323d43";
+        format = "[[ $symbol $branch ](bg:#eba09b fg:#323d43)]($style)";
       };
       git_status = {
-        style = "bg:#9fc193 fg:#323d43";
-        format = "[[($all_status$ahead_behind )](bg:#9fc193 fg:#323d43)]($style)";
+        style = "bg:#eba09b fg:#323d43";
+        format = "[[($all_status$ahead_behind )](bg:#eba09b fg:#323d43)]($style)";
       };
       rust = {
         symbol = "";
-        style = "bg:#d3c6aa fg:#323d43";
-        format = "[[ $symbol ($version) ](bg:#d3c6aa fg:#323d43)]($style)";
+        style = "bg:#eca78e fg:#323d43";
+        format = "[[ $symbol ($version) ](bg:#eca78e fg:#323d43)]($style)";
       };
       time = {
         disabled = false;
         time_format = "%R";
-        style = "bg:#9fc193 fg:#323d43";
-        format = "[[  $time ](bg:#9fc193 fg:#323d43)]($style)";
+        style = "bg:#e6b184 fg:#323d43";
+        format = "[[  $time ](bg:#e6b184 fg:#323d43)]($style)";
       };
     };
   };

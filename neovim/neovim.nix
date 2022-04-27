@@ -30,7 +30,6 @@ in
       toggleterm = pkgs.callPackage ./toggleterm.nix { };
       telescope = pkgs.callPackage ./telescope.nix { };
       tree-sitter = pkgs.callPackage ./tree-sitter.nix { };
-      zk = pkgs.callPackage ./zk.nix { };
       keybindings = pkgs.callPackage ./keybindings.nix { };
     in
     [
@@ -43,7 +42,6 @@ in
             plug.plugins = with pkgs.vimPlugins;
               [
                 (plugin "m-demare/hlargs.nvim")
-                (plugin "mickael-menu/zk-nvim")
                 (plugin "nvim-telescope/telescope-symbols.nvim")
                 (plugin "sainnhe/everforest")
                 (plugin "stevearc/dressing.nvim")
@@ -94,7 +92,6 @@ in
               + todo-highlight
               + telescope
               + tree-sitter
-              + zk
               + keybindings;
           };
         };

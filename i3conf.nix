@@ -131,7 +131,7 @@
   bindsym $mod+t exec "killall -q picom || picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
 
   # class                 border  bground text    indicator child_border
-  client.focused          #dbbc7f #dbbc7f #FFFFFF #dbbc7f   #dbbc7f
+  client.focused          #d3c6aa #d3c6aa #4b565c #d3c6aa   #d3c6aa
   client.focused_inactive #4b565c #4b565c #FFFFFF #4b565c   #4b565c
   client.unfocused        #2b3339 #2b3339 #d3c6aa #2b3339   #2b3339
   client.urgent           #e67e80 #e67e80 #FFFFFF #e67e80   #e67e80
