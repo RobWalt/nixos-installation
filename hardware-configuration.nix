@@ -58,6 +58,7 @@ in
     };
   };
 
+
   # ==== SOUND ====
   # Enable sound.
   #security.rtkit.enable = true;
@@ -77,4 +78,7 @@ in
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
+  # ==== BLUETOOTH ====
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }

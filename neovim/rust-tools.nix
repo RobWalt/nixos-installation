@@ -38,8 +38,15 @@
               loadOutDirsFromCheck = true,
             },
             procMacro = {
-              enable = true
+              enable = true,
             },
+            highlightRelated = {
+              references = true,
+            },
+            checkOnSave = {
+              command = "clippy",
+              extraArgs = {"--", "-W", "clippy::all", "-W", "clippy::pedantic"},
+            }
           }
         }
       },

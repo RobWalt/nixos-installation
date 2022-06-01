@@ -41,6 +41,12 @@ in
           configure = {
             plug.plugins = with pkgs.vimPlugins;
               [
+                (nvim-treesitter.withPlugins (
+                  plugins: with pkgs.tree-sitter-grammars; [
+                    tree-sitter-rust
+                    tree-sitter-nix
+                  ]
+                ))
                 (plugin "m-demare/hlargs.nvim")
                 (plugin "nvim-telescope/telescope-symbols.nvim")
                 (plugin "sainnhe/everforest")
@@ -66,7 +72,6 @@ in
                 todo-comments-nvim
                 nvim-lspconfig
                 nvim-tree-lua
-                nvim-treesitter
                 nvim-web-devicons
                 plenary-nvim
                 popup-nvim

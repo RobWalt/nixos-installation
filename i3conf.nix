@@ -27,7 +27,7 @@
   exec_always --no-startup-id "feh /home/robw/wallpaper/desktopwp.png -z --bg-fill"
 
   # picom
-  exec_always --no-startup-id "(killall -q picom || true) && picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
+  # exec_always --no-startup-id "(killall -q picom || true) && picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
 
   # change focus
   bindsym $mod+j focus left
@@ -105,9 +105,12 @@
   bindsym XF86MonBrightnessUp exec brightnessctl s +10%  # increase screen brightness
   bindsym XF86MonBrightnessDown exec brightnessctl s 10%-  # decrease screen brightness
   # Pulse Audio controls
-  bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-  bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-  bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+  # increase sound volume
+  bindsym XF86AudioRaiseVolume exec --no-startup-id "(pactl set-sink-volume 0 +5% || true) && (pactl set-sink-volume 1 +5% || true)"
+  # decrease sound volume
+  bindsym XF86AudioLowerVolume exec --no-startup-id "(pactl set-sink-volume 0 -5% || true) && (pactl set-sink-volume 1 -5% || true)"
+  # mute sound
+  bindsym XF86AudioMute exec --no-startup-id "(pactl set-sink-mute 0 toggle || true) && (pactl set-sink-mute 1 toggle || true)"
 
   mode "adjust" {
     bindsym h move left
@@ -115,12 +118,12 @@
     bindsym j move down
     bindsym l move right
 
-    bindsym Shift+l resize grow width 10 px or 10 ppt
-    bindsym Shift+h resize shrink width 10 px or 10 ppt
-    bindsym Shift+j resize grow height 10 px or 10 ppt
-    bindsym Shift+k resize shrink height 10 px or 10 ppt
+    bindsym Shift+l resize grow width 5 px or 5 ppt
+    bindsym Shift+h resize shrink width 5 px or 5 ppt
+    bindsym Shift+j resize grow height 5 px or 5 ppt
+    bindsym Shift+k resize shrink height 5 px or 5 ppt
 
-    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym semicolon resize grow width 5 px or 5 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -128,7 +131,7 @@
 
   bindsym $mod+m mode "adjust"
   bindsym $mod+f fullscreen
-  bindsym $mod+t exec "killall -q picom || picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
+  # bindsym $mod+t exec "killall -q picom || picom -cf -i 1.0 -e 0.5 -t -5 -l -5 -m 1.0 --corner-radius 5"
 
   # class                 border  bground text    indicator child_border
   client.focused          #d3c6aa #d3c6aa #4b565c #d3c6aa   #d3c6aa
@@ -139,7 +142,7 @@
 
   client.background       #FFFFFF
 
-  for_window [class=".*"] border pixel 5
+  for_window [class=".*"] border pixel 2
 
-  gaps inner 25 
+  gaps inner 0 
 ''

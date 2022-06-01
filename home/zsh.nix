@@ -4,67 +4,6 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
-      # format = lib.concatStrings [
-      #   "[ ](bg:#d699b6)"
-      #   "$username"
-      #   "[](fg:#d699b6 bg:#e69ca6)"
-      #   "[](fg:#e69ca6 bg:#eca394 )"
-      #   "$directory"
-      #   "[](fg:#eca394 bg:#e8ae86)"
-      #   "[](fg:#e8ae86 bg:#dbbc7f)"
-      #   "$git_branch"
-      #   "$git_status"
-      #   "[](fg:#dbbc7f bg:#bcc085)"
-      #   "[](fg:#bcc085 bg:#9fc193)"
-      #   "$rust"
-      #   "[](fg:#9fc193 bg:#8abfa4)"
-      #   "[](fg:#8abfa4 bg:#7fbbb3)"
-      #   "$time"
-      #   "[](fg:#7fbbb3 bg:#aac2a4)"
-      #   "[](fg:#aac2a4 bg:#d3c6aa)"
-      #   "[  ](bg:#d3c6aa fg:#323d43)"
-      #   "[ ](fg:#d3c6aa)"
-      # ];
-      # add_newline = false;
-      # username = {
-      #   show_always = true;
-      #   style_user = "bg:#d699b6 fg:#323d43";
-      #   style_root = "bg:#d699b6 fg:#323d43";
-      #   format = "[ $user ]($style)";
-      # };
-      # directory = {
-      #   style = "bg:#eca394 fg:#323d43";
-      #   format = "[  $path ]($style)";
-      #   truncation_length = 3;
-      #   truncation_symbol = "…/";
-      #   substitutions = {
-      #     "Documents" = "  ";
-      #     "Downloads" = "  ";
-      #     "Music" = "  ";
-      #     "Pictures" = "  ";
-      #     "Important  " = "  ";
-      #   };
-      # };
-      # git_branch = {
-      #   symbol = "";
-      #   style = "bg:#dbbc7f fg:#323d43";
-      #   format = "[[ $symbol $branch ](bg:#dbbc7f fg:#323d43)]($style)";
-      # };
-      # git_status = {
-      #   style = "bg:#dbbc7f fg:#323d43";
-      #   format = "[[($all_status$ahead_behind )](bg:#dbbc7f fg:#323d43)]($style)";
-      # };
-      # rust = {
-      #   symbol = "";
-      #   style = "bg:#9fc193 fg:#323d43";
-      #   format = "[[ $symbol ($version) ](bg:#9fc193 fg:#323d43)]($style)";
-      # };
-      # time = {
-      #   disabled = false;
-      #   time_format = "%R";
-      #   style = "bg:#7fbbb3 fg:#323d43";
-      #   format = "[[  $time ](bg:#7fbbb3 fg:#323d43)]($style)";
-      # };
       format = lib.concatStrings [
         "[ ](bg:#d699b6)"
         "$username"
@@ -145,6 +84,20 @@
       diff = "difft";
       grep = "rg";
       find = "fd";
+      glab-get = "glab issue list --assignee=@me && glab mr list --assignee=@me";
+      glab-new-issue = "glab issue create";
+      glab-todo = "f() { glab issue update $1 -u \"Doing\" -u \"Review-Ready\" -l \"To Do\" };f";
+      glab-doing = "f() { glab issue update $1 -u \"To Do\" -u \"Review-Ready\" -l \"Doing\" };f";
+      glab-review = "f() { glab issue update $1 -u \"To Do\" -u \"Doing\" -l \"Review-Ready\" };f";
+      glab-mr-create = "f() { glab mr create --target-branch $1 };f";
+      glab-mr-target = "f() { glab mr update --target-branch $1 };f";
+      glab-mr-reviewer = "f() { glab mr update --reviewer $1 };f";
+      gh-get = "gh issue list --assignee=@me && gh pr list --assignee=@me";
+      init-ns = "cp /home/robw/nix-shells/dev.nix .";
+      init-wasm = "cp /home/robw/nix-shells/wasm.nix";
+      run-ns = "nix-shell dev.nix || nix-shell shell.rob.nix || nix-shell";
+      wasm-ns = "nix-shell wasm.nix";
+      wasm-start = "/home/robw/.cargo/bin/wasm-server-runner";
       remarkable = "restream -s 192.168.0.143 -p";
     };
 

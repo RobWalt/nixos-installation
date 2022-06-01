@@ -14,48 +14,59 @@ in
       (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
     ];
 
+  programs.adb.enable = true;
+
   environment.systemPackages = with pkgs;
     [
       # apps
       alacritty
       discord
+      element-desktop
+      flameshot
+      gimp
+      helix
+      imagemagick
+      inkscape
       libresprite
+      mdbook
       qutebrowser
       restream
+      spotify
       teamspeak_client
       zathura
-      spotify
-      element-desktop
-      unstable.appflowy
+      #unstable.appflowy
 
       # cli utils
       bat
       btop
-      loc
-      lsof
       delta
       difftastic
       du-dust
       duf
       exa
+      exercism
       fd
       fzf
       gh
       git
-      git-lfs
+      gitoxide
       git-cliff
+      git-lfs
+      glab
       just
+      loc
+      lsof
       pass
       pciutils
       ripgrep
       sd
       tldr
       tree
-      zip
       unzip
+      zip
+      zola
       zoxide
       zsh
-      helix
 
       # graphics 
       vulkan-headers
@@ -67,14 +78,15 @@ in
       brightnessctl
       i3lock-fancy
       mypolybar
-      polybar
 
       # stuff
       clang
+      lldb
       killall
       pkg-config
       wget
       wpa_supplicant
+      usbutils
       graphviz
 
       # audio
@@ -90,7 +102,13 @@ in
       ])
       rust-analyzer-nightly
 
+      # haskell
+      stack
+      ghc
+
+      # wasm
       wasm-bindgen-cli
+      wasm-pack
 
       cargo-audit
       cargo-bloat
