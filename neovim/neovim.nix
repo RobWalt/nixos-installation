@@ -57,26 +57,27 @@ in
                 cmp-nvim-lsp
                 cmp-nvim-lua
                 cmp-path
-                luasnip
-                friendly-snippets
                 cmp_luasnip
+                friendly-snippets
                 indent-blankline-nvim
+                lsp-status-nvim
                 lsp_signature-nvim
                 lspkind-nvim
-                lsp-status-nvim
                 lualine-nvim
+                luasnip
                 luatab-nvim
                 nvim-cmp
                 nvim-colorizer-lua
                 nvim-dap
-                todo-comments-nvim
                 nvim-lspconfig
                 nvim-tree-lua
+                nvim-treesitter-context
                 nvim-web-devicons
                 plenary-nvim
                 popup-nvim
                 rust-tools-nvim
                 telescope-nvim
+                todo-comments-nvim
                 toggleterm-nvim
                 vim-highlightedyank
                 vim-nix

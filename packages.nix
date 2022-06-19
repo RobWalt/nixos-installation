@@ -100,7 +100,7 @@ in
         "rustc"
         "rustfmt"
       ])
-      rust-analyzer-nightly
+      (fenix.rust-analyzer)
 
       # haskell
       stack
