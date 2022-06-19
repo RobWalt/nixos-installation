@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  unstable = import <nixos-unstable> { };
+  stable = import <nixos> { };
   pluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}";
     version = ref;
@@ -13,30 +13,9 @@ let
 in
 {
   nixpkgs.overlays =
-    let
-      general = pkgs.callPackage ./general.nix { };
-      colorscheme = pkgs.callPackage ./colorscheme.nix { };
-      colorizer = pkgs.callPackage ./colorizer.nix { };
-      cmp = pkgs.callPackage ./cmp.nix { };
-      dressing = pkgs.callPackage ./dressing.nix { };
-      hlargs = pkgs.callPackage ./hlargs.nix { };
-      lsp = pkgs.callPackage ./lsp.nix { };
-      lualine = pkgs.callPackage ./lualine.nix { };
-      luatab = pkgs.callPackage ./luatab.nix { };
-      todo-highlight = pkgs.callPackage ./todo-highlight.nix { };
-      indent-blankline = pkgs.callPackage ./indent-blankline.nix { };
-      nvim-tree = pkgs.callPackage ./nvim-tree.nix { };
-      rust-tools = pkgs.callPackage ./rust-tools.nix { };
-      toggleterm = pkgs.callPackage ./toggleterm.nix { };
-      telescope = pkgs.callPackage ./telescope.nix { };
-      tree-sitter = pkgs.callPackage ./tree-sitter.nix { };
-      keybindings = pkgs.callPackage ./keybindings.nix { };
-    in
     [
       (self: super: {
-        neovim = unstable.neovim.override {
-          viAlias = true;
-          vimAlias = true;
+        neovim = stable.neovim.override {
 
           configure = {
             plug.plugins = with pkgs.vimPlugins;
@@ -45,6 +24,7 @@ in
                   plugins: with pkgs.tree-sitter-grammars; [
                     tree-sitter-rust
                     tree-sitter-nix
+                    tree-sitter-lua
                   ]
                 ))
                 (plugin "m-demare/hlargs.nvim")
@@ -82,23 +62,28 @@ in
                 vim-highlightedyank
                 vim-nix
               ];
-            customRC = general
-              + colorscheme
-              + colorizer
-              + cmp
-              + dressing
-              + lsp
-              + hlargs
-              + lualine
-              + luatab
-              + indent-blankline
-              + nvim-tree
-              + rust-tools
-              + toggleterm
-              + todo-highlight
-              + telescope
-              + tree-sitter
-              + keybindings;
+            customRC =
+              let
+                listOfContent = map lib.readFile [
+                  ./general.lua
+                  ./colorscheme.lua
+                  ./colorizer.lua
+                  ./cmp.lua
+                  ./dressing.lua
+                  ./hlargs.lua
+                  ./lsp.lua
+                  ./lualine.lua
+                  ./luatab.lua
+                  ./todo-highlight.lua
+                  ./indent-blankline.lua
+                  ./nvim-tree.lua
+                  ./rust-tools.lua
+                  ./toggleterm.lua
+                  ./tree-sitter.lua
+                  ./keybindings.lua
+                ];
+              in
+              lib.concatStringsSep "\n" listOfContent;
           };
         };
       })

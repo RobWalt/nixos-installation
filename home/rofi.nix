@@ -1,11 +1,11 @@
 { pkgs, ... }:
 let
-  unstable = import <nixos-unstable> { };
+  stable = import <nixos> { };
 in
 {
   programs.rofi = {
     enable = true;
-    package = unstable.rofi;
+    package = stable.rofi;
     theme = builtins.toString (pkgs.writeText "rofi-theme" ''
       configuration {
           font: "Iosevka Nerd Font Mono";

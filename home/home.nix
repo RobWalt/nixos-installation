@@ -1,7 +1,6 @@
 { pkgs, config, lib, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  unstable = import <nixos-unstable> { };
 in
 {
   imports = [
@@ -12,6 +11,7 @@ in
   home-manager.users.robw = { ... }:
     {
       imports = [
+        ./neovim.nix
         ./polybar.nix
         ./zsh.nix
         ./alacritty.nix
@@ -23,6 +23,10 @@ in
         linker = "clang"
         rustflags = ["-C", "link-arg=-fuse-ld=lld"]
       '';
+
+      home.sessionPath = [
+        "$HOME/.cargo/bin"
+      ];
 
       programs.home-manager.enable = true;
 
@@ -40,11 +44,6 @@ in
           diff.colorMoved = "default";
         };
       };
-
-      # services.picom = {
-      #   enable = true;
-      #   package = unstable.picom;
-      # };
 
     };
 }

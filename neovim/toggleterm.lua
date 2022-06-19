@@ -1,6 +1,4 @@
-{}:
-''
-  lua << EOF
+lua << EOF
   require("toggleterm").setup {
     open_mapping = [[<c-t>]],
     hide_numbers = true,
@@ -17,5 +15,4 @@
       height = math.floor(vim.o.lines * 0.75),
     },
   }
-  EOF
-''
+EOF

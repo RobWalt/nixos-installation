@@ -1,8 +1,4 @@
 { pkgs, ... }:
-let
-  unstable = import <nixos-unstable> { };
-  stable = import <nixos> { };
-in
 {
   nixpkgs.overlays = with pkgs;
     [
@@ -34,7 +30,6 @@ in
       spotify
       teamspeak_client
       zathura
-      #unstable.appflowy
 
       # cli utils
       bat
@@ -59,6 +54,7 @@ in
       pass
       pciutils
       ripgrep
+      xsel
       sd
       tldr
       tree
@@ -90,7 +86,7 @@ in
       graphviz
 
       # audio
-      stable.pamixer
+      pamixer
 
       # rust
       (fenix.complete.withComponents [
@@ -106,6 +102,10 @@ in
       stack
       ghc
 
+      # lua
+      luajit
+      sumneko-lua-language-server
+
       # wasm
       wasm-bindgen-cli
       wasm-pack
@@ -119,7 +119,7 @@ in
       cargo-fuzz
       cargo-llvm-lines
       cargo-make
-      unstable.cargo-nextest
+      cargo-nextest
       cargo-outdated
       cargo-udeps
       cargo-watch
