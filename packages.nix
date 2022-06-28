@@ -27,6 +27,7 @@
       mdbook
       qutebrowser
       restream
+      supercollider
       spotify
       teamspeak_client
       zathura
@@ -58,6 +59,7 @@
       sd
       tldr
       tree
+      tmux
       unzip
       zip
       zola
@@ -77,6 +79,7 @@
 
       # stuff
       clang
+      lld
       lldb
       killall
       pkg-config
@@ -89,18 +92,23 @@
       pamixer
 
       # rust
-      (fenix.complete.withComponents [
+      (fenix.stable.withComponents [
         "cargo"
         "clippy"
         "rust-src"
         "rustc"
+      ])
+      (fenix.complete.withComponents [
         "rustfmt"
       ])
-      (fenix.rust-analyzer)
+      rust-analyzer
 
       # haskell
       stack
       ghc
+      haskell-language-server
+      haskellPackages.tidal
+      haskellPackages.implicit-hie
 
       # lua
       luajit

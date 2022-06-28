@@ -51,9 +51,9 @@ lua << EOF
   vim.o.expandtab=true
 
   -- shift and tab widths
-  vim.o.shiftwidth=4
-  vim.o.tabstop=4
-  vim.o.softtabstop=4
+  vim.o.shiftwidth=2
+  vim.o.tabstop=2
+  vim.o.softtabstop=2
 
   -- use same indent on next line as on current line
   vim.o.autoindent=true

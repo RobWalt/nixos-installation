@@ -44,6 +44,9 @@
   # lock windows
   bindsym $mod+Shift+l exec "i3lock-fancy -g"
 
+  # screenshot
+  bindsym Print exec --no-startup-id "flameshot gui"
+
   # alternatively, you can use the cursor keys:
   bindsym $mod+Shift+Left move left
   bindsym $mod+Shift+Down move down

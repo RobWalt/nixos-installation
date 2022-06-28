@@ -44,7 +44,7 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.robw = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "audio" "realtime" "docker" "adbusers" ];
   };
 
   virtualisation.docker.enable = true;

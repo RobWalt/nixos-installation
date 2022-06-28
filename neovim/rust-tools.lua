@@ -29,7 +29,6 @@ lua << EOF
     server = {
       capabilities = capabilities,
       on_attach = require('lsp-status').on_attach,
-      standalone = true,
       settings = {
         ["rust-analyzer"] = {
           assist = {
@@ -44,7 +43,7 @@ lua << EOF
           },
           checkOnSave = {
             command = "clippy",
-            extraArgs = {"--", "-W", "clippy::all", "-W", "clippy::pedantic"},
+            -- extraArgs = {"--", "-W", "clippy::all", "-W", "clippy::pedantic"},
           }
         }
       }

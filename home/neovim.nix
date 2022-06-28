@@ -26,6 +26,7 @@ in
       (nvim-treesitter.withPlugins (
         plugins: with pkgs.tree-sitter-grammars; [
           tree-sitter-rust
+          tree-sitter-haskell
           tree-sitter-nix
           tree-sitter-lua
         ]
@@ -35,6 +36,7 @@ in
       (plugin "sainnhe/everforest")
       (plugin "stevearc/dressing.nvim")
       (plugin "xiyaowong/nvim-transparent")
+      (plugin "tidalcycles/vim-tidal")
       auto-pairs
       cmp-buffer
       cmp-nvim-lsp

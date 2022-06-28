@@ -86,9 +86,9 @@
       find = "fd";
       glab-get = "glab issue list --assignee=@me && glab mr list --assignee=@me";
       glab-new-issue = "glab issue create";
-      glab-todo = "f() { glab issue update $1 -u \"Doing\" -u \"Review-Ready\" -l \"To Do\" };f";
-      glab-doing = "f() { glab issue update $1 -u \"To Do\" -u \"Review-Ready\" -l \"Doing\" };f";
-      glab-review = "f() { glab issue update $1 -u \"To Do\" -u \"Doing\" -l \"Review-Ready\" };f";
+      glab-todo = "f() { glab issue update $1 -u \"Doing\" -u \"Review-Ready\" -l \"To-Do\" };f";
+      glab-doing = "f() { glab issue update $1 -u \"To-Do\" -u \"Review-Ready\" -l \"Doing\" };f";
+      glab-review = "f() { glab issue update $1 -u \"To-Do\" -u \"Doing\" -l \"Review-Ready\" };f";
       glab-mr-create = "f() { glab mr create --target-branch $1 };f";
       glab-mr-target = "f() { glab mr update --target-branch $1 };f";
       glab-mr-reviewer = "f() { glab mr update --reviewer $1 };f";
@@ -103,7 +103,7 @@
 
     history = {
       size = 100000;
-      path = ".zhistory";
+      path = "/home/robw/.zhistory";
     };
 
     zplug = {

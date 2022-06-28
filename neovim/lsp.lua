@@ -8,6 +8,7 @@ lua << EOF
     hint_prefix = "",  -- Panda for parameter
   }
   require('lspconfig').rnix.setup({})
+  require('lspconfig').hls.setup({})
   require('lsp_signature').setup(sigcfg)
 
   local luacfg = {

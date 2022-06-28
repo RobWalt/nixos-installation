@@ -10,6 +10,8 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.users.robw = { ... }:
     {
+      home.stateVersion = config.system.stateVersion;
+
       imports = [
         ./neovim.nix
         ./polybar.nix
