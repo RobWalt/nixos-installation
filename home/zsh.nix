@@ -94,7 +94,7 @@
       glab-mr-reviewer = "f() { glab mr update --reviewer $1 };f";
       gh-get = "gh issue list --assignee=@me && gh pr list --assignee=@me";
       init-ns = "cp /home/robw/nix-shells/dev.nix .";
-      init-wasm = "cp /home/robw/nix-shells/wasm.nix";
+      init-wasm = "cp /home/robw/nix-shells/wasm.nix .";
       run-ns = "nix-shell dev.nix || nix-shell shell.rob.nix || nix-shell";
       wasm-ns = "nix-shell wasm.nix";
       wasm-start = "/home/robw/.cargo/bin/wasm-server-runner";

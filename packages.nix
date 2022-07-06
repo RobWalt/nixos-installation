@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  unstable = import <nixos-unstable> { };
+in
 {
   nixpkgs.overlays = with pkgs;
     [
@@ -99,6 +102,10 @@
         "rustc"
       ])
       (fenix.complete.withComponents [
+        #  "cargo"
+        #  "clippy"
+        #  "rust-src"
+        #  "rustc"
         "rustfmt"
       ])
       rust-analyzer
@@ -126,11 +133,12 @@
       cargo-expand
       cargo-fuzz
       cargo-llvm-lines
-      cargo-make
+      #cargo-make
       cargo-nextest
       cargo-outdated
       cargo-udeps
       cargo-watch
+      unstable.cargo-make
       hyperfine
       # not available yet
       #cargo-hack

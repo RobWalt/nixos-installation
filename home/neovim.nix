@@ -29,6 +29,7 @@ in
           tree-sitter-haskell
           tree-sitter-nix
           tree-sitter-lua
+          tree-sitter-scheme
         ]
       ))
       (plugin "m-demare/hlargs.nvim")
@@ -37,6 +38,7 @@ in
       (plugin "stevearc/dressing.nvim")
       (plugin "xiyaowong/nvim-transparent")
       (plugin "tidalcycles/vim-tidal")
+      (plugin "DingDean/wgsl.vim")
       auto-pairs
       cmp-buffer
       cmp-nvim-lsp

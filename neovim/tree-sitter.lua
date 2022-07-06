@@ -1,6 +1,6 @@
 lua << EOF
   require('nvim-treesitter.configs').setup {
-    ensure_installed = {"nix", "rust", "wgsl", "lua", "haskell"},
+    ensure_installed = {"nix", "rust", "wgsl", "lua", "haskell", "scheme"},
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
