@@ -27,7 +27,8 @@ in
       };
     };
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = stable.linuxPackages_latest;
+    # unstable version of kernel
+    #kernelPackages = stable.linuxPackages_latest;
     extraModulePackages = [ ];
   };
 

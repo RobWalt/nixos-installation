@@ -11,12 +11,14 @@ with pkgs; mkShell {
     udev
     alsaLib
     vulkan-loader
-    x11
+    xlibsWrapper
     xorg.libXcursor
     xorg.libXrandr
     xorg.libXi
   ];
-  shellHook = ''export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath [
+  shellHook = ''
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath [
     udev alsaLib vulkan-loader
-  ]}"'';
+    ]}"
+  '';
 }

@@ -21,6 +21,7 @@ in
       alacritty
       discord
       element-desktop
+      firefox
       flameshot
       gimp
       helix
@@ -30,13 +31,14 @@ in
       mdbook
       qutebrowser
       restream
-      supercollider
       spotify
+      supercollider
       teamspeak_client
       zathura
 
       # cli utils
       bat
+      binutils
       btop
       delta
       difftastic
@@ -48,9 +50,9 @@ in
       fzf
       gh
       git
-      gitoxide
       git-cliff
       git-lfs
+      gitoxide
       glab
       just
       loc
@@ -58,12 +60,12 @@ in
       pass
       pciutils
       ripgrep
-      xsel
       sd
       tldr
-      tree
       tmux
+      tree
       unzip
+      xsel
       zip
       zola
       zoxide
@@ -73,6 +75,7 @@ in
       vulkan-headers
       vulkan-tools
       vulkan-loader
+      vulkan-validation-layers
       vulkan-extension-layer
 
       # ui
@@ -95,20 +98,26 @@ in
       pamixer
 
       # rust
-      (fenix.stable.withComponents [
-        "cargo"
-        "clippy"
-        "rust-src"
-        "rustc"
-      ])
-      (fenix.complete.withComponents [
-        #  "cargo"
-        #  "clippy"
-        #  "rust-src"
-        #  "rustc"
-        "rustfmt"
-      ])
+      rustup
       rust-analyzer
+
+      # rust cargo extensions
+      cargo-audit
+      cargo-bloat
+      cargo-deny
+      cargo-generate
+      cargo-edit
+      cargo-expand
+      cargo-fuzz
+      cargo-llvm-lines
+      cargo-make
+      cargo-nextest
+      cargo-outdated
+      cargo-udeps
+      cargo-watch
+      hyperfine
+      # not available yet
+      #cargo-hack
 
       # haskell
       stack
@@ -125,25 +134,10 @@ in
       wasm-bindgen-cli
       wasm-pack
 
-      cargo-audit
-      cargo-bloat
-      cargo-deny
-      cargo-generate
-      cargo-edit
-      cargo-expand
-      cargo-fuzz
-      cargo-llvm-lines
-      #cargo-make
-      cargo-nextest
-      cargo-outdated
-      cargo-udeps
-      cargo-watch
-      unstable.cargo-make
-      hyperfine
-      # not available yet
-      #cargo-hack
-
+      # javascript 
       nodejs
+
+      # docker
       docker-compose
     ];
 }

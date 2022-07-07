@@ -20,12 +20,6 @@ in
         ./rofi.nix
       ];
 
-      home.file.".cargo/config.toml".text = ''
-        [target.x86_64-unkown-linux-gnu]
-        linker = "clang"
-        rustflags = ["-C", "link-arg=-fuse-ld=lld"]
-      '';
-
       home.sessionPath = [
         "$HOME/.cargo/bin"
       ];

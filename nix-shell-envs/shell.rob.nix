@@ -40,15 +40,15 @@ stdenv.mkDerivation {
     vulkan-tools
     vulkan-validation-layers
     wasm-pack
-    x11
+    xlibsWrapper
     xorg.libXcursor
     xorg.libXi
     xorg.libXrandr
   ];
   shellHook = ''
     export NIX_ENFORCE_PURITY=0
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath [ udev alsaLib vulkan-loader ]}"
     source .env
-    echo 'fn main() {if cfg!(target_os = "linux") {println!("cargo:rustc-link-lib=vulkan");}}' > metacad/build.rs
     #cargo watch -x "clippy"
   '';
 }
