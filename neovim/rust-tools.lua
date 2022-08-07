@@ -41,6 +41,9 @@ lua << EOF
           procMacro = {
             enable = true,
           },
+          rustfmt = {
+            extraArgs = {"+nightly"},
+          },
           checkOnSave = {
             command = "clippy",
             -- extraArgs = {"--", "-W", "clippy::all", "-W", "clippy::pedantic"},

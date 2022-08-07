@@ -41,6 +41,6 @@
     };
   };
 
-  environment.etc."i3.conf".text = pkgs.callPackage ./i3conf.nix { };
+  environment.etc."i3.conf".source = ./i3conf.config;
 
 }

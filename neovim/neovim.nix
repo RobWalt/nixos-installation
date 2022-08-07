@@ -31,7 +31,9 @@ in
                 ))
                 (plugin "m-demare/hlargs.nvim")
                 (plugin "nvim-telescope/telescope-symbols.nvim")
+                # color schemes
                 (plugin "sainnhe/everforest")
+
                 (plugin "stevearc/dressing.nvim")
                 (plugin "xiyaowong/nvim-transparent")
                 (plugin "tidalcycles/vim-tidal")

@@ -68,12 +68,21 @@
     };
   };
 
+  home.file.".mygumscripts/glab-info.sh".source = ./scripts/glab-info.sh;
+  home.file.".mygumscripts/glab-status.sh".source = ./scripts/glab-status.sh;
+  home.file.".mygumscripts/glab-review.sh".source = ./scripts/glab-review.sh;
+  home.file.".mygumscripts/glab-checklist.sh".source = ./scripts/glab-checklist.sh;
+
   programs.zsh = {
     enable = true;
 
     enableAutosuggestions = true;
 
     shellAliases = {
+      glab-info = "sh ~/.mygumscripts/glab-info.sh";
+      glab-status = "sh ~/.mygumscripts/glab-status.sh";
+      glab-review = "sh ~/.mygumscripts/glab-review.sh";
+      glab-checklist = "sh ~/.mygumscripts/glab-checklist.sh";
       l = "exa -l";
       ll = "exa -alh";
       ls = "exa";
@@ -84,13 +93,8 @@
       diff = "difft";
       grep = "rg";
       find = "fd";
-      glab-get = "glab issue list --assignee=@me && glab mr list --assignee=@me";
       glab-new-issue = "glab issue create";
-      glab-todo = "f() { glab issue update $1 -u \"Doing\" -u \"Review-Ready\" -l \"To-Do\" };f";
-      glab-doing = "f() { glab issue update $1 -u \"To-Do\" -u \"Review-Ready\" -l \"Doing\" };f";
-      glab-review = "f() { glab issue update $1 -u \"To-Do\" -u \"Doing\" -l \"Review-Ready\" };f";
       glab-mr-create = "f() { glab mr create --target-branch $1 };f";
-      glab-mr-target = "f() { glab mr update --target-branch $1 };f";
       glab-mr-reviewer = "f() { glab mr update --reviewer $1 };f";
       gh-get = "gh issue list --assignee=@me && gh pr list --assignee=@me";
       init-ns = "cp /home/robw/nix-shells/dev.nix .";

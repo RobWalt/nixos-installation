@@ -47,6 +47,14 @@
     extraGroups = [ "wheel" "audio" "realtime" "docker" "adbusers" ];
   };
 
+  # Enable cron service
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/5 * * * *   robw  DISPLAY=:0 feh --bg-max /home/robw/wallpaper/bg/ -z --image-bg \"#345\""
+    ];
+  };
+
   virtualisation.docker.enable = true;
 
   system.stateVersion = "22.05";

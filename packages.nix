@@ -27,6 +27,7 @@ in
       helix
       imagemagick
       inkscape
+      eww
       libresprite
       mdbook
       qutebrowser
@@ -37,6 +38,7 @@ in
       zathura
 
       # cli utils
+      unstable.gum
       bat
       binutils
       btop
@@ -61,7 +63,7 @@ in
       pciutils
       ripgrep
       sd
-      tldr
+      tealdeer
       tmux
       tree
       unzip
@@ -110,12 +112,13 @@ in
       cargo-expand
       cargo-fuzz
       cargo-llvm-lines
-      cargo-make
+      unstable.cargo-make # latest version needed
       cargo-nextest
       cargo-outdated
       cargo-udeps
       cargo-watch
       hyperfine
+      feroxbuster
       # not available yet
       #cargo-hack
 
