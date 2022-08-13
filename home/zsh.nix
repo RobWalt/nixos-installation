@@ -70,8 +70,9 @@
 
   home.file.".mygumscripts/glab-info.sh".source = ./scripts/glab-info.sh;
   home.file.".mygumscripts/glab-status.sh".source = ./scripts/glab-status.sh;
-  home.file.".mygumscripts/glab-review.sh".source = ./scripts/glab-review.sh;
+  home.file.".mygumscripts/glab-mr.sh".source = ./scripts/glab-mr.sh;
   home.file.".mygumscripts/glab-checklist.sh".source = ./scripts/glab-checklist.sh;
+  home.file.".mygumscripts/git-commit.sh".source = ./scripts/git-commit.sh;
 
   programs.zsh = {
     enable = true;
@@ -81,8 +82,11 @@
     shellAliases = {
       glab-info = "sh ~/.mygumscripts/glab-info.sh";
       glab-status = "sh ~/.mygumscripts/glab-status.sh";
-      glab-review = "sh ~/.mygumscripts/glab-review.sh";
+      glab-mr = "sh ~/.mygumscripts/glab-mr.sh";
       glab-checklist = "sh ~/.mygumscripts/glab-checklist.sh";
+      git-commit = "sh ~/.mygumscripts/git-commit.sh";
+      git-initpush = "git push --set-upstream origin $(git branch --show-current)";
+      glab-new-issue = "glab issue create";
       l = "exa -l";
       ll = "exa -alh";
       ls = "exa";
@@ -93,16 +97,13 @@
       diff = "difft";
       grep = "rg";
       find = "fd";
-      glab-new-issue = "glab issue create";
-      glab-mr-create = "f() { glab mr create --target-branch $1 };f";
-      glab-mr-reviewer = "f() { glab mr update --reviewer $1 };f";
       gh-get = "gh issue list --assignee=@me && gh pr list --assignee=@me";
       init-ns = "cp /home/robw/nix-shells/dev.nix .";
       init-wasm = "cp /home/robw/nix-shells/wasm.nix .";
       run-ns = "nix-shell dev.nix || nix-shell shell.rob.nix || nix-shell";
       wasm-ns = "nix-shell wasm.nix";
       wasm-start = "/home/robw/.cargo/bin/wasm-server-runner";
-      remarkable = "restream -s 192.168.0.143 -p";
+      remarkable = "restream -s reMarkable -p";
     };
 
     history = {

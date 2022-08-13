@@ -20,22 +20,21 @@ in
       # apps
       alacritty
       discord
-      element-desktop
-      firefox
       flameshot
       gimp
       helix
       imagemagick
       inkscape
-      eww
       libresprite
       mdbook
       qutebrowser
       restream
       spotify
-      supercollider
       teamspeak_client
       zathura
+
+      # ui
+      eww
 
       # cli utils
       unstable.gum
@@ -45,6 +44,8 @@ in
       delta
       difftastic
       du-dust
+      jq
+      dunst
       duf
       exa
       exercism
@@ -62,9 +63,9 @@ in
       pass
       pciutils
       ripgrep
+      ranger
       sd
       tealdeer
-      tmux
       tree
       unzip
       xsel
@@ -72,13 +73,6 @@ in
       zola
       zoxide
       zsh
-
-      # graphics 
-      vulkan-headers
-      vulkan-tools
-      vulkan-loader
-      vulkan-validation-layers
-      vulkan-extension-layer
 
       # ui
       brightnessctl
@@ -102,6 +96,7 @@ in
       # rust
       rustup
       rust-analyzer
+      mold
 
       # rust cargo extensions
       cargo-audit
@@ -126,8 +121,11 @@ in
       stack
       ghc
       haskell-language-server
-      haskellPackages.tidal
       haskellPackages.implicit-hie
+
+      # tidal cycles
+      haskellPackages.tidal
+      supercollider
 
       # lua
       luajit

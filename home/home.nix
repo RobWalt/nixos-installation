@@ -13,11 +13,14 @@ in
       home.stateVersion = config.system.stateVersion;
 
       imports = [
-        ./neovim.nix
-        ./polybar.nix
-        ./zsh.nix
         ./alacritty.nix
+        ./dunst.nix
+        ./neovim.nix
+        #./picom.nix
+        ./polybar.nix
         ./rofi.nix
+        ./tmux.nix
+        ./zsh.nix
       ];
 
       home.sessionPath = [
@@ -25,6 +28,8 @@ in
       ];
 
       programs.home-manager.enable = true;
+
+      home.file.".cargo/config.toml".text = pkgs.callPackage ./configs/config.nix { };
 
       programs.git = {
         enable = true;
