@@ -22,6 +22,7 @@ in
       discord
       flameshot
       gimp
+      firefox
       helix
       imagemagick
       inkscape
@@ -58,7 +59,7 @@ in
       gitoxide
       glab
       just
-      loc
+      tokei
       lsof
       pass
       pciutils

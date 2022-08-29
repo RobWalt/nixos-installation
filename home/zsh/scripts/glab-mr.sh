@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /etc/nixos/home/scripts/utils.sh
+source $HOME/.mygumscripts/utils.sh
 
 gum_print "What is the target branch?"
 

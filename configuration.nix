@@ -8,12 +8,12 @@
   imports =
     [
       # Include the results of the hardware scan.
-      ./env.nix
-      ./hardware-configuration.nix
-      ./home/home.nix
-      ./windowmanager.nix
-      ./packages.nix
-      ./neovim/neovim.nix
+      ./env
+      ./hardware/e15.nix
+      ./home
+      ./windowmanager
+      ./packages
+      ./neovim
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -31,7 +31,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-    keyMap = "de-latin1";
   };
 
   fonts.fonts = with pkgs; [

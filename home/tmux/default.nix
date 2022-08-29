@@ -12,15 +12,17 @@
 
     plugins = with pkgs; [
       {
-        plugin = tmuxPlugins.resurrect;
-        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-      }
-      {
         plugin = tmuxPlugins.tmux-fzf;
         extraConfig = ''
-          bind-key "C-l" run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/window.sh switch"
+          bind-key "l" run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/window.sh switch"
         '';
       }
+      # idk, i don't use it tbh
+      #{
+      #  plugin = tmuxPlugins.resurrect;
+      #  extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      #}
+
       # dunno, this doesn't seem to work (yet)
       # {
       #   plugin = tmuxPlugins.continuum;

@@ -13,7 +13,7 @@
 
     # input
     libinput.enable = true;
-    layout = "de";
+    layout = "us";
 
     displayManager = {
       lightdm.enable = true;

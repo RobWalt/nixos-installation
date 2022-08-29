@@ -68,11 +68,17 @@
     };
   };
 
+  # Utility functions for other scripts
+  home.file.".mygumscripts/utils.sh".source = ./scripts/utils.sh;
+
+  # user friendly cli scripts
   home.file.".mygumscripts/glab-info.sh".source = ./scripts/glab-info.sh;
   home.file.".mygumscripts/glab-status.sh".source = ./scripts/glab-status.sh;
   home.file.".mygumscripts/glab-mr.sh".source = ./scripts/glab-mr.sh;
   home.file.".mygumscripts/glab-checklist.sh".source = ./scripts/glab-checklist.sh;
   home.file.".mygumscripts/git-commit.sh".source = ./scripts/git-commit.sh;
+
+  home.file.".tmux/launch-tmux.sh".source = ./scripts/launch-tmux.sh;
 
   programs.zsh = {
     enable = true;
@@ -87,6 +93,8 @@
       git-commit = "sh ~/.mygumscripts/git-commit.sh";
       git-initpush = "git push --set-upstream origin $(git branch --show-current)";
       glab-new-issue = "glab issue create";
+      tmuxw = "sh ~/.tmux/launch-tmux.sh";
+      loc = "tokei";
       l = "exa -l";
       ll = "exa -alh";
       ls = "exa";

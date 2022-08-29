@@ -19,8 +19,8 @@ in
         #./picom.nix
         ./polybar.nix
         ./rofi.nix
-        ./tmux.nix
-        ./zsh.nix
+        ./tmux
+        ./zsh
       ];
 
       home.sessionPath = [
@@ -29,7 +29,7 @@ in
 
       programs.home-manager.enable = true;
 
-      home.file.".cargo/config.toml".text = pkgs.callPackage ./configs/config.nix { };
+      home.file.".cargo/config.toml".text = pkgs.callPackage ./home-configs/cargo-config.nix { };
 
       programs.git = {
         enable = true;

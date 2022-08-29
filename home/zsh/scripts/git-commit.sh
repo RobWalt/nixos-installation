@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /etc/nixos/home/scripts/utils.sh
+source $HOME/.mygumscripts/utils.sh
 
 check_for_commit() {
   COMMITTED_STUFF=$(git commit --dry-run | rg "no changes added to commit")
@@ -19,17 +19,18 @@ SHOULD_CONTINUE=$?
 if [ $SHOULD_CONTINUE -eq 0 ]; then
 
   FILTER_CHOOSE_OUTPUT=""
-  filter_choose "feature fix documentation style refactor tests chore" "Choose type of commit"
+  filter_choose "chore documentation feature fix refactor review style tests" "Choose type of commit"
 
   PREFIX=""
   case $FILTER_CHOOSE_OUTPUT in 
+    *chore* ) PREFIX="chore" ;;
+    *documentation* ) PREFIX="docs" ;;
     *feature* ) PREFIX="feat" ;;
     *fix* ) PREFIX="fix" ;;
-    *documentation* ) PREFIX="docs" ;;
-    *style* ) PREFIX="style" ;;
     *refactor* ) PREFIX="refactor" ;;
+    *review* ) PREFIX="review" ;;
+    *style* ) PREFIX="style" ;;
     *tests* ) PREFIX="tests" ;;
-    *chore* ) PREFIX="chore" ;;
     * )  ;;
   esac
 
