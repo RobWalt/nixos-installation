@@ -33,27 +33,19 @@ gum_print "Getting labels"
 
 EXIST_LABELS=$(glab issue view $NR_ISS | rg -i "label" | sd '.*:\W*(.*)' '$1' | sd ', ' '\n')
 
-DESELECT=""
-NEW_DESELECT=""
-FIRST_WITHOUT_SECOND_OUTPUT=""
+DESELECT=$(printf "%s" "$EXIST_LABELS" | rusty-gum)
 
-while [[ ! $NEW_DESELECT = "CONTINUE" ]]
-do
-  DESELECT="$NEW_DESELECT $DESELECT"
-  FIRST_WITHOUT_SECOND_OUTPUT=$(comm -23 <(sort <(printf "%s\n" $EXIST_LABELS)) <(sort <(printf "%s\n" $DESELECT)))
-  NEW_DESELECT=$(printf "%s\n" "CONTINUE" "$FIRST_WITHOUT_SECOND_OUTPUT" | gum filter --placeholder "Which labels should be deselected?")
-done
+SELECT=$(printf "%s" "$ALL_LABELS" | rusty-gum)
 
-SELECT=""
-NEW_SELECT=""
-FIRST_WITHOUT_SECOND_OUTPUT=""
-
-while [[ ! $NEW_SELECT = "CONTINUE" ]]
-do
-  SELECT="$NEW_SELECT $SELECT"
-  UNWANTED="$SELECT $EXIST_LABELS"
-  FIRST_WITHOUT_SECOND_OUTPUT=$(comm -23 <(sort <(printf "%s\n" $ALL_LABELS)) <(sort <(printf "%s\n" $UNWANTED)))
-  NEW_SELECT=$(printf "%s\n" "CONTINUE" "$FIRST_WITHOUT_SECOND_OUTPUT" | gum filter --placeholder "Which labels should be selected?")
-done
-
-glab issue update $NR_ISS -u $DESELECT -l $SELECT
+if [ -z $SELECT ] && [ -z $DESELECT ] 
+then
+  printf "Nothing selected at all"
+elif [ -z $SELECT ] 
+then
+  glab issue update $NR_ISS -u $DESELECT
+elif [ -z $DESELECT ]
+then
+  glab issue update $NR_ISS -l $SELECT
+else
+  glab issue update $NR_ISS -l $SELECT -u $DESELECT
+fi

@@ -15,6 +15,12 @@
         plugin = tmuxPlugins.tmux-fzf;
         extraConfig = ''
           bind-key "l" run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/window.sh switch"
+
+          set-option -g status-style bg=black
+          set-option -g status-style fg=yellow
+
+          set-option -g exit-empty off
+          set-option -g exit-unattached off
         '';
       }
       # idk, i don't use it tbh

@@ -3,6 +3,7 @@ let
   unstable = import <nixos-unstable> { };
 in
 {
+
   nixpkgs.overlays = with pkgs;
     [
       (self: super: {
@@ -39,7 +40,10 @@ in
 
       # cli utils
       unstable.gum
+      # doesn't exist yet
+      # dialoguer
       bat
+      crate2nix
       binutils
       btop
       delta
