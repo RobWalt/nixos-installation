@@ -16,8 +16,6 @@ in
         ./alacritty.nix
         ./dunst.nix
         ./neovim.nix
-        #./picom.nix
-        ./polybar.nix
         ./rofi.nix
         ./tmux
         ./zsh

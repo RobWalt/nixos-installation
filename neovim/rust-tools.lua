@@ -41,6 +41,11 @@ lua << EOF
           procMacro = {
             enable = true,
           },
+          diagnostics = {
+            disabled = {
+              "unresolved-proc-macro"
+            },
+          },
           rustfmt = {
             extraArgs = {"+nightly"},
           },

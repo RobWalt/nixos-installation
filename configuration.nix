@@ -25,6 +25,18 @@
     useDHCP = false;
     interfaces.enp2s0.useDHCP = true;
     interfaces.wlp3s0.useDHCP = true;
+
+    wireless = {
+      enable = true;
+      userControlled.enable = true;
+      networks = {
+        # me lol
+        CoolanXD = {
+          pskRaw = "a59a39d392ed3a162784400836235fa155c43c03d48ebfd4b5315852f93f526d";
+        };
+        # not me lol
+      };
+    };
   };
 
   # Select internationalisation properties.
@@ -43,7 +55,7 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.robw = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "realtime" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "audio" "realtime" "docker" ];
   };
 
   # Enable cron service
@@ -51,6 +63,8 @@
     enable = true;
     systemCronJobs = [
       "*/5 * * * *   robw  DISPLAY=:0 feh --bg-max /home/robw/wallpaper/bg/ -z --image-bg \"#345\""
+      "*/15 * * * *   robw  test $(cat /sys/class/power_supply/BAT0/capacity | tr -dc '0-9') -le 50 && test $(cat /sys/class/power_supply/BAT0/capacity | tr -dc '0-9') -gt 25 && dunstify \"Battery Low\" $(printf \"%s%%\" $(cat /sys/class/power_supply/BAT0/capacity))"
+      "*/5 * * * *   robw  test $(cat /sys/class/power_supply/BAT0/capacity | tr -dc '0-9') -le 25 && dunstify -u critical \"Battery Low CRITICAL\" $(printf \"%s%%\" $(cat /sys/class/power_supply/BAT0/capacity))"
     ];
   };
 

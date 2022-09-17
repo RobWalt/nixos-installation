@@ -33,6 +33,8 @@ in
                 (plugin "nvim-telescope/telescope-symbols.nvim")
                 # color schemes
                 (plugin "sainnhe/everforest")
+                (plugin "eddyekofo94/bogster.nvim")
+                (plugin "catppuccin/nvim")
 
                 (plugin "stevearc/dressing.nvim")
                 (plugin "xiyaowong/nvim-transparent")

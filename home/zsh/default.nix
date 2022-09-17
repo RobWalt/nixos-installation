@@ -45,6 +45,7 @@
       grep = "rg";
       find = "fd";
       gh-get = "gh issue list --assignee=@me && gh pr list --assignee=@me";
+      init-bevy = "cp /home/robw/nix-shells/bevy.nix .";
       init-ns = "cp /home/robw/nix-shells/dev.nix .";
       init-wasm = "cp /home/robw/nix-shells/wasm.nix .";
       run-ns = "nix-shell dev.nix || nix-shell shell.rob.nix || nix-shell";

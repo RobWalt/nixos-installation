@@ -4,18 +4,6 @@ let
 in
 {
 
-  nixpkgs.overlays = with pkgs;
-    [
-      (self: super: {
-        mypolybar = polybar.override {
-          i3Support = true;
-        };
-      })
-      (import "${fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz"}/overlay.nix")
-    ];
-
-  programs.adb.enable = true;
-
   environment.systemPackages = with pkgs;
     [
       # apps
@@ -28,22 +16,22 @@ in
       imagemagick
       inkscape
       libresprite
+      blender
       mdbook
       qutebrowser
       restream
       spotify
       teamspeak_client
       zathura
+      blueberry
 
       # ui
       eww
 
       # cli utils
       unstable.gum
-      # doesn't exist yet
-      # dialoguer
+      license-generator
       bat
-      crate2nix
       binutils
       btop
       delta
@@ -82,7 +70,6 @@ in
       # ui
       brightnessctl
       i3lock-fancy
-      mypolybar
 
       # stuff
       clang
