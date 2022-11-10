@@ -13,12 +13,15 @@ in
       gimp
       firefox
       helix
+      tdesktop
       imagemagick
       inkscape
       libresprite
       blender
       mdbook
+      rustdesk
       qutebrowser
+      peek
       restream
       spotify
       teamspeak_client
@@ -29,17 +32,14 @@ in
       eww
 
       # cli utils
-      unstable.gum
-      license-generator
       bat
       binutils
       btop
       delta
       difftastic
       du-dust
-      jq
-      dunst
       duf
+      dunst
       exa
       exercism
       fd
@@ -50,22 +50,30 @@ in
       git-lfs
       gitoxide
       glab
+      hurl
+      jq
       just
-      tokei
+      license-generator
       lsof
       pass
       pciutils
-      ripgrep
       ranger
+      ripgrep
       sd
       tealdeer
+      tokei
       tree
+      unstable.gum
       unzip
-      xsel
+      xclip
       zip
       zola
       zoxide
       zsh
+
+      # for tmux battery
+      acpi
+      upower
 
       # ui
       brightnessctl
@@ -94,16 +102,17 @@ in
       cargo-audit
       cargo-bloat
       cargo-deny
-      cargo-generate
       cargo-edit
       cargo-expand
       cargo-fuzz
+      cargo-generate
       cargo-llvm-lines
-      unstable.cargo-make # latest version needed
       cargo-nextest
       cargo-outdated
       cargo-udeps
+      cargo-update
       cargo-watch
+      unstable.cargo-make # latest version needed
       hyperfine
       feroxbuster
       # not available yet
@@ -124,7 +133,7 @@ in
       sumneko-lua-language-server
 
       # wasm
-      wasm-bindgen-cli
+      # wasm-bindgen-cli # not always up to date
       wasm-pack
 
       # javascript 

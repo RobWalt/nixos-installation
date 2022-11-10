@@ -23,13 +23,16 @@ lua << EOF
   map("n", "<C-g>", "<cmd>Telescope live_grep<CR>", {silent = true})
   map("n", "<C-s>", "<cmd>Telescope git_status initial_mode=normal<CR>", {silent = true})
   map("n", "<C-c>", "<cmd>Telescope git_commits initial_mode=normal<CR>", {silent = true})
+  map("n", "<C-j>", "<cmd>Telescope diagnostics initial_mode=normal<CR>", {silent = true})
   map("n", "<Leader>m", "<cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
-  map("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
   map("n", "<A-,>", ":tabprevious<CR>", {silent = true})
   map("n", "<A-.>", ":tabnext<CR>", {silent = true})
   map("n", "<A-h>", ":tabmove -1<CR>", {silent = true})
   map("n", "<A-l>", ":tabmove +1<CR>", {silent = true})
   map("n", "<Leader>t", "<cmd>TodoTelescope<CR>", {silent = true})
+
+  map("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
+
   map("i", "<C-s>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true})
   map("i", "<C-d>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true})
   map("i", "<C-k>", "<cmd> lua if require('luasnip').expand_or_jumpable() then require('luasnip').expand_or_jump() end<CR>", {silent = true})

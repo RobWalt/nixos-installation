@@ -7,9 +7,6 @@ lua << EOF
     hint_enable = true, -- virtual hint enable
     hint_prefix = "",  -- Panda for parameter
   }
-  require('lspconfig').rnix.setup({})
-  require('lspconfig').hls.setup({})
-  require('lsp_signature').setup(sigcfg)
 
   local luacfg = {
     settings = {
@@ -34,6 +31,10 @@ lua << EOF
     },
   }
 
-  require('lspconfig').sumneko_lua.setup(luacfg)
+  require('lspconfig').rnix.setup({}) -- nix
+  require('lspconfig').hls.setup({}) -- haskell
+  -- require('lspconfig').marksman.setup({}) -- markdown
+  require('lspconfig').sumneko_lua.setup(luacfg) -- lua
+  require('lsp_signature').setup(sigcfg) -- signatures bottom left
 
 EOF

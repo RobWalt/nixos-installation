@@ -21,11 +21,11 @@ lua << EOF
       ['<CR>'] = cmp.mapping.confirm({select = true}),
     },
     sources = {
-      {name = 'nvim_lua'},
       {name = 'nvim_lsp'},
+      {name = 'buffer'},
+      {name = 'nvim_lua'},
       {name = 'path'},
       {name = 'luasnip'},
-      {name = 'buffer'},
     },
     formatting = {
       format = lspkind.cmp_format({

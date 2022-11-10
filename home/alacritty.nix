@@ -407,52 +407,6 @@
               ];
           };
         };
-        bogsterday = {
-          # Default colors
-          primary =
-            {
-              background = "#1a1b26";
-              foreground = "#c0caf5";
-            };
-
-          # Normal colors
-          normal =
-            {
-              black = "#15161E";
-              red = "#d32c5d";
-              green = "#5dd32c";
-              yellow = "#dcb659";
-              blue = "#59c0dc";
-              magenta = "#bb9af7";
-              cyan = "#7dcfff";
-              white = "#a9b1d6";
-            };
-
-          # Bright colors
-          bright =
-            {
-              black = "#414868";
-              red = "#d32c5d";
-              green = "#5dd32c";
-              yellow = "#dcb659";
-              blue = "#59c0dc";
-              magenta = "#bb9af7";
-              cyan = "#7dcfff";
-              white = "#c0caf5";
-            };
-
-          indexed_colors =
-            [
-              {
-                index = 16;
-                color = "#dc7759";
-              }
-              {
-                index = 17;
-                color = "#db4b4b";
-              }
-            ];
-        };
       };
       colors = {
 

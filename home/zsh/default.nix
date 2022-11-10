@@ -28,6 +28,7 @@
       glab-checklist = "sh ~/.mygumscripts/glab-checklist.sh";
       git-commit = "sh ~/.mygumscripts/git-commit.sh";
       git-initpush = "git push --set-upstream origin $(git branch --show-current)";
+      git-recent-branches = "git branch --sort=-committerdate | head";
       glab-new-issue = "glab issue create";
       tmuxw = "sh ~/.tmux/init-tmux-work.sh";
       tmuxa = "sh ~/.tmux/init-tmux-all.sh";
@@ -63,12 +64,17 @@
       enable = true;
       plugins = [
         { name = "zsh-users/zsh-autosuggestions"; }
+        { name = "zsh-users/zsh-completions"; }
+        { name = "zsh-users/zsh-history-substring-search"; }
       ];
     };
 
     initExtra = ''
       eval "$(zoxide init zsh)"
       eval $(ssh-agent) > /home/robw/.sshstartup.log && ssh-add /home/robw/.ssh/keys/* 2>> /home/robw/.sshstartup.log
+
+      bindkey '^[[A' history-substring-search-up
+      bindkey '^[[B' history-substring-search-down
     '';
   };
 
