@@ -43,9 +43,20 @@ lua << EOF
           },
           diagnostics = {
             disabled = {
-              "unresolved-proc-macro"
+              "unresolved-proc-macro",
+	      "inactive-code"
             },
           },
+	  lens = {
+	    enable = true,
+	    references = { 
+	      enable = true, 
+	      adt = { enable = true },
+	      enumVariant = { enable = true },
+	      method = { enable = true },
+	      trait = { enable = true },
+     	    },
+	  },
           rustfmt = {
             extraArgs = {"+nightly"},
           },
