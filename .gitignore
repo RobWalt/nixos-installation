@@ -1,1 +1,2 @@
 **/*.sh
+!update_git_files.sh
