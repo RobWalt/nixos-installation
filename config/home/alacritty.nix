@@ -108,8 +108,8 @@
             }
           ];
         };
-        frappe = {
 
+        frappe = {
           # Default colors
           primary = {
             background = "#303446"; # base
@@ -211,7 +211,6 @@
           ];
         };
 
-
         macchiato = {
           # Default colors
           primary = {
@@ -311,9 +310,7 @@
             ];
         };
 
-
         mocha = {
-
           # Default colors
           primary = {
             background = "#1E1E2E"; # base

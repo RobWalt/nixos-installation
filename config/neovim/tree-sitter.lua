@@ -5,6 +5,7 @@ lua << EOF
       enable = true,
       additional_vim_regex_highlighting = false,
     },
+    parser_install_dir = "/home/robw/.local/share/nvim/parser",
     ident = {
       enable = true,
     },

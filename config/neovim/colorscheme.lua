@@ -36,7 +36,7 @@ lua << EOF
         telescope = true,
         treesitter = true,
 	neogit = true,
-	ident_blankline = {
+	indent_blankline = {
 		enabled = true,
 		colored_indent_levels = true,
 	},

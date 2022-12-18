@@ -118,15 +118,23 @@ in
       # not available yet
       #cargo-hack
 
+      #kind
+      unstable.kind2
+
       # haskell
-      stack
+      cabal-install
+      cabal2nix
+      haskellPackages.implicit-hie
       ghc
       haskell-language-server
-      haskellPackages.implicit-hie
+      ormolu
 
       # tidal cycles
       haskellPackages.tidal
       supercollider
+
+      # local markdown slides
+      jekyll
 
       # lua
       luajit

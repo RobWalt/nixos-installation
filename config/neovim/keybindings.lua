@@ -10,8 +10,8 @@ lua << EOF
   vim.g.mapleader = ','
   map("n", "<C-f>", ":NvimTreeFindFileToggle<CR>", {silent = true})
   map("n", "<C-K>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {silent = true})
-  map("n", "<C-n>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent = true})
-  map("n", "<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent = true})
+  map("n", "<C-n>", "<cmd>lua vim.diagnostic.goto_next()<CR>", {silent = true})
+  map("n", "<C-p>", "<cmd>lua vim.diagnostic.goto_prev()<CR>", {silent = true})
   map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", {silent = true})
   map("n", "gD", "<cmd>Telescope diagnostics theme=ivy initial_mode=normal<CR>", {silent = true})
   map("n", "gd", "<cmd>Telescope lsp_definitions theme=ivy initial_mode=normal<CR>", {silent = true})

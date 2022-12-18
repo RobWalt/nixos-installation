@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
 in
 {
   imports = [
@@ -50,6 +50,7 @@ in
           delta.navigate = true;
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
+	  init.defaultBranch = "main";
         };
       };
 

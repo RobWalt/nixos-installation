@@ -89,7 +89,7 @@ in
 
       # color schemes
       (plugin "sainnhe/everforest")
-      (pluginGitRev "e4ff2a69844f02ef3ee88ca5c5766eb4c7cf0c0c" "catppuccin/nvim")
+      (plugin "catppuccin/nvim")
 
       # simple better UX
       auto-pairs

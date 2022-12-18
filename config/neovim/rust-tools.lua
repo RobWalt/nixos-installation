@@ -3,13 +3,13 @@ lua << EOF
   vim.g.updatetime = 500
   vim.api.nvim_create_autocmd("CursorHold", {pattern = {"*"}, command = "lua vim.diagnostic.open_float(nil, { focusable = false })"})
 
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   capabilities = vim.tbl_extend('keep', capabilities or {}, require('lsp-status').capabilities)
-  require('rust-tools').setup({
+  local rt = require('rust-tools')
+  rt.setup({
 
     tools = {
       autoSetHints = true,
-      hover_with_actions = true,
       executor = require("rust-tools/executors").termopen,
       on_initialized = nil,
       inlay_hints = {
@@ -28,7 +28,11 @@ lua << EOF
     },
     server = {
       capabilities = capabilities,
-      on_attach = require('lsp-status').on_attach,
+      on_attach = function(x,bufnr)
+        require('lsp-status').on_attach(x,bufnr)
+        -- Hover actions
+        vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
+      end,
       settings = {
         ["rust-analyzer"] = {
           assist = {

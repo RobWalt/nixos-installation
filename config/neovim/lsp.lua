@@ -1,5 +1,5 @@
 lua << EOF
-  vim.api.nvim_create_autocmd("BufWritePre", {pattern = {"*.nix", "*.rs", "*.lua"}, command = "lua vim.lsp.buf.formatting_sync(nil, 100)"})
+  vim.api.nvim_create_autocmd("BufWritePre", {pattern = {"*.nix", "*.rs", "*.lua", "*.hs"}, command = "lua vim.lsp.buf.formatting_sync(nil, 100)"})
 
   local sigcfg = {
     doc_lines = 0,
@@ -31,8 +31,16 @@ lua << EOF
     },
   }
 
+  local hlscfg = {
+    settings = {
+      haskell = {
+        formattingProvider = "ormolu"
+      }
+    }
+  }
+
   require('lspconfig').rnix.setup({}) -- nix
-  require('lspconfig').hls.setup({}) -- haskell
+  require('lspconfig').hls.setup(hlscfg) -- haskell
   -- require('lspconfig').marksman.setup({}) -- markdown
   require('lspconfig').sumneko_lua.setup(luacfg) -- lua
   require('lsp_signature').setup(sigcfg) -- signatures bottom left
