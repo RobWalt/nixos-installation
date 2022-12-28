@@ -15,9 +15,9 @@ in
       imports = [
         ./alacritty.nix
         ./dunst.nix
-        ./neovim.nix
         ./rofi.nix
         ./tmux
+        ./neovim.nix
         ./zsh
       ];
 

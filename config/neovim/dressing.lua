@@ -24,7 +24,7 @@ lua << EOF
       max_width = { 140, 0.9 },
       min_width = { 20, 0.2 },
 
-      win_options = { 
+      win_options = {
         -- Window transparency (0-100)
         winblend = 10,
 
@@ -55,27 +55,27 @@ lua << EOF
 
       -- Options for fzf selector
       fzf = {
-      window = {
-      width = 0.5,
-      height = 0.4,
-      },
+        window = {
+          width = 0.5,
+          height = 0.4,
+        },
       },
 
       -- Options for fzf_lua selector
       fzf_lua = {
-      winopts = {
-      width = 0.5,
-      height = 0.4,
-      },
+        winopts = {
+          width = 0.5,
+          height = 0.4,
+        },
       },
 
       -- Options for nui Menu
       nui = {
-      position = "50%",
-      size = nil,
-      relative = "editor",
-      border = {
-      style = "rounded",
+        position = "50%",
+        size = nil,
+        relative = "editor",
+        border = {
+        style = "rounded",
       },
       max_width = 80,
       max_height = 40,

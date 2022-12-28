@@ -8,11 +8,10 @@ in
     [
       (self: super: {
         neovim = super.neovim.override {
-          # unstable until 0.8 hits stable
-          # configure = {
-          #   packages.main = { start = (pkgs.callPackage ../vimplugins.nix { }).myvimplugins; };
-          #   customRC = (pkgs.callPackage ../vimplugins.nix { }).myvimextraconfig;
-          # };
+          configure = {
+            packages.main = { start = (pkgs.callPackage ../vimplugins.nix { }).myvimplugins; };
+            customRC = (pkgs.callPackage ../vimplugins.nix { }).myvimextraconfig;
+          };
         };
       })
     ];

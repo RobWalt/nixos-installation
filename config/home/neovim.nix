@@ -1,7 +1,4 @@
 { pkgs, lib, ... }:
-let
-  unstable = import <nixos-unstable> { };
-in
 {
   programs.neovim = {
 
@@ -15,8 +12,8 @@ in
     withPython3 = true;
     withRuby = false;
 
-    plugins = (pkgs.callPackage ../vimplugins.nix { }).myvimplugins;
-
-    extraConfig = (pkgs.callPackage ../vimplugins.nix { }).myvimextraconfig;
+    plugins = (pkgs.callPackage ../vimplugins.nix {}).myvimplugins;
+    
+    extraConfig = (pkgs.callPackage ../vimplugins.nix {}).myvimextraconfig;
   };
 }

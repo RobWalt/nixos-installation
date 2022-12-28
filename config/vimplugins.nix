@@ -19,14 +19,22 @@ in
         version = "pinned";
         src = builtins.fetchGit {
           url = "https://github.com/${repo}.git";
-	  rev = rev;
+          rev = rev;
         };
       };
     in
     with lib;
     [
+      {
+        plugin = zen-mode-nvim;
+        config = readFile ./neovim/zen-mode.lua;
+      }
+      {
+        plugin = twilight-nvim;
+        config = readFile ./neovim/twilight.lua;
+      }
       # dependency of many things
-      { plugin = plenary-nvim; }
+      plenary-nvim
       popup-nvim
 
       # LSP
@@ -38,6 +46,10 @@ in
       lsp_signature-nvim
       lspkind-nvim
       nvim-dap
+      {
+        plugin = crates-nvim;
+        config = readFile ./neovim/crates.lua;
+      }
       {
         plugin = rust-tools-nvim;
         config = readFile ./neovim/rust-tools.lua;
@@ -53,6 +65,7 @@ in
               tree-sitter-nix
               tree-sitter-lua
               tree-sitter-scheme
+              tree-sitter-norg
             ]
           ));
         config = readFile ./neovim/tree-sitter.lua;
@@ -63,7 +76,10 @@ in
         config = readFile ./neovim/indent-blankline.lua;
       }
       vim-nix
-      vim-highlightedyank
+      {
+        plugin = vim-illuminate;
+        config = readFile ./neovim/illuminate.lua;
+      }
       nvim-web-devicons
       {
         plugin = nvim-colorizer-lua;
@@ -107,7 +123,10 @@ in
         plugin = toggleterm-nvim;
         config = readFile ./neovim/toggleterm.lua;
       }
-      telescope-nvim
+      {
+        plugin = telescope-nvim;
+        config = readFile ./neovim/telescope.lua;
+      }
       {
         plugin = lualine-nvim;
         config = readFile ./neovim/lualine.lua;
@@ -137,6 +156,27 @@ in
         config = readFile ./neovim/neogit.lua;
       }
 
+      {
+        plugin = dial-nvim;
+        config = readFile ./neovim/dial.lua;
+      }
+      {
+        plugin = neoscroll-nvim;
+        config = readFile ./neovim/neoscroll.lua;
+      }
+      {
+        plugin = (plugin "gbprod/yanky.nvim");
+        config = readFile ./neovim/yanky.lua;
+      }
+      (plugin "nvim-neorg/neorg-telescope")
+      {
+        plugin = neorg;
+        config = readFile ./neovim/neorg.lua;
+      }
+      {
+        plugin = (plugin "sunjon/Shade.nvim");
+        config = readFile ./neovim/shade.lua;
+      }
       (plugin "tidalcycles/vim-tidal")
       (plugin "DingDean/wgsl.vim")
     ];

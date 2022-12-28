@@ -17,7 +17,12 @@ lua << EOF
   map("n", "gd", "<cmd>Telescope lsp_definitions theme=ivy initial_mode=normal<CR>", {silent = true})
   map("n", "gi", "<cmd>Telescope lsp_implementations theme=ivy initial_mode=normal<CR>", {silent = true})
   map("n", "gr", "<cmd>Telescope lsp_references theme=ivy initial_mode=normal<CR>", {silent = true})
+  map("n", "gp", "<cmd>Telescope yank_history<CR>", {silent = true})
   map("n", "ga", "<cmd>lua vim.lsp.buf.code_action() initial_mode=normal<CR>", {silent = true})
+  map("n", "<C-a>", require('dial.map').inc_normal(), {noremap = true})
+  map("n", "<C-x>", require('dial.map').dec_normal(), {noremap = true})
+  map("n", "p", "<cmd> lua require('yanky').put('p')<CR>", {silent = true, noremap = true})
+  map("n", "P", "<cmd> lua require('yanky').put('P')<CR>", {silent = true, noremap = true})
   map("n", "<C-e>", "<cmd>Telescope find_files<CR>", {silent = true})
   map("n", "<C-q>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", {silent = true})
   map("n", "<C-g>", "<cmd>Telescope live_grep<CR>", {silent = true})
@@ -29,12 +34,11 @@ lua << EOF
   map("n", "<A-.>", ":tabnext<CR>", {silent = true})
   map("n", "<A-h>", ":tabmove -1<CR>", {silent = true})
   map("n", "<A-l>", ":tabmove +1<CR>", {silent = true})
+  map("n", "<A-z>", "<cmd>ZenMode<CR>", {silent = true})
   map("n", "<Leader>t", "<cmd>TodoTelescope<CR>", {silent = true})
 
   map("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
 
-  map("i", "<C-s>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true})
-  map("i", "<C-d>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true})
-  map("i", "<C-k>", "<cmd> lua if require('luasnip').expand_or_jumpable() then require('luasnip').expand_or_jump() end<CR>", {silent = true})
-  map("i", "<C-j>", "<cmd> lua if require('luasnip').jumpable(-1) then require('luasnip').jump(-1) end<CR>", {silent = true})
+  map("i", "<A-m>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true})
+  map("i", "<A-e>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true})
 EOF

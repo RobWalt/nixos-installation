@@ -1,5 +1,3 @@
 lua << EOF
-  require('colorizer').setup({
-      '*';
-    });
+  require('colorizer').setup({});
 EOF
