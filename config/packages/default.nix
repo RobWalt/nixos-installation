@@ -141,7 +141,7 @@ in
       sumneko-lua-language-server
 
       # wasm
-      # wasm-bindgen-cli # not always up to date
+      wasm-bindgen-cli # not always up to date
       wasm-pack
 
       # javascript 

@@ -1,5 +1,5 @@
 lua << EOF
-  vim.api.nvim_create_autocmd("BufWritePre", {pattern = {"*.nix", "*.rs", "*.lua", "*.hs"}, command = "lua vim.lsp.buf.formatting_sync(nil, 100)"})
+  vim.api.nvim_create_autocmd("BufWritePre", {pattern = {"*.nix", "*.rs", "*.lua", "*.hs"}, command = "lua vim.lsp.buf.format()"})
 
   local sigcfg = {
     doc_lines = 0,

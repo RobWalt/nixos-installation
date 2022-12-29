@@ -173,10 +173,6 @@ in
         plugin = neorg;
         config = readFile ./neovim/neorg.lua;
       }
-      {
-        plugin = (plugin "sunjon/Shade.nvim");
-        config = readFile ./neovim/shade.lua;
-      }
       (plugin "tidalcycles/vim-tidal")
       (plugin "DingDean/wgsl.vim")
     ];
