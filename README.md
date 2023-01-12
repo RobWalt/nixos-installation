@@ -1,4 +1,4 @@
-# Install guide
+# Install guide (Updated: 2023-01-12)
 
 ## 1. Make bootable stick
 This shouldn't be too hard
@@ -174,394 +174,17 @@ reboot
 ## 0. Cheating
 
 You can use the configuration of this repository at your own risk. It might not
-work for your machine. However, you can at least reuse some parts you like and
-which work for you
+work for your machine and you have to teak a few values. However, you can at
+least reuse some parts you like and which work for you
 
 Download the configuration with curl, i.e.
 ```console
 curl https://raw.githubusercontent.com/RobWalt/nixos-installation/main/configuration.nix
 ```
 
-# 2. Editor (Neovim)
+# 1. Home Manager 
 
-## 2.1 Use of Unstable for neovim 0.6.1.
-
-(Note that this step may not be required in the future, but it is always good
-to have a more recent version of neovim as long as nothing is broken)
-
-To get access to all of the neovim functionality I want to have, we actually
-need to use unstable NixOS. This is the case since stable NixOS only gives us
-neovim 0.5.1 at max, when I want neovim 0.6.1.
-
-To change to unstable NixOS, first we need to add the unstable channel in the
-command line as follows:
-```console
-nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
-nix-channel --update
-```
-
-After that we can actually use it and use a little nix-magic in the
-`configuration.nix` file as follows:
-```nix
-# /etc/nixos/configuration.nix
-...
-environment.systemPackages = with pkgs;
-let 
-  unstable = import <nixos-unstable> {  };
-in
-  [
-    unstable.neovim
-    ...
-  ];
-...
-```
-
-Then check, if the right version of `nvim` is installed:
-```console
-nvim --version
-
->NVIM v0.6.1
-```
-
-If this works, then we are set for the next step. You can delete the lines
-added to your `configuration.nix` file, since we are going to create an extra
-module just for neovim and include it in the `configuration.nix` to prevent
-cluttering it.
-
-## 2.2 Add neovim module
-
-We firs start by creating the file `/etc/nixos/nvim.nix`.
-```
-touch /etc/nixos/nvim.nix
-```
-
-(Note: The most recent version of this configuration file is included in this repository)
-
-Now we need to include this file in out `configuration.nix` config.
-
-```nix
-# /etc/nixos/configuration.nix
-...
-imports = 
-[
-  ./hardware-configuration.nix
-  ./nvim.nix # NEW!
-]
-...
-```
-
-In `nvim.nix`, we write the basic nix configuration skeleton, including the definition
-of unstable we already made above.
-
-```
-# /etc/nixos/nvim.nix
-{ pkgs, ... }:
-let 
-  unstable = import <nixos-unstable> {  };
-in 
-{
-  # content 
-  # empty
-}
-```
-
-First of all, we are just going to include the `neovim` package, its
-dependencies and other definitions. Notice that neovim isn't configured in any
-way after this step
-
-```nix
-# /etc/nixos/nvim.nix
-...
-environment.variables.EDITOR = "nvim";
-environment.systemPackages = with pkgs;
-[
-  neovim             # neovim 
-  clang              # needed for rust-analyzer
-  gcc                # needed for tree sitter plugin (doesn't work with clang) 
-  git                # needed for tree sitter to download parsers
-  rust-analyzer      # rust-analyzer, rust lsp
-  rnix-lsp           # nix lsp
-];
-...
-```
-
-Next we can start configuring this instance of `neovim` by using `overlay` and
-`override` in a defintion. Overlays have the benefit of changing the definition
-of the `neovim` package everywhere in our system. Without that, `neovim` would
-be the default version anywhere else in our configs. We do so in the following
-way
-
-```nix
-# /etc/nixos/nvim.nix
-...
-environment.variables.EDITOR = "nvim";
-
-nixpkgs.overlays = [
-  (self: super: {
-    neovim = unstable.neovim.override {
-      viAlias = true;
-      vimAlias = true;
-    };
-  })
-];
-
-environment.systemPackages = with pkgs;
-[
-  neovim             # neovim 
-  clang              # needed for rust-analyzer
-  gcc                # needed for tree sitter plugin (doesn't work with clang) 
-  git                # needed for tree sitter to download parsers
-  rust-analyzer      # rust-analyzer, rust lsp
-  rnix-lsp           # nix lsp
-];
-...
-```
-
-To check, if everything is working, you can `nixos-rebuild` here and try to
-enter `vi` or `vim` in the command line. If everything works fine, these
-commands should open an instance of `nvim` now.
-
-We can start with the real configuration from here on. First of all, we are going to add the plugins. Just before actually adding the plugins, let me tell you a little lesson I learn here. Some plugin names and with a file suffix, e.g. `treesitter.nvim`. Nix can't parse the dots `.` in these names. It took me a while to figure out that we need to replace the dots with dashes `-` to make it work. This was just a side node, if you plan to add your own favourite plugin with a file suffix ;)
-
-Anyways, here is the next version of `nvim.nix` with plugins added to neovim. Oh by the way, there are several ways to do this, you can choose form different plugin managers. I use vimplug here since I used it outside of NixOS aswell.
-
-```nix
-# /etc/nixos/nvim.nix
-...
-environment.variables.EDITOR = "nvim";
-
-nixpkgs.overlays = [
-  (self: super: {
-    neovim = unstable.neovim.override {
-      viAlias = true;
-      vimAlias = true;
-      configure = {
-        plug.plugins = with pkgs.vimPlugins;
-        [
-          vim-nix
-          gruvbox
-          rust-tools-nvim
-          nvim-lspconfig
-          cmp-nvim-lsp
-          cmp-buffer
-          nvim-cmp
-          cmp-vsnip
-          plenary-nvim
-          nvim-dap
-          popup-nvim
-          telescope-nvim
-          nvim-treesitter
-          nerdtree
-          auto-pairs
-          ctrlp-vim
-        ];
-      };
-    };
-  })
-];
-
-environment.systemPackages = with pkgs;
-[
-  neovim             # neovim 
-  clang              # needed for rust-analyzer
-  gcc                # needed for tree sitter plugin (doesn't work with clang) 
-  git                # needed for tree sitter to download parsers
-  rust-analyzer      # rust-analyzer, rust lsp
-  rnix-lsp           # nix lsp
-];
-...
-```
-
-After that all plugins should be installed. Some of them might not be enabled
-yet so we need to add other configurations normally made in `init.nvim`. We can
-do so by extending our configuration. I will only show you how to add one part.
-You can add several parts in the same manner. For my whole configuration look
-for the `nvim.nix` file in this repository.
-
-Notice that this next example shows how to add normal vimscript-style
-configurations aswell as lua configurations. One additional warning: In the
-case of adding lua parts to the script, in case of errors, check for trailing
-whitespace in the start and end part of the lua part in the configuration, i.e.
-whitespace after `lua << EOF` and after `EOF`. This caused some errors for me.
-
-The final version of `nvim.nix`. 
-
-```nix
-# /etc/nixos/nvim.nix
-...
-environment.variables.EDITOR = "nvim";
-
-nixpkgs.overlays = 
-let 
-  general_settings = ''...'' ;
-  ...
-  lsp_settings = ''
-    autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
-    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
-
-    lua << EOF
-      require('lspconfig').rnix.setup();
-      require('lspconfig').rust_analyzer.setup{
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        settings = {
-          ["rust-analyzer"] = {
-            assist = {
-              importGranularity = "module",
-              importPrefix = "by_self",
-            },
-            cargo = {
-              loadOutDirsFromCheck = true,
-            },
-            procMacro = {
-              enable = true,
-            },
-          },
-        },
-      };
-    EOF
-  '';
-  ...
-in
-[
-  (self: super: {
-    neovim = unstable.neovim.override {
-      viAlias = true;
-      vimAlias = true;
-      configure = {
-        plug.plugins = with pkgs.vimPlugins;
-        [
-          vim-nix
-          gruvbox
-          rust-tools-nvim
-          nvim-lspconfig
-          cmp-nvim-lsp
-          cmp-buffer
-          nvim-cmp
-          cmp-vsnip
-          plenary-nvim
-          nvim-dap
-          popup-nvim
-          telescope-nvim
-          nvim-treesitter
-          nerdtree
-          auto-pairs
-          ctrlp-vim
-        ];
-        customRC = general_settings 
-          + ...
-          + lsp_settings
-          + ...;
-        };
-    };
-  })
-];
-
-environment.systemPackages = with pkgs;
-[
-  neovim             # neovim 
-  clang              # needed for rust-analyzer
-  gcc                # needed for tree sitter plugin (doesn't work with clang) 
-  git                # needed for tree sitter to download parsers
-  rust-analyzer      # rust-analyzer, rust lsp
-  rnix-lsp           # nix lsp
-];
-...
-```
-
-And that's it. Neovim should work fine now :)
-
-We can increase readability even more, by modularizing the configuration a bit
-more. The settings could be their own modules for instance. I crafted the
-following solution to reduce the individual file line counts:
-
-```nix
-# /etc/nixos/nvim.nix
-...
-environment.variables.EDITOR = "nvim";
-environment.systemPackages = with pkgs;
-let 
-
-...
-general_settings = pkgs.callPackage ./general.nix {};
-...
-
-myneovim = (unstable.neovim.override {
-    viAlias = true;
-    vimAlias = true;
-    configure = {
-      plug.plugins = with pkgs.vimPlugins;
-      [
-        vim-nix
-        gruvbox
-        rust-tools-nvim
-        nvim-lspconfig
-        cmp-nvim-lsp
-        cmp-buffer
-        nvim-cmp
-        cmp-vsnip
-        plenary-nvim
-        nvim-dap
-        popup-nvim
-        telescope-nvim
-        nvim-treesitter
-        nerdtree
-        auto-pairs
-        ctrlp-vim
-      ];
-    };
-
-    customRC = general_settings 
-      + ...;
-  });
-in
-[
-  myneovim           # neovim 
-  clang              # needed for rust-analyzer
-  gcc                # needed for tree sitter plugin (doesn't work with clang) 
-  git                # needed for tree sitter to download parsers
-  rust-analyzer      # rust-analyzer, rust lsp
-  rnix-lsp           # nix lsp
-];
-...
-```
-
-And then create `lsp_settings.nix` as follows:
-```nix
-{}:
-''
-  autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 100)
-  autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
-
-  lua << EOF
-    require('lspconfig').rnix.setup();
-    require('lspconfig').rust_analyzer.setup{
-      capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      settings = {
-        ["rust-analyzer"] = {
-          assist = {
-            importGranularity = "module",
-            importPrefix = "by_self",
-          },
-          cargo = {
-            loadOutDirsFromCheck = true,
-          },
-          procMacro = {
-            enable = true,
-          },
-        },
-      },
-    };
-  EOF
-''
-```
-
-While this approach may seem to be a bit more complex in comparison to
-installing neovim just with Home-Manager, we retain more control and the setup
-is done system wide, so this configuration is also used by the root user
-
-# 3. Home Manager 
-
-## 3.1. Setting Home Manager Up
+## 1.1. Setting Home Manager Up
 
 Home manager is a convenient way of managing files which would be located in
 the home directory on normal systems.
@@ -617,3 +240,215 @@ in
 
 Congrats, this should also work and now your git information will automatically
 be filled in on every rebuild of your system.
+
+# 2. Editor (Neovim v0.8.1)
+
+## 2.1 Basic install
+
+Since I want to have a configurated `nvim` when logged in as root, but also
+don't want to give away using it from Home-Manager when not logged in as root,
+I installed it both ways. It might seem a little weird at first, but the
+weirdness is just part of enabling us to reuse the configuration files later
+on.
+
+### 2.1.1 Home-Manager
+
+Let's take a look first at how a basic Home-Manager nvim install is done:
+
+```nix 
+  programs.neovim = {
+    enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    withNodeJs = true;
+    withPython3 = true;
+    withRuby = false;
+  };
+```
+
+It's basically just plug an play. Note that I also used the options to have the
+JS and Python features in the nvim version that's installed.
+
+### 2.1.2 System install
+
+The system wide install isn't much more difficult either
+
+```nix
+  nixpkgs.overlays =
+    [
+      (self: super: {
+        neovim = super.neovim.override {
+          # TODO
+        };
+      })
+    ];
+
+  environment.systemPackages = with pkgs;
+    [
+      neovim
+      clang # needed for rust-tools
+      gcc # needed for treesitter compilation
+      git # needed for treesitter download
+      rnix-lsp # nix lsp
+      ce.marksman # markdown lsp
+      #rust-analyzer
+    ];
+```
+
+It looks a bit akward to use such a naked overlay, but we will add our
+configuration files soon where I put the `TODO` comment for now. Note, that I
+also grouped some other system packages beneath the neovim overlay, just to
+have an eye on it. Some of these packages are dependencies for plugins and
+others are purely used by neovim, so I figured it would make sense to put them
+there
+
+## 2.2 Neovim configuration
+
+### 2.2.1 Preparations
+
+First, we need to do some setup. In a separate file, e.g. `vimplugins.nix` add the following:
+
+```nix
+{ pkgs, lib, fetchFromGitHub, ... }:
+let
+  # enables us to use nvim plugins which are not yet available on nixpkgs but on github
+  pluginGit = version: ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = version;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+  # easy to use version of the function above
+  plugin = pluginGit "HEAD" "HEAD";
+in
+{
+  # TODO
+}
+```
+
+These are just convenience functions for getting plugins that are not available
+through `nixpkgs`. Now, we can add the meat to this file. We split the file
+into two major sections:
+
+- Plugin config
+- general config
+
+### 2.2.2 Plugin config
+
+A vim plugin in our config has one of the following two formats:
+
+1. Simple Plugin without extra configuration
+  - nixpkgs: Use the plugin name, replace "." in "plenary.nvim" with "-" so we
+    have "plenary-nvim"
+  - github: Use `(plugin "<RepoOwner>/<RepoName>")`
+2. Plugin with extra configuration 
+  Use 
+  ```nix 
+{
+  plugin = <PluginName as in 1.>;
+  config = lib.readFile <PathToConfigOfPlugin>
+}
+  ```
+
+Here `<PathToConfigOfPlugin>` is just your regular plugin configuration in a
+`.lua` file. The only special part about the config is, that it has to start
+with `lua << EOF` and end with `EOF` since it will be included in a vim config
+file later so that nvim can identify the code is `lua` code.
+
+Then we just define a list of these plugin entries, which is a field in our `vimplugins.nix` file. Here is an example: 
+
+```nix
+  myvimplugins = with pkgs.vimPlugins; with lib;
+    [
+      # LSP
+      {
+        plugin = nvim-lspconfig;
+        config = readFile ./neovim/lsp.lua;
+      }
+
+      # dependency of many things
+      plenary-nvim
+
+      # non nixpkgs plugin
+      {
+        plugin = (plugin "m-demare/hlargs.nvim");
+        config = readFile ./neovim/hlargs.lua;
+      }
+
+      (plugin "sainnhe/everforest")
+    ];
+```
+
+### 2.2.3 General config
+
+The general config will just be provided as plain text. We can create several files with general purposes. I use the following modularization:
+
+```
+  ./neovim/general.lua      # neovim settings
+  ./neovim/colorscheme.lua  # colors
+  ./neovim/keybindings.lua  # key maps
+```
+
+Once we have these files, we just concat them and add a field in our `vimplugins.nix` file as follows:
+
+```nix
+  myvimextraconfig =
+    let
+      listOfContent = map lib.readFile [
+        ./neovim/general.lua
+        ./neovim/colorscheme.lua
+        ./neovim/keybindings.lua
+      ];
+    in
+    lib.concatStringsSep "\n" listOfContent;
+```
+
+## 2.3 Using the configs
+
+### 2.3.1 Home-Manager
+
+Adjust the configuration as follows
+
+```nix
+  programs.neovim = {
+
+    enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    withNodeJs = true;
+    withPython3 = true;
+    withRuby = false;
+
+    # NEW!
+    plugins = (pkgs.callPackage ../vimplugins.nix {}).myvimplugins;
+    # NEW!
+    extraConfig = (pkgs.callPackage ../vimplugins.nix {}).myvimextraconfig;
+  };
+```
+
+### 2.3.1 System packages
+
+Adjust the configuration as follows
+
+```nix 
+  nixpkgs.overlays =
+    [
+      (self: super: {
+        neovim = super.neovim.override {
+          configure = {
+            packages.main = { start = (pkgs.callPackage ../vimplugins.nix { }).myvimplugins; };
+            customRC = (pkgs.callPackage ../vimplugins.nix { }).myvimextraconfig;
+          };
+        };
+      })
+    ];
+```
+
