@@ -1,5 +1,15 @@
 # Install guide (Updated: 2023-01-12)
 
+## 0. Other Docs
+
+I think it's more important to have some general docs to look after instead of
+me explaining everything again if there's stuff out there. So before you read
+my explanations, please take a look if one of the following sources fits your
+taste aswell and just go with it instead. Spread the word!
+
+- [nix.dev tutorial series](nix.dev/tutorials)
+- [Noogle](noogle.dev)
+
 ## 1. Make bootable stick
 This shouldn't be too hard
 
