@@ -15,6 +15,7 @@ with pkgs; mkShell {
     xorg.libXcursor
     xorg.libXrandr
     xorg.libXi
+    cmake
   ];
   shellHook = ''
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.lib.makeLibraryPath [

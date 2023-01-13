@@ -1,29 +1,17 @@
 { pkgs, lib, fetchFromGitHub, ... }:
 let
-  unstable = import <nixos-unstable> { };
+  pluginGit = version: ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = version;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+  plugin = pluginGit "HEAD" "HEAD";
 in
 {
-  myvimplugins = with pkgs.vimPlugins;
-    let
-      pluginGit = version: ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
-        pname = "${lib.strings.sanitizeDerivationName repo}";
-        version = version;
-        src = builtins.fetchGit {
-          url = "https://github.com/${repo}.git";
-          ref = ref;
-        };
-      };
-      plugin = pluginGit "HEAD" "HEAD";
-      pluginGitRev = rev: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
-        pname = "${lib.strings.sanitizeDerivationName repo}";
-        version = "pinned";
-        src = builtins.fetchGit {
-          url = "https://github.com/${repo}.git";
-          rev = rev;
-        };
-      };
-    in
-    with lib;
+  myvimplugins = with pkgs.vimPlugins; with lib;
     [
       {
         plugin = zen-mode-nvim;
@@ -155,7 +143,12 @@ in
         plugin = neogit;
         config = readFile ./neovim/neogit.lua;
       }
+      {
+        plugin = gitsigns-nvim;
+        config = readFile ./neovim/gitsigns.lua;
+      }
 
+      # other
       {
         plugin = dial-nvim;
         config = readFile ./neovim/dial.lua;

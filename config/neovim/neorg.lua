@@ -14,6 +14,7 @@ lua << EOF
         ["core.norg.dirman"] = {
             config = {
               workspaces = {
+                work = "~/notes/work",
                 school = "~/notes/school",
                 private = "~/notes/private",
                 journal = "~/notes/journal",

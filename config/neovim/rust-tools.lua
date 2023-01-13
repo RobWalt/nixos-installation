@@ -28,8 +28,8 @@ lua << EOF
     },
     server = {
       capabilities = capabilities,
-      on_attach = function(x,bufnr)
-        require('lsp-status').on_attach(x,bufnr)
+      on_attach = function(x, bufnr)
+        require('lsp-status').on_attach(x)
         -- Hover actions
         vim.keymap.set("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
       end,
@@ -48,13 +48,13 @@ lua << EOF
           diagnostics = {
             disabled = {
               "unresolved-proc-macro",
-	      "inactive-code"
+	            "inactive-code"
             },
           },
 	  lens = {
 	    enable = true,
-	    references = { 
-	      enable = true, 
+	    references = {
+	      enable = true,
 	      adt = { enable = true },
 	      enumVariant = { enable = true },
 	      method = { enable = true },

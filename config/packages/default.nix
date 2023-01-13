@@ -7,32 +7,31 @@ in
   environment.systemPackages = with pkgs;
     [
       # apps
-      alacritty
-      discord
-      flameshot
-      gimp
-      firefox
-      helix
-      tdesktop
-      imagemagick
-      inkscape
-      libresprite
-      blender
-      mdbook
-      rustdesk
-      qutebrowser
-      peek
-      restream
-      spotify
-      teamspeak_client
-      zathura
-      blueberry
-
-      # ui
-      eww
+      alacritty # terminal
+      blender # 3D modelling
+      discord # chat app
+      firefox # alternative browser if qutebrowser doesn't work
+      flameshot # screenshots
+      gimp # image editing
+      helix # alternative editor to nvim
+      imagemagick # convert between image data type
+      inkscape # drawing tool
+      keepassxc # password manager
+      libresprite # pixel art tool
+      mdbook # pdf books from markdown
+      peek # gif capturing tool
+      qutebrowser # broswer with vim controls
+      restream # stream remarkable to pc screen
+      rustdesk # remote connection to other computers
+      spotify # music
+      tdesktop # telegram desktop app
+      teamspeak_client # voice chat
+      zathura # pdf reader
+      xflux # blue light filter
 
       # cli utils
-      bat
+      blueberry # bluetooth config
+      bat # better cat
       binutils
       btop
       delta

@@ -41,7 +41,7 @@ lua << EOF
 
   require('lspconfig').rnix.setup({}) -- nix
   require('lspconfig').hls.setup(hlscfg) -- haskell
-  -- require('lspconfig').marksman.setup({}) -- markdown
+  require('lspconfig').marksman.setup({}) -- markdown
   require('lspconfig').sumneko_lua.setup(luacfg) -- lua
   require('lsp_signature').setup(sigcfg) -- signatures bottom left
 

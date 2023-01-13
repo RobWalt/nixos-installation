@@ -28,14 +28,6 @@ in
 
       programs.home-manager.enable = true;
 
-      # home.file.".local/bin/marksman" = {
-      #   source = builtins.fetchurl {
-      #     url = "https://github.com/artempyanykh/marksman/releases/download/2022-09-13/marksman-linux";
-      #     sha256 = "0c7zqhfbn6675f7rj11if306hg6qx97jcr6wlpmn553a8viqr6nm";
-      #   };
-      #   executable = true;
-      # };
-
       home.file.".cargo/config.toml".text = pkgs.callPackage ./home-configs/cargo-config.nix { };
 
       programs.git = {
@@ -50,7 +42,7 @@ in
           delta.navigate = true;
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
-	  init.defaultBranch = "main";
+          init.defaultBranch = "main";
         };
       };
 
