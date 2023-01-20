@@ -2,7 +2,6 @@
 let
   stable = import <nixos> { };
   unstable = import <nixos-unstable> { };
-  ce = import <cutting-edge> { };
 in
 {
   nixpkgs.overlays =
@@ -24,7 +23,7 @@ in
       gcc # needed for treesitter compilation
       git # needed for treesitter download
       rnix-lsp # nix lsp
-      ce.marksman # markdown lsp
+      marksman # markdown lsp
       #rust-analyzer
     ];
 }

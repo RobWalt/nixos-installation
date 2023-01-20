@@ -30,9 +30,9 @@ in
       xflux # blue light filter
 
       # cli utils
+      blueberry # bluetooth config
       bat # better cat
       binutils
-      blueberry # bluetooth config
       btop
       delta
       difftastic
@@ -54,7 +54,6 @@ in
       just
       license-generator
       lsof
-      nix-top
       pass
       pciutils
       ranger

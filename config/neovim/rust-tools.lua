@@ -35,9 +35,11 @@ lua << EOF
       end,
       settings = {
         ["rust-analyzer"] = {
-          assist = {
-            importGranularity = "module",
-            importPrefix = "by_self",
+          imports = {
+            prefix = "crate",
+            granularity = {
+              group = "module"
+            },
           },
           cargo = {
             loadOutDirsFromCheck = true,
@@ -51,16 +53,16 @@ lua << EOF
 	            "inactive-code"
             },
           },
-	  lens = {
-	    enable = true,
-	    references = {
-	      enable = true,
-	      adt = { enable = true },
-	      enumVariant = { enable = true },
-	      method = { enable = true },
-	      trait = { enable = true },
-     	    },
-	  },
+          lens = {
+            enable = true,
+            references = {
+              enable = true,
+              adt = { enable = true },
+              enumVariant = { enable = true },
+              method = { enable = true },
+              trait = { enable = true },
+                },
+          },
           rustfmt = {
             extraArgs = {"+nightly"},
           },
