@@ -29,6 +29,10 @@ in
       programs.home-manager.enable = true;
 
       home.file.".cargo/config.toml".text = pkgs.callPackage ./home-configs/cargo-config.nix { };
+      home.file.".config/nvim/hand_made_snippets/package.json".text = lib.readFile ./home-configs/vim-snippets/package.json;
+      home.file.".config/nvim/hand_made_snippets/rust/bevy.json".text = lib.readFile ./home-configs/vim-snippets/rust/bevy.json;
+      home.file.".config/nvim/hand_made_snippets/rust/functional.json".text = lib.readFile ./home-configs/vim-snippets/rust/functional.json;
+      home.file.".config/nvim/hand_made_snippets/all.json".text = lib.readFile ./home-configs/vim-snippets/all.json;
 
       programs.git = {
         enable = true;
@@ -43,6 +47,7 @@ in
           merge.conflictstyle = "diff3";
           diff.colorMoved = "default";
           init.defaultBranch = "main";
+          push.autoSetupRemote = true;
         };
       };
 

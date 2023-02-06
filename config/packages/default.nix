@@ -54,6 +54,7 @@ in
       just
       license-generator
       lsof
+      openssl
       pass
       pciutils
       ranger

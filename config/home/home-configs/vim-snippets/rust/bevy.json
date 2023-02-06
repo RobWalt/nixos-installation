@@ -1,0 +1,17 @@
+{
+  "bevy-prelude": {
+    "prefix": "bevy-prelude",
+    "body": [
+      "use bevy::prelude::*;"
+    ],
+    "description": "import bevy prelude"
+  },
+  "define-component": {
+    "prefix": "def-comp",
+    "body": [
+      "#[derive(Debug, Clone, Component)]",
+      "pub struct $1;"
+    ],
+    "description": "Define a bevy component"
+  }
+}

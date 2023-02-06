@@ -33,7 +33,7 @@ lua << EOF
   map("n", "<C-q>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", {silent = true})
   map("n", "<C-s>", "<cmd>Telescope git_status initial_mode=normal<CR>", {silent = true})
   map("n", "<C-x>", require('dial.map').dec_normal(), {noremap = true})
-
+  
   map("n", "<A-,>", ":tabprevious<CR>", {silent = true})
   map("n", "<A-.>", ":tabnext<CR>", {silent = true})
   map("n", "<A-h>", ":tabmove -1<CR>", {silent = true})
@@ -53,7 +53,7 @@ lua << EOF
   map("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
 
   -- INSERT
-  map("i", "<A-e>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true})
-  map("i", "<A-m>", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true})
+  map("i", "<Leader>e", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true, noremap = true})
+  map("i", "<Leader>m", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true, noremap = true})
 
 EOF

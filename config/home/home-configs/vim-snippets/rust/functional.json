@@ -1,0 +1,38 @@
+{
+  "map": {
+    "prefix": "map",
+    "body": [
+      "map(|$1| {",
+      "todo!($2)",
+      "})"
+    ],
+    "description": "map"
+  },
+  "filter": {
+    "prefix": "filter",
+    "body": [
+      "filter(|&$1| {",
+      "todo!($2)",
+      "})"
+    ],
+    "description": "filter"
+  },
+  "filter_map": {
+    "prefix": "filter_map",
+    "body": [
+      "filter_map(|$1| {",
+      "todo!($2)",
+      "})"
+    ],
+    "description": "filter_map"
+  },
+  "fold": {
+    "prefix": "fold",
+    "body": [
+      "fold({$1:init},|{$2:accum}, {$3:elem}| {",
+      "todo!($2)",
+      "})"
+    ],
+    "description": "fold"
+  }
+}
