@@ -10,8 +10,68 @@
     "prefix": "def-comp",
     "body": [
       "#[derive(Debug, Clone, Component)]",
-      "pub struct $1;"
+      "pub struct ${1:type_name};"
     ],
     "description": "Define a bevy component"
+  },
+  "define-newtype-component": {
+    "prefix": "def-newtype-comp",
+    "body": [
+      "#[derive(Debug, Clone, Component, Deref, DerefMut)]",
+      "pub struct ${1:type_name}(${2:inner});"
+    ],
+    "description": "Define a bevy component newtype"
+  },
+  "define-plugin": {
+    "prefix": "def-plugin",
+    "body": [
+      "pub struct ${1:plugin_name};",
+      "",
+      "impl Plugin for ${1:plugin_name} {",
+      "  fn build(&self, app: &mut App) {",
+      "    ${2:todo!();}",
+      "  }",
+      "}"
+    ],
+    "description": "Define a bevy component newtype"
+  },
+  "define-resource": {
+    "prefix": "def-res",
+    "body": [
+      "#[derive(Debug, Clone, Resource)]",
+      "pub struct ${1:type_name}{",
+      "  ${2:field_name}: ${3:field_type}",
+      "}"
+    ],
+    "description": "Define a bevy resource"
+  },
+  "define-newtype-resource": {
+    "prefix": "def-newtype-res",
+    "body": [
+      "#[derive(Debug, Clone, Resource, Deref, DerefMut)]",
+      "pub struct ${1:type_name}(${2:inner});"
+    ],
+    "description": "Define a bevy resource newtype"
+  },
+  "assets-resource": {
+    "prefix": "res-assets",
+    "body": [
+      "Res<Assets<$1>>"
+    ],
+    "description": "Resource Assets"
+  },
+  "assets-resource-mut": {
+    "prefix": "res-assets-mut",
+    "body": [
+      "ResMut<Assets<$1>>"
+    ],
+    "description": "Mutable Resource Assets"
+  },
+  "commands": {
+    "prefix": "commands",
+    "body": [
+      "mut commands: Commands"
+    ],
+    "description": "commands argument"
   }
 }

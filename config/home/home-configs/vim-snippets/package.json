@@ -18,6 +18,12 @@
 				"language": [
 					"rust"
 				],
+				"path": "./rust/general.json"
+			},
+			{
+				"language": [
+					"rust"
+				],
 				"path": "./rust/functional.json"
 			}
 		]

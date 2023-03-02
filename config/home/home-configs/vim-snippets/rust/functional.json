@@ -1,38 +1,146 @@
 {
   "map": {
-    "prefix": "map",
+    "prefix": ".map.",
     "body": [
-      "map(|$1| {",
-      "todo!($2)",
+      ".map(|$1| {",
+      "  ${2:todo!()}",
       "})"
     ],
-    "description": "map"
+    "description": "map",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "map_err": {
+    "prefix": ".map_err.",
+    "body": [
+      ".map_err(|$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "map_err",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "and_then": {
+    "prefix": ".and_then.",
+    "body": [
+      ".and_then(|$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "and_then",
+    "luasnip": {
+      "autotrigger": true
+    }
   },
   "filter": {
-    "prefix": "filter",
+    "prefix": ".filter.",
     "body": [
-      "filter(|&$1| {",
-      "todo!($2)",
+      ".filter(|&$1| {",
+      "  ${2:todo!()}",
       "})"
     ],
-    "description": "filter"
+    "description": "filter",
+    "luasnip": {
+      "autotrigger": true
+    }
   },
   "filter_map": {
-    "prefix": "filter_map",
+    "prefix": ".filter_map.",
     "body": [
-      "filter_map(|$1| {",
-      "todo!($2)",
+      ".filter_map(|$1| {",
+      "  ${2:todo!()}",
       "})"
     ],
-    "description": "filter_map"
+    "description": "filter_map",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "find": {
+    "prefix": ".find.",
+    "body": [
+      ".find(|&$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "find",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "find_map": {
+    "prefix": ".find_map.",
+    "body": [
+      ".find_map(|$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "find_map",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "position": {
+    "prefix": ".position.",
+    "body": [
+      ".position(|&$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "position",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "all": {
+    "prefix": ".all.",
+    "body": [
+      ".all(|&$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "all",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "any": {
+    "prefix": ".any.",
+    "body": [
+      ".any(|&$1| {",
+      "  ${2:todo!()}",
+      "})"
+    ],
+    "description": "any",
+    "luasnip": {
+      "autotrigger": true
+    }
   },
   "fold": {
-    "prefix": "fold",
+    "prefix": ".fold.",
     "body": [
-      "fold({$1:init},|{$2:accum}, {$3:elem}| {",
-      "todo!($2)",
+      ".fold(${1:init},|${2:accum}, ${3:elem}| {",
+      "  ${4:todo!()}",
       "})"
     ],
-    "description": "fold"
+    "description": "fold",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "for_each": {
+    "prefix": ".for_each.",
+    "body": [
+      ".for_each(${1:elem}| {",
+      "  ${2:todo!()}",
+      "});"
+    ],
+    "description": "for_each",
+    "luasnip": {
+      "autotrigger": true
+    }
   }
 }

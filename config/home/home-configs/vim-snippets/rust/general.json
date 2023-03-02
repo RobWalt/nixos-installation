@@ -1,0 +1,69 @@
+{
+  "anyhow-anyhow": {
+    "prefix": "anyhow",
+    "body": [
+      "anyhow::anyhow!(\"$1\")"
+    ],
+    "description": "anyhow"
+  },
+  "anyhow-bail": {
+    "prefix": "bail",
+    "body": [
+      "anyhow::bail!(\"$1\")"
+    ],
+    "description": "bail"
+  },
+  "anyhow-result": {
+    "prefix": "anyhow-result",
+    "body": [
+      "anyhow::Result<$1>"
+    ],
+    "description": "bail"
+  },
+  "serde-json-serialize": {
+    "prefix": "json-serialize",
+    "body": [
+      "serde_json::to_string(&$1)"
+    ],
+    "description": "json serialize"
+  },
+  "serde-json-deserialize": {
+    "prefix": "json-deserialize",
+    "body": [
+      "serde_json::from_str(&$1)"
+    ],
+    "description": "json deserialize"
+  },
+  "async-fn": {
+    "prefix": "afn",
+    "body": [
+      "${1:pub} ${2:async} fn ${3:fn_name}(${4:_args: ()}) -> ${5:()}  {",
+      "  ${6:unimplemented!()}",
+      "}"
+    ],
+    "description": "general async function"
+  },
+  "pub-fn": {
+    "prefix": "pfn",
+    "body": [
+      "${1:pub} fn ${2:fn_name}(${3:_args: ()}) -> ${4:()}  {",
+      "  ${5:unimplemented!()}",
+      "}"
+    ],
+    "description": "general normal function"
+  },
+  "newtype": {
+    "prefix": "newtype",
+    "body": [
+      "${1:pub} struct ${2:typename}(${3:newtype_of});"
+    ],
+    "description": "newtype type"
+  },
+  "collect-vec": {
+    "prefix": "collectv",
+    "body": [
+      "collect::<Vec<_>>()"
+    ],
+    "description": "collect to vector"
+  }
+}

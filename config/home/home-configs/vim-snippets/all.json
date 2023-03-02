@@ -1,2 +1,12 @@
 {
+  "TODO": {
+    "prefix": "TODO",
+    "body": [
+      "🚧🚧 TODO 🚧🚧:"
+    ],
+    "description": "TODO",
+    "luasnip": {
+      "autotrigger": true
+    }
+  }
 }

@@ -24,17 +24,7 @@
     useDHCP = false;
     interfaces.enp2s0.useDHCP = true;
     interfaces.wlp3s0.useDHCP = true;
-
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-      networks = {
-        # me lol
-        CoolanXD = {
-          pskRaw = "a59a39d392ed3a162784400836235fa155c43c03d48ebfd4b5315852f93f526d";
-        };
-      };
-    };
+    networkmanager.enable = true;
   };
 
   # Select internationalisation properties.

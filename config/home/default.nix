@@ -1,6 +1,7 @@
 { pkgs, config, lib, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
+  hoard-shell-plugin-path = builtins.fetchurl "https://raw.githubusercontent.com/Hyde46/hoard/main/src/shell/hoard.zsh";
 in
 {
   imports = [
@@ -32,7 +33,9 @@ in
       home.file.".config/nvim/hand_made_snippets/package.json".text = lib.readFile ./home-configs/vim-snippets/package.json;
       home.file.".config/nvim/hand_made_snippets/rust/bevy.json".text = lib.readFile ./home-configs/vim-snippets/rust/bevy.json;
       home.file.".config/nvim/hand_made_snippets/rust/functional.json".text = lib.readFile ./home-configs/vim-snippets/rust/functional.json;
+      home.file.".config/nvim/hand_made_snippets/rust/general.json".text = lib.readFile ./home-configs/vim-snippets/rust/general.json;
       home.file.".config/nvim/hand_made_snippets/all.json".text = lib.readFile ./home-configs/vim-snippets/all.json;
+      home.file.".config/hoard/hoard.zsh".text = lib.readFile hoard-shell-plugin-path;
 
       programs.git = {
         enable = true;

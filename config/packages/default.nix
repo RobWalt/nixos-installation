@@ -1,18 +1,26 @@
 { pkgs, ... }:
 let
   unstable = import <nixos-unstable> { };
+  master-pkgs = import <nixpkgs-master> { };
+  codeberg-cli = pkgs.callPackage /home/robw/repos/nixpkgs/pkgs/applications/version-management/codeberg-cli/default.nix {
+    inherit (pkgs.darwin.apple_sdk.frameworks) Security;
+  };
 in
 {
-
   environment.systemPackages = with pkgs;
     [
+      codeberg-cli
       # apps
       alacritty # terminal
       blender # 3D modelling
+      chromium # used for vhs
+      cocogitto # gitops
       discord # chat app
+      eww # widgets
       firefox # alternative browser if qutebrowser doesn't work
       flameshot # screenshots
       gimp # image editing
+      godot_4 # game engine
       helix # alternative editor to nvim
       imagemagick # convert between image data type
       inkscape # drawing tool
@@ -26,8 +34,9 @@ in
       spotify # music
       tdesktop # telegram desktop app
       teamspeak_client # voice chat
-      zathura # pdf reader
+      vhs # terminal camera
       xflux # blue light filter
+      zathura # pdf reader
 
       # cli utils
       blueberry # bluetooth config
@@ -49,6 +58,7 @@ in
       git-lfs
       gitoxide
       glab
+      hoard
       hurl
       jq
       just
@@ -73,7 +83,6 @@ in
 
       # for tmux battery
       acpi
-      upower
 
       # ui
       brightnessctl
@@ -115,8 +124,10 @@ in
       unstable.cargo-make # latest version needed
       hyperfine
       feroxbuster
-      # not available yet
-      #cargo-hack
+      cargo-hack
+
+      #idris 
+      idris2
 
       #kind
       unstable.kind2
@@ -139,6 +150,11 @@ in
       # lua
       luajit
       sumneko-lua-language-server
+
+      # gpg
+      gnupg # key signing
+      gpgme # key signing
+      pinentry # passphrase input
 
       # wasm
       wasm-bindgen-cli # not always up to date

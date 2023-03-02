@@ -48,12 +48,12 @@ lua << EOF
   map("n", "<Leader>no", "<cmd>Neorg workspace oss<CR>", {silent = true})
   map("n", "<Leader>ns", "<cmd>Neorg workspace school<CR>", {silent = true})
   map("n", "<Leader>nw", "<cmd>Neorg workspace work<CR>", {silent = true})
+  map("n", "<Leader>le", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true, noremap = true})
+  map("n", "<Leader>lm", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true, noremap = true})
 
   -- VISUAL
   map("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
 
   -- INSERT
-  map("i", "<Leader>e", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true, noremap = true})
-  map("i", "<Leader>m", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true, noremap = true})
 
 EOF

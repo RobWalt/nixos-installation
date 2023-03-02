@@ -78,6 +78,15 @@ in
         config = readFile ./neovim/hlargs.lua;
       }
 
+      # eww configuartion
+      yuck-vim
+      {
+        plugin = (plugin "gpanders/nvim-parinfer");
+      }
+
+      # idris
+      idris2-vim
+
       # cmp
       {
         plugin = nvim-cmp;

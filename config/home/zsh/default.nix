@@ -41,9 +41,7 @@
       cat = "bat";
       df = "duf";
       du = "dust";
-      sed = "sd";
       diff = "difft";
-      grep = "rg";
       find = "fd";
       gh-get = "gh issue list --assignee=@me && gh pr list --assignee=@me";
       init-bevy = "cp /home/robw/nix-shells/bevy.nix .";
@@ -75,6 +73,10 @@
 
       bindkey '^[[A' history-substring-search-up
       bindkey '^[[B' history-substring-search-down
+
+      source ~/.config/hoard/hoard.zsh
+
+      fpath+=(~/.zfunc)
     '';
   };
 
