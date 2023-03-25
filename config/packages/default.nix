@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
   unstable = import <nixos-unstable> { };
-  master-pkgs = import <nixpkgs-master> { };
   codeberg-cli = pkgs.callPackage /home/robw/repos/nixpkgs/pkgs/applications/version-management/codeberg-cli/default.nix {
     inherit (pkgs.darwin.apple_sdk.frameworks) Security;
   };
@@ -13,6 +12,7 @@ in
       # apps
       alacritty # terminal
       blender # 3D modelling
+      butler # itch.io deploy
       chromium # used for vhs
       cocogitto # gitops
       discord # chat app
@@ -20,13 +20,14 @@ in
       firefox # alternative browser if qutebrowser doesn't work
       flameshot # screenshots
       gimp # image editing
-      godot_4 # game engine
+      unstable.godot_4 # game engine
       helix # alternative editor to nvim
       imagemagick # convert between image data type
       inkscape # drawing tool
       keepassxc # password manager
       libresprite # pixel art tool
       mdbook # pdf books from markdown
+      musescore # musescore
       peek # gif capturing tool
       qutebrowser # broswer with vim controls
       restream # stream remarkable to pc screen
@@ -37,6 +38,7 @@ in
       vhs # terminal camera
       xflux # blue light filter
       zathura # pdf reader
+      zulip # zulip client
 
       # cli utils
       blueberry # bluetooth config
@@ -64,8 +66,11 @@ in
       just
       license-generator
       lsof
+      nix-index
       openssl
       pass
+      pinentry
+      pinentry-rofi
       pciutils
       ranger
       ripgrep
@@ -127,7 +132,7 @@ in
       cargo-hack
 
       #idris 
-      idris2
+      idris2 # use flake for now
 
       #kind
       unstable.kind2

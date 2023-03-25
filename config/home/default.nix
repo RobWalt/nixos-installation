@@ -1,6 +1,9 @@
 { pkgs, config, lib, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz";
+    sha256 = "1gf97qpywcr6ckvwah3j5szrjl1xhv99w5jkbw2nlhj6w7j29cns";
+  };
   hoard-shell-plugin-path = builtins.fetchurl "https://raw.githubusercontent.com/Hyde46/hoard/main/src/shell/hoard.zsh";
 in
 {

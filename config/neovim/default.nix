@@ -1,8 +1,4 @@
 { pkgs, config, lib, ... }:
-let
-  stable = import <nixos> { };
-  unstable = import <nixos-unstable> { };
-in
 {
   nixpkgs.overlays =
     [

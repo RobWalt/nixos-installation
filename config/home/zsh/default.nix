@@ -105,7 +105,18 @@
         "[  ](bg:#dbbc7f fg:#323d43)"
         "[ ](fg:#dbbc7f)"
       ];
+      right_format = lib.concatStrings [
+        "$nix_shell"
+      ];
       add_newline = false;
+      nix_shell = {
+        format = lib.concatStrings [
+          "[](fg:#9BC8D1 bg:#323d43)"
+          "[ $symbol]($style)"
+          "[](fg:#9BC8D1 bg:#323d43)"
+        ];
+        style = "bg:#9BC8D1 fg:#323d43";
+      };
       username = {
         show_always = true;
         style_user = "bg:#d699b6 fg:#323d43";
