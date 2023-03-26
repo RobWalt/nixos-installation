@@ -1,14 +1,19 @@
-{ pkgs, ... }:
+{ pkgs, lib, unstable, ... }:
 let
-  unstable = import <nixos-unstable> { };
-  codeberg-cli = pkgs.callPackage /home/robw/repos/nixpkgs/pkgs/applications/version-management/codeberg-cli/default.nix {
-    inherit (pkgs.darwin.apple_sdk.frameworks) Security;
-  };
+  codeberg-cli = pkgs.callPackage
+    (builtins.fetchurl {
+      url = "https://raw.githubusercontent.com/RobWalt/nixpkgs/cod/pkgs/applications/version-management/codeberg-cli/default.nix";
+      sha256 = "sha256:0mhwajbvdwssvmqybq8ws1wpsczixdgycd75gndilzafbgby5d47";
+    })
+    {
+      inherit (pkgs.darwin.apple_sdk.frameworks) Security;
+    };
 in
 {
   environment.systemPackages = with pkgs;
     [
       codeberg-cli
+
       # apps
       alacritty # terminal
       blender # 3D modelling
@@ -68,9 +73,6 @@ in
       lsof
       nix-index
       openssl
-      pass
-      pinentry
-      pinentry-rofi
       pciutils
       ranger
       ripgrep
@@ -78,7 +80,7 @@ in
       tealdeer
       tokei
       tree
-      unstable.gum
+      gum
       unzip
       xclip
       zip
@@ -126,16 +128,13 @@ in
       cargo-udeps
       cargo-update
       cargo-watch
-      unstable.cargo-make # latest version needed
+      cargo-make
       hyperfine
       feroxbuster
       cargo-hack
 
       #idris 
       idris2 # use flake for now
-
-      #kind
-      unstable.kind2
 
       # haskell
       cabal-install
@@ -144,10 +143,6 @@ in
       ghc
       haskell-language-server
       ormolu
-
-      # tidal cycles
-      haskellPackages.tidal
-      supercollider
 
       # local markdown slides
       jekyll
@@ -159,6 +154,8 @@ in
       # gpg
       gnupg # key signing
       gpgme # key signing
+      pass
+      rofi-pass
       pinentry # passphrase input
 
       # wasm

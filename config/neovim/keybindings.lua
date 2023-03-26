@@ -16,10 +16,12 @@ lua << EOF
   map("n", "ga", "<cmd>lua vim.lsp.buf.code_action() initial_mode=normal<CR>", {silent = true})
   map("n", "gd", "<cmd>Telescope lsp_definitions theme=ivy initial_mode=normal<CR>", {silent = true})
   map("n", "gi", "<cmd>Telescope lsp_implementations theme=ivy initial_mode=normal<CR>", {silent = true})
-  map("n", "gp", "<cmd>Telescope yank_history<CR>", {silent = true})
   map("n", "gr", "<cmd>Telescope lsp_references theme=ivy initial_mode=normal<CR>", {silent = true})
-  map("n", "p", "<cmd> lua require('yanky').put('p')<CR>", {silent = true, noremap = true})
-  map("n", "P", "<cmd> lua require('yanky').put('P')<CR>", {silent = true, noremap = true})
+
+  -- TODO flakify
+  --map("n", "gp", "<cmd>Telescope yank_history<CR>", {silent = true})
+  --map("n", "p", "<cmd> lua require('yanky').put('p')<CR>", {silent = true, noremap = true})
+  --map("n", "P", "<cmd> lua require('yanky').put('P')<CR>", {silent = true, noremap = true})
 
   map("n", "<C-K>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {silent = true})
   map("n", "<C-a>", require('dial.map').inc_normal(), {noremap = true})

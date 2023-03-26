@@ -24,8 +24,6 @@
       };
     };
     kernelModules = [ "kvm-amd" ];
-    # unstable version of kernel
-    #kernelPackages = stable.linuxPackages_latest;
     extraModulePackages = [ ];
   };
 
@@ -59,16 +57,9 @@
 
   # ==== SOUND ====
   # Enable sound.
-
-  # Pulse Audio
-  # hardware.pulseaudio = {
-  #   enable = true;
-  #   package = pkgs.pulseaudioFull;
-  # };
   sound.enable = true;
 
   # PipeWire
-  # if this doesn't work, try to change the config in pavucontrol!!!
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

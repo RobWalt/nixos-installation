@@ -3,7 +3,8 @@ lua << EOF
     load = {
         ["core.defaults"] = {},
         ["core.integrations.treesitter"] = {},
-        ["core.integrations.telescope"] = {},
+        -- TODO flakify
+        -- ["core.integrations.telescope"] = {},
         ["core.norg.concealer"] = {},
         ["core.norg.journal"] = {},
         ["core.norg.completion"] = {

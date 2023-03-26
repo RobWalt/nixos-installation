@@ -12,5 +12,6 @@ lua << EOF
       },
     },
   })
-  require('telescope').load_extension("yank_history")
+  -- TODO flakify
+  -- require('telescope').load_extension("yank_history")
 EOF

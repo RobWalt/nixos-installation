@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 {
   nix.settings.experimental-features = [
@@ -16,7 +12,7 @@
       ./hardware/e15.nix
       ./home
       ./windowmanager
-      ./packages
+      ./system-packages
       ./neovim
     ];
 
@@ -59,9 +55,16 @@
     ];
   };
 
+  # needed for gnupg
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+
   virtualisation.docker.enable = true;
 
   system.stateVersion = "22.11";
 
 }
-
