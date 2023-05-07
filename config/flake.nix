@@ -14,29 +14,35 @@
       url = "github:nvim-neorg/neorg-telescope";
       flake = false;
     };
+    wgsl-vim-src = {
+      url = "github:DingDean/wgsl.vim";
+      flake = false;
+    };
   };
   outputs = { nixpkgs, unstable, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      robw = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules =
-          let
-            defaults = { pkgs, ... }: {
-              _module.args =
-                let
-                  make-available-in-args = p: import p { inherit (pkgs.stdenv.targetPlatform) system; };
-                in
-                {
-                  unstable = make-available-in-args inputs.unstable;
-                };
+    nixosConfigurations =
+      let
+        defaults = { pkgs, ... }: {
+          _module.args =
+            let
+              make-available-in-args = p: import p { inherit (pkgs.stdenv.targetPlatform) system; };
+            in
+            {
+              unstable = make-available-in-args inputs.unstable;
+              inputs = inputs;
             };
-          in
-          [
-            home-manager.nixosModules.home-manager
-            defaults
-            ./my_uwu_system.nix
-          ];
+        };
+      in
+      {
+        robw = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules =
+            [
+              home-manager.nixosModules.home-manager
+              defaults
+              ./my_uwu_system.nix
+            ];
+        };
       };
-    };
   };
 }

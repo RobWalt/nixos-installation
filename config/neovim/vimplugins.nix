@@ -1,4 +1,4 @@
-{ pkgs, lib, fetchFromGitHub, ... }:
+{ pkgs, lib, fetchFromGitHub, inputs, ... }:
 let
   pluginGit = version: ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}";
@@ -157,42 +157,38 @@ in
         config = readFile ./plugins/neorg.lua;
       }
 
-      # TODO flakify
-      #{
-      #  plugin = (plugin "gbprod/yanky.nvim");
-      #  config = readFile ./plugins/yanky.lua;
-      #}
-      #{
-      #  plugin = (plugin "m-demare/hlargs.nvim");
-      #  config = readFile ./plugins/hlargs.lua;
-      #}
-      #(plugin "nvim-neorg/neorg-telescope")
-
-      #{
-      #  plugin =
-      #    pkgs.vimUtils.buildVimPluginFrom2Nix {
-      #      pname = "${lib.strings.sanitizeDerivationName "gbprod/yanky.nvim"}";
-      #      version = "HEAD";
-      #      src = yanky-src;
-      #    };
-      #  config = readFile ./plugins/yanky.lua;
-      #}
-      #{
-      #  plugin =
-      #    pkgs.vimUtils.buildVimPluginFrom2Nix {
-      #      pname = "${lib.strings.sanitizeDerivationName "m-demare/hlargs.nvim"}";
-      #      version = "HEAD";
-      #      src = hlargs-src;
-      #    };
-      #  config = readFile ./plugins/hlargs.lua;
-      #}
-      #(
-      #  pkgs.vimUtils.buildVimPluginFrom2Nix {
-      #    pname = "${lib.strings.sanitizeDerivationName "nvim-neorg/neorg-telescope"}";
-      #    version = "HEAD";
-      #    src = neorg-telescope-src;
-      #  }
-      #)
+      {
+        plugin =
+          pkgs.vimUtils.buildVimPluginFrom2Nix {
+            pname = "${lib.strings.sanitizeDerivationName "gbprod/yanky.nvim"}";
+            version = "flakify";
+            src = inputs.yanky-src;
+          };
+        config = readFile ./plugins/yanky.lua;
+      }
+      {
+        plugin =
+          pkgs.vimUtils.buildVimPluginFrom2Nix {
+            pname = "${lib.strings.sanitizeDerivationName "m-demare/hlargs.nvim"}";
+            version = "flakify";
+            src = inputs.hlargs-src;
+          };
+        config = readFile ./plugins/hlargs.lua;
+      }
+      (
+        pkgs.vimUtils.buildVimPluginFrom2Nix {
+          pname = "${lib.strings.sanitizeDerivationName "nvim-neorg/neorg-telescope"}";
+          version = "flakify";
+          src = inputs.neorg-telescope-src;
+        }
+      )
+      (
+        pkgs.vimUtils.buildVimPluginFrom2Nix {
+          pname = "${lib.strings.sanitizeDerivationName "DingDean/wgsl.vim"}";
+          version = "flakify";
+          src = inputs.wgsl-vim-src;
+        }
+      )
     ];
 
   myvimextraconfig =

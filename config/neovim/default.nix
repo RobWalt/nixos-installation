@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 {
   # install custom neovim system wide to also have it when doing stuff with root
   nixpkgs.overlays =
@@ -7,11 +7,11 @@
         neovim = super.neovim.override {
           configure = {
             packages.main = {
-              start = (pkgs.callPackage ./vimplugins.nix { }).myvimplugins;
+              start = (pkgs.callPackage ./vimplugins.nix { inherit inputs; }).myvimplugins;
             };
             # kind of sucks that the configurations all have to start/end with
             # the lua code block symbols in here but ok
-            customRC = (pkgs.callPackage ./vimplugins.nix { }).myvimextraconfig;
+            customRC = (pkgs.callPackage ./vimplugins.nix { inherit inputs; }).myvimextraconfig;
           };
         };
       })

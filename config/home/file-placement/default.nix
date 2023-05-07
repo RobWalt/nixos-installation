@@ -9,6 +9,9 @@ in
   # cargo config
   home.file.".cargo/config.toml".text = pkgs.callPackage ../home-configs/cargo-config.nix { };
 
+  # rofi pass config
+  home.file.".config/rofi-pass/config".source = ../rofi/rofi-pass.config;
+
   # snippets for vim
   home.file.".config/nvim/hand_made_snippets/package.json".source = ../home-configs/vim-snippets/package.json;
   home.file.".config/nvim/hand_made_snippets/rust/bevy.json".source = ../home-configs/vim-snippets/rust/bevy.json;

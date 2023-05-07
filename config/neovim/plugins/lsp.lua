@@ -1,5 +1,5 @@
 lua << EOF
-  vim.api.nvim_create_autocmd("BufWritePre", {pattern = {"*.nix", "*.rs", "*.lua", "*.hs"}, command = "lua vim.lsp.buf.format()"})
+  vim.api.nvim_create_autocmd("BufWritePre", {pattern = {"*.nix", "*.rs", "*.lua", "*.hs", "*.wgsl"}, command = "lua vim.lsp.buf.format()"})
 
   local sigcfg = {
     doc_lines = 0,
@@ -40,6 +40,7 @@ lua << EOF
   }
 
   require('lspconfig').rnix.setup({}) -- nix
+  require('lspconfig').wgsl_analyzer.setup({}) -- wgsl
   require('lspconfig').hls.setup(hlscfg) -- haskell
   require('lspconfig').marksman.setup({}) -- markdown
   require('lspconfig').sumneko_lua.setup(luacfg) -- lua

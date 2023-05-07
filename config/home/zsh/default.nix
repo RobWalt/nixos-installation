@@ -7,10 +7,16 @@
   ];
 
   programs.zsh = {
-
+    # docs
+    # https://rycee.gitlab.io/home-manager/options.html#opt-programs.zsh.enable
     enable = true;
 
     enableAutosuggestions = true;
+    enableCompletion = true;
+    enableSyntaxHighlighting = true;
+    enableVteIntegration = true;
+    autocd = true;
+    defaultKeymap = "viins";
 
     shellAliases = {
 
@@ -22,6 +28,19 @@
       git-commit = "sh ~/.mygumscripts/git-commit.sh";
       git-recent-branches = "git branch --sort=-committerdate | head";
       glab-new-issue = "glab issue create";
+
+      ccc = "cog commit chore";
+      ccfe = "cog commit feat";
+      ccfi = "cog commit fix";
+      ccr = "cog commit refactor";
+      ga = "git add";
+      gaa = "git add -A";
+      gc = "git checkout";
+      gcb = "git checkout -b";
+      gp = "git push";
+      gpp = "git pull -p";
+      grc = "git checkout -- .";
+      grh = "git reset HEAD~";
 
       tmuxa = "sh ~/.tmux/init-tmux-all.sh";
       tmuxf = "sh ~/.tmux/init-tmux-freetime.sh";
@@ -48,8 +67,15 @@
     };
 
     history = {
+      expireDuplicatesFirst = true;
+      extended = true;
+      save = 100000;
       size = 100000;
       path = "/home/robw/.zhistory";
+    };
+
+    historySubstringSearch = {
+      enable = true;
     };
 
     zplug = {
@@ -58,6 +84,8 @@
         { name = "zsh-users/zsh-autosuggestions"; }
         { name = "zsh-users/zsh-completions"; }
         { name = "zsh-users/zsh-history-substring-search"; }
+        { name = "nix-community/nix-zsh-completions"; }
+        { name = "chisui/zsh-nix-shell"; }
       ];
     };
 
@@ -65,8 +93,7 @@
       eval "$(zoxide init zsh)"
       eval $(ssh-agent) > /home/robw/.sshstartup.log && ssh-add /home/robw/.ssh/keys/* 2>> /home/robw/.sshstartup.log
 
-      bindkey '^[[A' history-substring-search-up
-      bindkey '^[[B' history-substring-search-down
+      export NIX_BUILD_SHELL="zsh"
 
       source ~/.config/hoard/hoard.zsh
 

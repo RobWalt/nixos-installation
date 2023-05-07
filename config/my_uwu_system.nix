@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   nix.settings.experimental-features = [
     "nix-command"
@@ -7,7 +7,6 @@
 
   imports =
     [
-      # Include the results of the hardware scan.
       ./env
       ./hardware/e15.nix
       ./home

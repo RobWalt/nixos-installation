@@ -18,10 +18,9 @@ lua << EOF
   map("n", "gi", "<cmd>Telescope lsp_implementations theme=ivy initial_mode=normal<CR>", {silent = true})
   map("n", "gr", "<cmd>Telescope lsp_references theme=ivy initial_mode=normal<CR>", {silent = true})
 
-  -- TODO flakify
-  --map("n", "gp", "<cmd>Telescope yank_history<CR>", {silent = true})
-  --map("n", "p", "<cmd> lua require('yanky').put('p')<CR>", {silent = true, noremap = true})
-  --map("n", "P", "<cmd> lua require('yanky').put('P')<CR>", {silent = true, noremap = true})
+  map("n", "gp", "<cmd>Telescope yank_history<CR>", {silent = true})
+  map("n", "p", "<cmd> lua require('yanky').put('p')<CR>", {silent = true, noremap = true})
+  map("n", "P", "<cmd> lua require('yanky').put('P')<CR>", {silent = true, noremap = true})
 
   map("n", "<C-K>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {silent = true})
   map("n", "<C-a>", require('dial.map').inc_normal(), {noremap = true})
@@ -41,6 +40,7 @@ lua << EOF
   map("n", "<A-h>", ":tabmove -1<CR>", {silent = true})
   map("n", "<A-l>", ":tabmove +1<CR>", {silent = true})
   map("n", "<A-z>", "<cmd>ZenMode<CR>", {silent = true})
+  map("n", "<A-o>", "<cmd>RustOpenExternalDocs<CR>", {silent = true})
 
   map("n", "<Leader>m", "<cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
   map("n", "<Leader>t", "<cmd>TodoTelescope<CR>", {silent = true})

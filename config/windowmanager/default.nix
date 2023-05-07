@@ -9,7 +9,7 @@
     # general settings
     enable = true;
 
-    #videoDrivers = [ "amdgpu" ];
+    videoDrivers = [ "amdgpu" ];
 
     # input
     libinput.enable = true;

@@ -18,18 +18,16 @@ in
       alacritty # terminal
       blender # 3D modelling
       butler # itch.io deploy
+      calibre # manage ebooks
       chromium # used for vhs
       cocogitto # gitops
       discord # chat app
-      eww # widgets
+      taskwarrior # todo app
       firefox # alternative browser if qutebrowser doesn't work
       flameshot # screenshots
       gimp # image editing
-      unstable.godot_4 # game engine
-      helix # alternative editor to nvim
       imagemagick # convert between image data type
       inkscape # drawing tool
-      keepassxc # password manager
       libresprite # pixel art tool
       mdbook # pdf books from markdown
       musescore # musescore
@@ -40,8 +38,8 @@ in
       spotify # music
       tdesktop # telegram desktop app
       teamspeak_client # voice chat
+      unstable.godot_4 # game engine
       vhs # terminal camera
-      xflux # blue light filter
       zathura # pdf reader
       zulip # zulip client
 
@@ -49,10 +47,10 @@ in
       blueberry # bluetooth config
       bat # better cat
       binutils
-      btop
-      delta
+      btop # better top
+      delta # diffs
       difftastic
-      du-dust
+      du-dust # better du
       duf
       dunst
       exa
@@ -82,7 +80,7 @@ in
       tree
       gum
       unzip
-      xclip
+      xclip # clipboard on x11
       zip
       zola
       zoxide
@@ -104,7 +102,9 @@ in
       wget
       wpa_supplicant
       usbutils
-      graphviz
+      # graph utilities
+      graphviz # standard on linux
+      xdot # interactive viewer for graphviz
 
       # audio
       pamixer
@@ -128,13 +128,10 @@ in
       cargo-udeps
       cargo-update
       cargo-watch
+      cargo-modules
       cargo-make
       hyperfine
-      feroxbuster
       cargo-hack
-
-      #idris 
-      idris2 # use flake for now
 
       # haskell
       cabal-install
@@ -152,14 +149,14 @@ in
       sumneko-lua-language-server
 
       # gpg
+      pinentry # passphrase input
       gnupg # key signing
       gpgme # key signing
       pass
       rofi-pass
-      pinentry # passphrase input
 
       # wasm
-      wasm-bindgen-cli # not always up to date
+      unstable.wasm-bindgen-cli # not always up to date
       wasm-pack
 
       # javascript 
@@ -167,5 +164,8 @@ in
 
       # docker
       docker-compose
+
+      # for getting ADM GPU Name
+      libdrm
     ];
 }

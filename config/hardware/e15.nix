@@ -48,8 +48,8 @@
     opengl = {
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = [
-        pkgs.amdvlk
+      extraPackages = with pkgs; [
+        amdvlk
       ];
     };
   };
