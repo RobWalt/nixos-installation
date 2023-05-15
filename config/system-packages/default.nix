@@ -38,9 +38,10 @@ in
       spotify # music
       tdesktop # telegram desktop app
       teamspeak_client # voice chat
+      thunderbird # email client
       unstable.godot_4 # game engine
       vhs # terminal camera
-      zathura # pdf reader
+      unstable.zathura # pdf reader
       zulip # zulip client
 
       # cli utils
@@ -80,11 +81,14 @@ in
       tree
       gum
       unzip
-      xclip # clipboard on x11
+      xdotool # automatically type text
       zip
       zola
       zoxide
       zsh
+
+      xclip # clipboard on x11
+      haskellPackages.greenclip # clipboard manager, daemon needs to be started
 
       # for tmux battery
       acpi
@@ -156,7 +160,7 @@ in
       rofi-pass
 
       # wasm
-      unstable.wasm-bindgen-cli # not always up to date
+      #unstable.wasm-bindgen-cli # not always up to date
       wasm-pack
 
       # javascript 

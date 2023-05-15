@@ -17,6 +17,7 @@
       diff.colorMoved = "default";
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
+      commit.gpgsign = true;
     };
   };
 

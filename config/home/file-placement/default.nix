@@ -48,5 +48,7 @@ in
   home.file.".nix-shells/dev.nix".source = ../zsh/nix-shells/dev.nix;
   home.file.".nix-shells/wasm.nix".source = ../zsh/nix-shells/wasm.nix;
   home.file.".nix-shells/phone.nix".source = ../zsh/nix-shells/phone.nix;
+
+  home.file.".config/greenclip.toml".source = ../home-configs/greenclip.toml;
 }
 
