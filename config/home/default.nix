@@ -21,10 +21,7 @@
       ];
 
       programs.home-manager.enable = true;
-
-      programs.gpg = {
-        enable = true;
-      };
+      programs.gpg.enable = true;
 
     };
 }

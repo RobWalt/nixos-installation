@@ -43,7 +43,7 @@ lua << EOF
   require('lspconfig').wgsl_analyzer.setup({}) -- wgsl
   require('lspconfig').hls.setup(hlscfg) -- haskell
   require('lspconfig').marksman.setup({}) -- markdown
-  require('lspconfig').sumneko_lua.setup(luacfg) -- lua
+  require('lspconfig').lua_ls.setup(luacfg) -- lua
   require('lsp_signature').setup(sigcfg) -- signatures bottom left
 
 EOF

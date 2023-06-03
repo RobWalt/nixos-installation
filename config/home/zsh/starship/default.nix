@@ -21,7 +21,7 @@
         "$time"
         "[](fg:#e6b184 bg:#e1b681)"
         "[](fg:#e1b681 bg:#dbbc7f)"
-        "[  ](bg:#dbbc7f fg:#323d43)"
+        "[ 󱗆 ](bg:#dbbc7f fg:#323d43)"
         "[ ](fg:#dbbc7f)"
         "$nix_shell"
       ];

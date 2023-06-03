@@ -54,7 +54,6 @@ lua << EOF
       {name = 'nvim_lua'},
       {name = 'path'},
       {name = 'crates'},
-      {name = 'neorg'},
     },
     formatting = {
       format = lspkind.cmp_format({

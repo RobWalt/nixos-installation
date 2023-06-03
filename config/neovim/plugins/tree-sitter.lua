@@ -1,11 +1,10 @@
 lua << EOF
   require('nvim-treesitter.configs').setup {
-    ensure_installed = {"nix", "rust", "wgsl", "lua", "haskell", "scheme", "norg"},
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,
     },
-    parser_install_dir = "/home/robw/.local/share/nvim/parser",
+    parser_install_dir = "/home/robw/.local/share/nvim",
     ident = {
       enable = true,
     },

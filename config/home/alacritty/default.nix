@@ -104,7 +104,7 @@
       #};
       font = {
         normal = {
-          family = "Iosevka Nerd Font Mono";
+          family = "IosevkaTerm Nerd Font Mono";
           style = "Regular";
         };
       };

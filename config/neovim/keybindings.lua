@@ -44,12 +44,6 @@ lua << EOF
 
   map("n", "<Leader>m", "<cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
   map("n", "<Leader>t", "<cmd>TodoTelescope<CR>", {silent = true})
-  map("n", "<Leader>jj", "<cmd>Neorg journal<CR>", {silent = true})
-  map("n", "<Leader>np", "<cmd>Neorg workspace private<CR>", {silent = true})
-  map("n", "<Leader>nj", "<cmd>Neorg workspace journal<CR>", {silent = true})
-  map("n", "<Leader>no", "<cmd>Neorg workspace oss<CR>", {silent = true})
-  map("n", "<Leader>ns", "<cmd>Neorg workspace school<CR>", {silent = true})
-  map("n", "<Leader>nw", "<cmd>Neorg workspace work<CR>", {silent = true})
   map("n", "<Leader>le", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>", {silent = true, noremap = true})
   map("n", "<Leader>lm", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>", {silent = true, noremap = true})
 

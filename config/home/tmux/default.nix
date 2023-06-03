@@ -17,12 +17,15 @@
           bind-key "l" run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/window.sh switch"
         '';
       }
-      tmuxPlugins.battery
+      {
+        plugin = tmuxPlugins.battery;
+        extraConfig = '' 
+          set -g status-right 'Batt: #{battery_percentage} | %a %h-%d %H:%M '
+        '';
+      }
     ];
 
     extraConfig = ''
-      set -g status-right 'Batt: #{battery_percentage} | %a %h-%d %H:%M '
-
       set-option -g status-style bg=black
       set-option -g status-style fg=yellow
 

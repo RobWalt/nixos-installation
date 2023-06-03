@@ -44,7 +44,6 @@
 
       tmuxa = "sh ~/.tmux/init-tmux-all.sh";
       tmuxf = "sh ~/.tmux/init-tmux-freetime.sh";
-      tmuxn = "sh ~/.tmux/init-tmux-neorg.sh";
       tmuxs = "sh ~/.tmux/init-tmux-system.sh";
       tmuxw = "sh ~/.tmux/init-tmux-work.sh";
 

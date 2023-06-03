@@ -41,7 +41,6 @@ in
   home.file.".tmux/init-tmux-system.sh".source = ../tmux/scripts/init-tmux-system.sh;
   home.file.".tmux/init-tmux-all.sh".source = ../tmux/scripts/init-tmux-all.sh;
   home.file.".tmux/init-tmux-freetime.sh".source = ../tmux/scripts/init-tmux-freetime.sh;
-  home.file.".tmux/init-tmux-neorg.sh".source = ../tmux/scripts/init-tmux-neorg.sh;
 
   # nix shell creaters
   home.file.".nix-shells/bevy.nix".source = ../zsh/nix-shells/bevy.nix;

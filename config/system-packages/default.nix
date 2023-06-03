@@ -92,6 +92,7 @@ in
 
       # for tmux battery
       acpi
+      upower
 
       # ui
       brightnessctl
@@ -150,7 +151,7 @@ in
 
       # lua
       luajit
-      sumneko-lua-language-server
+      lua-language-server
 
       # gpg
       pinentry # passphrase input

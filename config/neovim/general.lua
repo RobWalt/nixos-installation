@@ -40,4 +40,9 @@ lua << EOF
   vim.o.softtabstop=2
   -- use same indent on next line as on current line
   vim.o.autoindent=true
+
+  -- recommendations from nvim-tree
+  -- -- disable netrw at the very start of your init.lua
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
 EOF

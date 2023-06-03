@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     yanky-src = {
       url = "github:gbprod/yanky.nvim";
@@ -8,14 +8,6 @@
     };
     hlargs-src = {
       url = "github:m-demare/hlargs.nvim";
-      flake = false;
-    };
-    neorg-telescope-src = {
-      url = "github:nvim-neorg/neorg-telescope";
-      flake = false;
-    };
-    wgsl-vim-src = {
-      url = "github:DingDean/wgsl.vim";
       flake = false;
     };
   };

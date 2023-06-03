@@ -36,7 +36,7 @@
   fonts.fonts = with pkgs; [
     terminus_font
     corefonts
-    (nerdfonts.override { fonts = [ "Meslo" "Iosevka" ]; })
+    (nerdfonts.override { fonts = [ "Iosevka" "IosevkaTerm" "Meslo" ]; })
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -60,7 +60,7 @@
     enable = true;
     enableSSHSupport = true;
   };
-
+  programs.zsh.enable = true;
 
   virtualisation.docker.enable = true;
 

@@ -47,13 +47,13 @@ in
       {
         plugin = (nvim-treesitter.withPlugins
           (
-            plugins: with pkgs.tree-sitter-grammars; [
+            plugins: with pkgs.tree-sitter-grammars; with plugins; [
               tree-sitter-rust
               tree-sitter-haskell
               tree-sitter-nix
               tree-sitter-lua
               tree-sitter-scheme
-              tree-sitter-norg
+              wgsl
             ]
           ));
         config = readFile ./plugins/tree-sitter.lua;
@@ -152,10 +152,7 @@ in
         plugin = dressing-nvim;
         config = readFile ./plugins/dressing.lua;
       }
-      {
-        plugin = neorg;
-        config = readFile ./plugins/neorg.lua;
-      }
+      wgsl-vim
 
       {
         plugin =
@@ -175,20 +172,6 @@ in
           };
         config = readFile ./plugins/hlargs.lua;
       }
-      (
-        pkgs.vimUtils.buildVimPluginFrom2Nix {
-          pname = "${lib.strings.sanitizeDerivationName "nvim-neorg/neorg-telescope"}";
-          version = "flakify";
-          src = inputs.neorg-telescope-src;
-        }
-      )
-      (
-        pkgs.vimUtils.buildVimPluginFrom2Nix {
-          pname = "${lib.strings.sanitizeDerivationName "DingDean/wgsl.vim"}";
-          version = "flakify";
-          src = inputs.wgsl-vim-src;
-        }
-      )
     ];
 
   myvimextraconfig =
