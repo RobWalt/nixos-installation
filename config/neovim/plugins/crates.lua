@@ -1,3 +1,1 @@
-lua << EOF
-  require('crates').setup({})
-EOF
+require('crates').setup({})

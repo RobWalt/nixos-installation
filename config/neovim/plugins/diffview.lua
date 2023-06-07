@@ -1,4 +1,2 @@
-lua << EOF
-  -- Lua
-  require("diffview").setup()
-EOF
+-- Lua
+require("diffview").setup()

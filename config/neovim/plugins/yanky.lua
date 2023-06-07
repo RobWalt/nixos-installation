@@ -1,3 +1,1 @@
-lua << EOF
-  require("yanky").setup({})
-EOF
+require("yanky").setup({})

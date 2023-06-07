@@ -8,16 +8,17 @@
       pre-commit = hooks/pre-commit.sh;
     };
     extraConfig = {
-      pull.rebase = false;
-      merge.tool = "nvimdiff";
+      commit.gpgsign = true;
       core.pager = "delta";
-      interactive.diffFilter = "delta --color-only";
       delta.navigate = true;
-      merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
       init.defaultBranch = "main";
+      interactive.diffFilter = "delta --color-only";
+      merge.conflictstyle = "diff3";
+      merge.tool = "nvimdiff";
+      pull.rebase = true;
       push.autoSetupRemote = true;
-      commit.gpgsign = true;
+      user.signingKey = "31D5FB29";
     };
   };
 

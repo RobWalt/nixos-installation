@@ -1,13 +1,13 @@
 {
   "bevy-prelude": {
-    "prefix": "bevy-prelude",
+    "prefix": "bprelude",
     "body": [
       "use bevy::prelude::*;"
     ],
     "description": "import bevy prelude"
   },
   "define-component": {
-    "prefix": "def-comp",
+    "prefix": "bcomp",
     "body": [
       "#[derive(Debug, Clone, Component)]",
       "pub struct ${1:type_name};"
@@ -15,7 +15,7 @@
     "description": "Define a bevy component"
   },
   "define-newtype-component": {
-    "prefix": "def-newtype-comp",
+    "prefix": "bcompnt",
     "body": [
       "#[derive(Debug, Clone, Component, Deref, DerefMut)]",
       "pub struct ${1:type_name}(${2:inner});"
@@ -23,7 +23,7 @@
     "description": "Define a bevy component newtype"
   },
   "define-plugin": {
-    "prefix": "def-plugin",
+    "prefix": "bplug",
     "body": [
       "pub struct ${1:plugin_name};",
       "",
@@ -36,7 +36,7 @@
     "description": "Define a bevy component newtype"
   },
   "define-resource": {
-    "prefix": "def-res",
+    "prefix": "bres",
     "body": [
       "#[derive(Debug, Clone, Resource)]",
       "pub struct ${1:type_name}{",
@@ -46,7 +46,7 @@
     "description": "Define a bevy resource"
   },
   "define-newtype-resource": {
-    "prefix": "def-newtype-res",
+    "prefix": "bresnt",
     "body": [
       "#[derive(Debug, Clone, Resource, Deref, DerefMut)]",
       "pub struct ${1:type_name}(${2:inner});"
@@ -54,24 +54,24 @@
     "description": "Define a bevy resource newtype"
   },
   "assets-resource": {
-    "prefix": "res-assets",
+    "prefix": "basset",
     "body": [
       "Res<Assets<$1>>"
     ],
     "description": "Resource Assets"
   },
   "assets-resource-mut": {
-    "prefix": "res-assets-mut",
+    "prefix": "bmasset",
     "body": [
       "ResMut<Assets<$1>>"
     ],
     "description": "Mutable Resource Assets"
   },
   "commands": {
-    "prefix": "commands",
+    "prefix": "comms",
     "body": [
       "mut commands: Commands"
     ],
-    "description": "commands argument"
+    "description": "Commands Argument"
   }
 }

@@ -1,3 +1,1 @@
-lua << EOF
-  require("hlargs").setup{}
-EOF
+require("hlargs").setup {}

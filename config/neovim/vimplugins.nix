@@ -9,17 +9,22 @@ let
     };
   };
   plugin = pluginGit "HEAD" "HEAD";
+  loadLuaConfig = with lib; path: concatStringsSep "\n" [
+    "lua << EOF"
+    (readFile path)
+    "EOF"
+  ];
 in
 {
   myvimplugins = with pkgs.vimPlugins; with lib;
     [
       {
         plugin = zen-mode-nvim;
-        config = readFile ./plugins/zen-mode.lua;
+        config = loadLuaConfig ./plugins/zen-mode.lua;
       }
       {
         plugin = twilight-nvim;
-        config = readFile ./plugins/twilight.lua;
+        config = loadLuaConfig ./plugins/twilight.lua;
       }
       # dependency of many things
       plenary-nvim
@@ -28,7 +33,7 @@ in
       # LSP
       {
         plugin = nvim-lspconfig;
-        config = readFile ./plugins/lsp.lua;
+        config = loadLuaConfig ./plugins/lsp.lua;
       }
       lsp-status-nvim
       lsp_signature-nvim
@@ -36,48 +41,49 @@ in
       nvim-dap
       {
         plugin = crates-nvim;
-        config = readFile ./plugins/crates.lua;
+        config = loadLuaConfig ./plugins/crates.lua;
       }
       {
         plugin = rust-tools-nvim;
-        config = readFile ./plugins/rust-tools.lua;
+        config = loadLuaConfig ./plugins/rust-tools.lua;
       }
 
       # highlighting stuff
       {
         plugin = (nvim-treesitter.withPlugins
           (
-            plugins: with pkgs.tree-sitter-grammars; with plugins; [
-              tree-sitter-rust
-              tree-sitter-haskell
-              tree-sitter-nix
-              tree-sitter-lua
-              tree-sitter-scheme
+            plugins: with plugins; [
+              rust
+              haskell
+              nix
+              lua
+              scheme
               wgsl
             ]
           ));
-        config = readFile ./plugins/tree-sitter.lua;
+        config = loadLuaConfig ./plugins/tree-sitter.lua;
       }
       nvim-treesitter-context
+      nvim-treesitter-refactor
       {
         plugin = indent-blankline-nvim;
-        config = readFile ./plugins/indent-blankline.lua;
+        config = loadLuaConfig ./plugins/indent-blankline.lua;
       }
       vim-nix
       {
         plugin = vim-illuminate;
-        config = readFile ./plugins/illuminate.lua;
+        config = loadLuaConfig ./plugins/illuminate.lua;
       }
       nvim-web-devicons
       {
         plugin = nvim-colorizer-lua;
-        config = readFile ./plugins/colorizer.lua;
+        config = loadLuaConfig ./plugins/colorizer.lua;
       }
 
       # cmp
       {
         plugin = nvim-cmp;
-        config = readFile ./plugins/cmp.lua;
+        config = loadLuaConfig ./plugins/cmp.lua;
       }
       cmp-buffer
       cmp-nvim-lsp
@@ -93,64 +99,64 @@ in
       auto-pairs
       {
         plugin = nvim-comment;
-        config = readFile ./plugins/comment.lua;
+        config = loadLuaConfig ./plugins/comment.lua;
       }
       {
         plugin = todo-comments-nvim;
-        config = readFile ./plugins/todo-highlight.lua;
+        config = loadLuaConfig ./plugins/todo-highlight.lua;
       }
 
       # UX apps
       {
         plugin = toggleterm-nvim;
-        config = readFile ./plugins/toggleterm.lua;
+        config = loadLuaConfig ./plugins/toggleterm.lua;
       }
       {
         plugin = telescope-nvim;
-        config = readFile ./plugins/telescope.lua;
+        config = loadLuaConfig ./plugins/telescope.lua;
       }
       {
         plugin = lualine-nvim;
-        config = readFile ./plugins/lualine.lua;
+        config = loadLuaConfig ./plugins/lualine.lua;
       }
       {
         plugin = luatab-nvim;
-        config = readFile ./plugins/luatab.lua;
+        config = loadLuaConfig ./plugins/luatab.lua;
       }
       {
         plugin = nvim-tree-lua;
-        config = readFile ./plugins/nvim-tree.lua;
+        config = loadLuaConfig ./plugins/nvim-tree.lua;
       }
 
 
       # git
       {
         plugin = diffview-nvim;
-        config = readFile ./plugins/diffview.lua;
+        config = loadLuaConfig ./plugins/diffview.lua;
       }
       {
         plugin = neogit;
-        config = readFile ./plugins/neogit.lua;
+        config = loadLuaConfig ./plugins/neogit.lua;
       }
       {
         plugin = gitsigns-nvim;
-        config = readFile ./plugins/gitsigns.lua;
+        config = loadLuaConfig ./plugins/gitsigns.lua;
       }
 
       # other
       {
         plugin = dial-nvim;
-        config = readFile ./plugins/dial.lua;
+        config = loadLuaConfig ./plugins/dial.lua;
       }
       {
         plugin = neoscroll-nvim;
-        config = readFile ./plugins/neoscroll.lua;
+        config = loadLuaConfig ./plugins/neoscroll.lua;
       }
       catppuccin-nvim
       telescope-symbols-nvim
       {
         plugin = dressing-nvim;
-        config = readFile ./plugins/dressing.lua;
+        config = loadLuaConfig ./plugins/dressing.lua;
       }
       wgsl-vim
 
@@ -161,7 +167,7 @@ in
             version = "flakify";
             src = inputs.yanky-src;
           };
-        config = readFile ./plugins/yanky.lua;
+        config = loadLuaConfig ./plugins/yanky.lua;
       }
       {
         plugin =
@@ -170,13 +176,13 @@ in
             version = "flakify";
             src = inputs.hlargs-src;
           };
-        config = readFile ./plugins/hlargs.lua;
+        config = loadLuaConfig ./plugins/hlargs.lua;
       }
     ];
 
   myvimextraconfig =
     let
-      listOfContent = map lib.readFile [
+      listOfContent = map loadLuaConfig [
         ./general.lua
         ./colorscheme.lua
         ./keybindings.lua

@@ -1,3 +1,1 @@
-lua << EOF
-  require('zen-mode').setup({})
-EOF
+require('zen-mode').setup({})

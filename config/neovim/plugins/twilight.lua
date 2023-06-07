@@ -1,3 +1,1 @@
-lua << EOF
-  require('twilight').setup({})
-EOF
+require('twilight').setup({})

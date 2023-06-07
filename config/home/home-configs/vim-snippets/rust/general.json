@@ -1,6 +1,6 @@
 {
   "anyhow-anyhow": {
-    "prefix": "anyhow",
+    "prefix": "anyh",
     "body": [
       "anyhow::anyhow!(\"$1\")"
     ],
@@ -14,21 +14,21 @@
     "description": "bail"
   },
   "anyhow-result": {
-    "prefix": "anyhow-result",
+    "prefix": "anyres",
     "body": [
       "anyhow::Result<$1>"
     ],
     "description": "bail"
   },
   "serde-json-serialize": {
-    "prefix": "json-serialize",
+    "prefix": "jsonify",
     "body": [
       "serde_json::to_string(&$1)"
     ],
     "description": "json serialize"
   },
   "serde-json-deserialize": {
-    "prefix": "json-deserialize",
+    "prefix": "dejsonify",
     "body": [
       "serde_json::from_str(&$1)"
     ],
@@ -53,14 +53,14 @@
     "description": "general normal function"
   },
   "newtype": {
-    "prefix": "newtype",
+    "prefix": "nt",
     "body": [
       "${1:pub} struct ${2:typename}(${3:newtype_of});"
     ],
     "description": "newtype type"
   },
   "collect-vec": {
-    "prefix": "collectv",
+    "prefix": "cv",
     "body": [
       "collect::<Vec<_>>()"
     ],

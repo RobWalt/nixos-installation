@@ -3,7 +3,7 @@ let
   codeberg-cli = pkgs.callPackage
     (builtins.fetchurl {
       url = "https://raw.githubusercontent.com/RobWalt/nixpkgs/cod/pkgs/applications/version-management/codeberg-cli/default.nix";
-      sha256 = "sha256:0mhwajbvdwssvmqybq8ws1wpsczixdgycd75gndilzafbgby5d47";
+      sha256 = "sha256:0hl5ckiyjy5y2xpwmvjlnl9rq0rd44pj3f9h3fgplwqzd1mzyw4k";
     })
     {
       inherit (pkgs.darwin.apple_sdk.frameworks) Security;
@@ -14,78 +14,80 @@ in
     [
       codeberg-cli
 
-      # apps
+      # gui apps
       alacritty # terminal
       blender # 3D modelling
-      butler # itch.io deploy
       calibre # manage ebooks
       chromium # used for vhs
-      cocogitto # gitops
       discord # chat app
-      taskwarrior # todo app
       firefox # alternative browser if qutebrowser doesn't work
       flameshot # screenshots
       gimp # image editing
       imagemagick # convert between image data type
       inkscape # drawing tool
       libresprite # pixel art tool
-      mdbook # pdf books from markdown
       musescore # musescore
       peek # gif capturing tool
       qutebrowser # broswer with vim controls
-      restream # stream remarkable to pc screen
       rustdesk # remote connection to other computers
       spotify # music
       tdesktop # telegram desktop app
       teamspeak_client # voice chat
       thunderbird # email client
-      unstable.godot_4 # game engine
-      vhs # terminal camera
-      unstable.zathura # pdf reader
       zulip # zulip client
+      # unstable
+      unstable.godot_4 # game engine
+      unstable.zathura # pdf reader
 
       # cli utils
-      blueberry # bluetooth config
+      # gitoxide  # rusty git
       bat # better cat
       binutils
+      blueberry # bluetooth config
       btop # better top
+      butler # itch.io deploy
+      cocogitto # git tooling for conventional commits and other stuff
       delta # diffs
       difftastic
       du-dust # better du
-      duf
-      dunst
-      exa
-      exercism
-      fd
-      fzf
-      gh
-      git
+      duf # shows free space on drives
+      dunst # notifications
+      exa # better ls
+      exercism # exercism cli tool for downloading/submitting
+      fd # better find
+      fzf # fuzzy finder
+      gh # github cli tool
+      git # git
       git-cliff
-      git-lfs
-      gitoxide
-      glab
-      hoard
-      hurl
-      jq
-      just
-      license-generator
+      git-lfs # git large file storage
+      glab # gitlab cli tool
+      gum # cli scripting glue
+      hoard # cli command saver
+      hurl # test http requests
+      jq # json cli processing
+      just # make alternative
+      license-generator # generate standard licenses
       lsof
+      mdbook # pdf books from markdown
+      mpv # cli media player
       nix-index
-      openssl
+      openssl # ssh
       pciutils
-      ranger
-      ripgrep
-      sd
-      tealdeer
-      tokei
-      tree
-      gum
-      unzip
+      ranger # cli file manager
+      restream # stream remarkable to pc screen
+      ripgrep # better grep
+      sd # better sed
+      taskwarrior # todo app
+      tealdeer # shorter man with examples
+      tokei # better loc
+      tree # file tree vis
+      unzip # zip
+      vhs # terminal camera
       xdotool # automatically type text
-      zip
-      zola
-      zoxide
-      zsh
+      zip # zip
+      zola # website generation
+      zoxide # faster jumping around dirs
+      zsh # better bash
 
       xclip # clipboard on x11
       haskellPackages.greenclip # clipboard manager, daemon needs to be started
@@ -107,6 +109,7 @@ in
       wget
       wpa_supplicant
       usbutils
+
       # graph utilities
       graphviz # standard on linux
       xdot # interactive viewer for graphviz
@@ -116,7 +119,6 @@ in
 
       # rust
       rustup
-      rust-analyzer
       mold
 
       # rust cargo extensions
@@ -127,16 +129,17 @@ in
       cargo-expand
       cargo-fuzz
       cargo-generate
+      cargo-hack
+      cargo-license
       cargo-llvm-lines
+      cargo-make
+      cargo-modules
       cargo-nextest
       cargo-outdated
       cargo-udeps
       cargo-update
       cargo-watch
-      cargo-modules
-      cargo-make
       hyperfine
-      cargo-hack
 
       # haskell
       cabal-install
