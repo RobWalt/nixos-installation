@@ -47,6 +47,7 @@ in
       btop # better top
       butler # itch.io deploy
       cocogitto # git tooling for conventional commits and other stuff
+      colorpicker # colorpicker
       delta # diffs
       difftastic
       du-dust # better du
@@ -139,12 +140,18 @@ in
       cargo-udeps
       cargo-update
       cargo-watch
+      cargo-leptos
       hyperfine
 
       # haskell
       cabal-install
       cabal2nix
       haskellPackages.implicit-hie
+      # hoogle generate doesn't work (timeout)
+      unstable.haskellPackages.hoogle
+      haskellPackages.fast-tags
+      haskellPackages.haskell-debug-adapter
+      haskellPackages.ghci-dap
       ghc
       haskell-language-server
       ormolu

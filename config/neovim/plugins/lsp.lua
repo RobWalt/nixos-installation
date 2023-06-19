@@ -3,9 +3,9 @@ vim.api.nvim_create_autocmd("BufWritePre",
 
 local sigcfg = {
   doc_lines = 0,
-  floating_window = false,   -- show hint in a floating window, set to false for virtual text only mode
-  hint_enable = true,        -- virtual hint enable
-  hint_prefix = "",          -- Panda for parameter
+  floating_window = false, -- show hint in a floating window, set to false for virtual text only mode
+  hint_enable = true,      -- virtual hint enable
+  hint_prefix = "",        -- Panda for parameter
 }
 
 local luacfg = {
@@ -31,17 +31,8 @@ local luacfg = {
   },
 }
 
-local hlscfg = {
-  settings = {
-    haskell = {
-      formattingProvider = "ormolu"
-    }
-  }
-}
-
-require('lspconfig').rnix.setup({})            -- nix
-require('lspconfig').wgsl_analyzer.setup({})   -- wgsl
-require('lspconfig').hls.setup(hlscfg)         -- haskell
-require('lspconfig').marksman.setup({})        -- markdown
-require('lspconfig').lua_ls.setup(luacfg)      -- lua
-require('lsp_signature').setup(sigcfg)         -- signatures bottom left
+require('lspconfig').rnix.setup({})          -- nix
+require('lspconfig').wgsl_analyzer.setup({}) -- wgsl
+require('lspconfig').marksman.setup({})      -- markdown
+require('lspconfig').lua_ls.setup(luacfg)    -- lua
+require('lsp_signature').setup(sigcfg)       -- signatures bottom left

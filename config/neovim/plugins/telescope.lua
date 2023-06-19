@@ -12,3 +12,5 @@ require('telescope').setup({
   },
 })
 require('telescope').load_extension("yank_history")
+require('telescope').load_extension("manix")
+--require('telescope').load_extension("hoogle")

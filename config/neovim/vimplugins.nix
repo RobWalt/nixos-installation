@@ -43,6 +43,11 @@ in
         plugin = crates-nvim;
         config = loadLuaConfig ./plugins/crates.lua;
       }
+      haskell-vim
+      {
+        plugin = haskell-tools-nvim;
+        config = loadLuaConfig ./plugins/haskell-tools.lua;
+      }
       {
         plugin = rust-tools-nvim;
         config = loadLuaConfig ./plugins/rust-tools.lua;
@@ -111,6 +116,9 @@ in
         plugin = toggleterm-nvim;
         config = loadLuaConfig ./plugins/toggleterm.lua;
       }
+      telescope-manix
+      # doesn't work yet (https://github.com/ndmitchell/hoogle/issues/408)
+      # telescope_hoogle
       {
         plugin = telescope-nvim;
         config = loadLuaConfig ./plugins/telescope.lua;

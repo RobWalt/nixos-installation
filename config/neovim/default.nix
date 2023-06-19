@@ -24,6 +24,7 @@
       clang # needed for rust-tools
       gcc # needed for treesitter compilation
       git # needed for treesitter download
+      manix # nix docs searcher
       rnix-lsp # nix lsp
       marksman # markdown lsp
     ];

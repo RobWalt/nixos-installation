@@ -69,10 +69,10 @@ rt.setup({
         rustfmt = {
           extraArgs = { "+nightly" },
         },
-        -- checkOnSave = {
-        --   command = "clippy",
-        --   -- extraArgs = {"--", "-W", "clippy::all", "-W", "clippy::pedantic"},
-        -- }
+        checkOnSave = {
+          command = "clippy",
+          -- extraArgs = {"--", "-W", "clippy::all", "-W", "clippy::pedantic"},
+        }
       }
     }
   },
