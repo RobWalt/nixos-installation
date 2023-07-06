@@ -1,9 +1,18 @@
 { config, pkgs, inputs, ... }:
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org/"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   imports =
     [
@@ -25,6 +34,17 @@
     interfaces.enp2s0.useDHCP = true;
     interfaces.wlp3s0.useDHCP = true;
     networkmanager.enable = true;
+    # firewall = {
+    #   enable = true;
+    #   allowedTCPPorts = [ 80 443 ];
+    #   allowedUDPPortRanges = [
+    #     { from = 4000; to = 4007; }
+    #     { from = 8000; to = 8010; }
+    #   ];
+
+    #   # To allow connections from a local network
+    #   interfaces."wlp3s0".allowedTCPPorts = [ 8000 ];
+    # };
   };
 
   # Select internationalisation properties.
@@ -53,6 +73,7 @@
       "*/5 * * * *   robw  DISPLAY=:0 feh --bg-max /home/robw/wallpaper/bg/ -z --image-bg \"#345\""
     ];
   };
+  services.logind.extraConfig = "RuntimeDirectorySize=4G";
 
   # needed for gnupg
   services.pcscd.enable = true;

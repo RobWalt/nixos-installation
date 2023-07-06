@@ -12,7 +12,7 @@ in
 {
   environment.systemPackages = with pkgs;
     [
-      codeberg-cli
+      # codeberg-cli
 
       # gui apps
       alacritty # terminal
@@ -28,7 +28,8 @@ in
       libresprite # pixel art tool
       musescore # musescore
       peek # gif capturing tool
-      qutebrowser # broswer with vim controls
+      #qutebrowser # broswer with vim controls
+      qutebrowser-qt6 # broswer with vim controls
       rustdesk # remote connection to other computers
       spotify # music
       tdesktop # telegram desktop app
@@ -36,8 +37,8 @@ in
       thunderbird # email client
       zulip # zulip client
       # unstable
-      unstable.godot_4 # game engine
-      unstable.zathura # pdf reader
+      #godot_4 # game engine
+      zathura # pdf reader
 
       # cli utils
       # gitoxide  # rusty git
@@ -70,6 +71,7 @@ in
       license-generator # generate standard licenses
       lsof
       mdbook # pdf books from markdown
+      hyperfine # benchmarking in terminal
       mpv # cli media player
       nix-index
       openssl # ssh
@@ -119,10 +121,13 @@ in
       pamixer
 
       # rust
+      clang
+      llvmPackages_9.bintools
       rustup
       mold
 
       # rust cargo extensions
+      # tools
       cargo-audit
       cargo-bloat
       cargo-deny
@@ -140,15 +145,18 @@ in
       cargo-udeps
       cargo-update
       cargo-watch
+      # app specific
       cargo-leptos
-      hyperfine
+      # needs at least v0.19 to work again, currently local install
+      unstable.cargo-shuttle
+      diesel-cli
 
       # haskell
       cabal-install
       cabal2nix
       haskellPackages.implicit-hie
       # hoogle generate doesn't work (timeout)
-      unstable.haskellPackages.hoogle
+      haskellPackages.hoogle
       haskellPackages.fast-tags
       haskellPackages.haskell-debug-adapter
       haskellPackages.ghci-dap
@@ -175,7 +183,7 @@ in
       wasm-pack
 
       # javascript 
-      nodejs
+      # nodejs
 
       # docker
       docker-compose

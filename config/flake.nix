@@ -1,7 +1,8 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/23.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager/f1490b8caf2ef6f59205c78cf1a8b68e776214a3";
     yanky-src = {
       url = "github:gbprod/yanky.nvim";
       flake = false;
@@ -30,8 +31,8 @@
           system = "x86_64-linux";
           modules =
             [
-              home-manager.nixosModules.home-manager
               defaults
+              home-manager.nixosModules.home-manager
               ./my_uwu_system.nix
             ];
         };
