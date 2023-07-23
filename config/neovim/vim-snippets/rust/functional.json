@@ -1,6 +1,6 @@
 {
   "map": {
-    "prefix": ".map.",
+    "prefix": ".map",
     "body": [
       ".map(|$1| {",
       "  ${2:todo!()}",
@@ -12,7 +12,7 @@
     }
   },
   "map_err": {
-    "prefix": ".map_err.",
+    "prefix": ".map_err",
     "body": [
       ".map_err(|$1| {",
       "  ${2:todo!()}",
@@ -24,7 +24,7 @@
     }
   },
   "and_then": {
-    "prefix": ".and_then.",
+    "prefix": ".and_then",
     "body": [
       ".and_then(|$1| {",
       "  ${2:todo!()}",
@@ -36,7 +36,7 @@
     }
   },
   "filter": {
-    "prefix": ".filter.",
+    "prefix": ".filter",
     "body": [
       ".filter(|&$1| {",
       "  ${2:todo!()}",
@@ -48,7 +48,7 @@
     }
   },
   "filter_map": {
-    "prefix": ".filter_map.",
+    "prefix": ".filter_map",
     "body": [
       ".filter_map(|$1| {",
       "  ${2:todo!()}",
@@ -60,7 +60,7 @@
     }
   },
   "find": {
-    "prefix": ".find.",
+    "prefix": ".find",
     "body": [
       ".find(|&$1| {",
       "  ${2:todo!()}",
@@ -72,7 +72,7 @@
     }
   },
   "find_map": {
-    "prefix": ".find_map.",
+    "prefix": ".find_map",
     "body": [
       ".find_map(|$1| {",
       "  ${2:todo!()}",
@@ -84,7 +84,7 @@
     }
   },
   "position": {
-    "prefix": ".position.",
+    "prefix": ".position",
     "body": [
       ".position(|&$1| {",
       "  ${2:todo!()}",
@@ -96,7 +96,7 @@
     }
   },
   "all": {
-    "prefix": ".all.",
+    "prefix": ".all",
     "body": [
       ".all(|&$1| {",
       "  ${2:todo!()}",
@@ -108,7 +108,7 @@
     }
   },
   "any": {
-    "prefix": ".any.",
+    "prefix": ".any",
     "body": [
       ".any(|&$1| {",
       "  ${2:todo!()}",
@@ -120,7 +120,7 @@
     }
   },
   "fold": {
-    "prefix": ".fold.",
+    "prefix": ".fold",
     "body": [
       ".fold(${1:init},|${2:accum}, ${3:elem}| {",
       "  ${4:todo!()}",
@@ -132,13 +132,59 @@
     }
   },
   "for_each": {
-    "prefix": ".for_each.",
+    "prefix": ".for_each",
     "body": [
       ".for_each(${1:elem}| {",
       "  ${2:todo!()}",
       "});"
     ],
     "description": "for_each",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "windows": {
+    "prefix": ".windows",
+    "body": [
+      ".windows(${1:num})"
+    ],
+    "description": "windows",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "reduce": {
+    "prefix": ".reduce",
+    "body": [
+      ".reduce(|${1:a},${2:b}| {",
+      "  ${3:todo!()}",
+      "});"
+    ],
+    "description": "reduce",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "unwrap_or_else": {
+    "prefix": ".unwrap_or_else",
+    "body": [
+      ".unwrap_or_else(|| {",
+      "  ${1:todo!()}",
+      "});"
+    ],
+    "description": "unwrap_or_else",
+    "luasnip": {
+      "autotrigger": true
+    }
+  },
+  "or_else": {
+    "prefix": ".or_else",
+    "body": [
+      ".or_else(|err| {",
+      "  ${1:todo!()}",
+      "});"
+    ],
+    "description": "or_else",
     "luasnip": {
       "autotrigger": true
     }

@@ -26,16 +26,20 @@ in
       imagemagick # convert between image data type
       inkscape # drawing tool
       libresprite # pixel art tool
+      krita # linux image editing
       musescore # musescore
       peek # gif capturing tool
       #qutebrowser # broswer with vim controls
       qutebrowser-qt6 # broswer with vim controls
       rustdesk # remote connection to other computers
       spotify # music
+      sniffnet # internet traffic viewer
       tdesktop # telegram desktop app
       teamspeak_client # voice chat
-      thunderbird # email client
+      unstable.thunderbird # email client
       zulip # zulip client
+      obsidian # note taking
+      jitsi-meet-electron # jitsi desktop app
       # unstable
       #godot_4 # game engine
       zathura # pdf reader

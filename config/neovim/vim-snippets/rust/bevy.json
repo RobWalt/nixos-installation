@@ -9,7 +9,7 @@
   "define-component": {
     "prefix": "bcomp",
     "body": [
-      "#[derive(Debug, Clone, Component)]",
+      "#[derive(Debug, Clone, Component, Default, Reflect)]",
       "pub struct ${1:type_name};"
     ],
     "description": "Define a bevy component"
@@ -17,10 +17,17 @@
   "define-newtype-component": {
     "prefix": "bcompnt",
     "body": [
-      "#[derive(Debug, Clone, Component, Deref, DerefMut)]",
+      "#[derive(Debug, Clone, Component, Deref, DerefMut, Default, Reflect)]",
       "pub struct ${1:type_name}(${2:inner});"
     ],
     "description": "Define a bevy component newtype"
+  },
+  "register-component-type-registry": {
+    "prefix": "bregcomp",
+    "body": [
+      ".register_type::<${1:component_name}>()"
+    ],
+    "description": "Register component in type registry"
   },
   "define-plugin": {
     "prefix": "bplug",

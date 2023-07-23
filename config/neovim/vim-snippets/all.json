@@ -2,7 +2,7 @@
   "TODO": {
     "prefix": "TODO",
     "body": [
-      "🚧🚧 TODO 🚧🚧:"
+      "🚧🚧 TODO 🚧🚧 : ${1:Message}"
     ],
     "description": "TODO",
     "luasnip": {

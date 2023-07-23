@@ -60,10 +60,13 @@
     "description": "newtype type"
   },
   "collect-vec": {
-    "prefix": "cv",
+    "prefix": ".cv",
     "body": [
-      "collect::<Vec<_>>()"
+      ".collect::<Vec<_>>()"
     ],
-    "description": "collect to vector"
+    "description": "collect to vector",
+    "luasnip": {
+      "autotrigger": true
+    }
   }
 }

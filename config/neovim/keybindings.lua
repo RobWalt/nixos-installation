@@ -46,6 +46,37 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+LastFunction = function()
+end
+AutoSnippetsOn = true
+function ToggleSnippets()
+  local function clone_function(fn)
+    local dumped = string.dump(fn)
+    local cloned = loadstring(dumped)
+    local i = 1
+    while true do
+      local name = debug.getupvalue(fn, i)
+      if not name then
+        break
+      end
+      debug.upvaluejoin(cloned, i, fn, i)
+      i = i + 1
+    end
+    return cloned
+  end
+
+  local newFunction = clone_function(LastFunction)
+  LastFunction = clone_function(require('luasnip').expand_auto)
+  require('luasnip').expand_auto = clone_function(newFunction)
+  AutoSnippetsOn = not AutoSnippetsOn
+
+  if AutoSnippetsOn then
+    print("toggled autosnippet mode ON")
+  else
+    print("toggled autosnippet mode OFF")
+  end
+end
+
 -- NORMAL
 
 map("n", "gp", "<cmd>Telescope yank_history<CR>")
@@ -73,12 +104,11 @@ map("n", "<A-h>", ":tabmove -1<CR>")
 map("n", "<A-l>", ":tabmove +1<CR>")
 map("n", "<A-z>", "<cmd>ZenMode<CR>")
 map("n", "<A-o>", "<cmd>RustOpenExternalDocs<CR>")
-map("n", "<A-c>", "<cmd>!echo hi<CR>")
-map("n", "<A-k>", "<cmd>!echo hi<CR>")
 
 map("n", "<Leader>t", "<cmd>TodoTelescope<CR>")
 map("n", "<Leader>le", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'emoji'}})<CR>")
 map("n", "<Leader>lm", "<space><ESC>hi<cmd>lua require('telescope.builtin').symbols({sources = {'math'}})<CR>")
+map("n", "<Leader>c", "<cmd> lua ToggleSnippets()<CR>")
 
 -- VISUAL
 map("v", "//", "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")

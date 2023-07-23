@@ -13,11 +13,11 @@ in
   home.file.".config/rofi-pass/config".source = ../rofi/rofi-pass.config;
 
   # snippets for vim
-  home.file.".config/nvim/hand_made_snippets/package.json".source = ../home-configs/vim-snippets/package.json;
-  home.file.".config/nvim/hand_made_snippets/rust/bevy.json".source = ../home-configs/vim-snippets/rust/bevy.json;
-  home.file.".config/nvim/hand_made_snippets/rust/functional.json".source = ../home-configs/vim-snippets/rust/functional.json;
-  home.file.".config/nvim/hand_made_snippets/rust/general.json".source = ../home-configs/vim-snippets/rust/general.json;
-  home.file.".config/nvim/hand_made_snippets/all.json".source = ../home-configs/vim-snippets/all.json;
+  home.file.".config/nvim/hand_made_snippets/package.json".source = ../../neovim/vim-snippets/package.json;
+  home.file.".config/nvim/hand_made_snippets/rust/bevy.json".source = ../../neovim/vim-snippets/rust/bevy.json;
+  home.file.".config/nvim/hand_made_snippets/rust/functional.json".source = ../../neovim/vim-snippets/rust/functional.json;
+  home.file.".config/nvim/hand_made_snippets/rust/general.json".source = ../../neovim/vim-snippets/rust/general.json;
+  home.file.".config/nvim/hand_made_snippets/all.json".source = ../../neovim/vim-snippets/all.json;
 
   # hoard config
   home.file.".config/hoard/hoard.zsh".source = hoard-shell-plugin-path;
