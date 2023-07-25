@@ -11,10 +11,10 @@ with pkgs; mkShell {
     udev
     alsaLib
     vulkan-loader
-    xlibsWrapper
     xorg.libXcursor
     xorg.libXrandr
     xorg.libXi
+    xorg.libX11
     cmake
   ];
   shellHook = ''

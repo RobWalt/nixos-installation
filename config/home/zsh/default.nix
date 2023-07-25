@@ -1,9 +1,11 @@
 { pkgs, lib, ... }:
+let
+  names = import ../../names.nix { };
+in
 {
 
   imports = [
-    # shell prompt
-    ./starship
+    ./starship # shell prompt
   ];
 
   programs.zsh = {
@@ -35,11 +37,11 @@
       ccr = "cog commit refactor";
       ga = "git add";
       gaa = "git add -A";
+      gst = "git status";
       gc = "git checkout";
       gcb = "git checkout -b";
       gp = "git push";
       gpp = "git pull -p";
-      grc = "git checkout -- .";
       grh = "git reset HEAD~";
 
       tmuxa = "sh ~/.tmux/init-tmux-all.sh";
@@ -48,19 +50,26 @@
       tmuxw = "sh ~/.tmux/init-tmux-work.sh";
 
       loc = "tokei";
+
+      ls = "exa";
       l = "exa -l";
       ll = "exa -alh";
-      ls = "exa";
-      cat = "bat";
+      lt = "exa --tree --header --icons --git";
+      tree1 = "lt --level=1";
+      tree2 = "lt --level=2";
+      tree3 = "lt --level=3";
+
+      cat = "bat --theme=catppuccin";
+
       df = "duf";
       du = "dust";
       diff = "difft";
       find = "fd";
 
-      init-bevy = "cp /home/robw/nix-shells/bevy.nix .";
-      init-ns = "cp /home/robw/nix-shells/dev.nix .";
-      init-wasm = "cp /home/robw/nix-shells/wasm.nix .";
-      init-phone = "cp /home/robw/nix-shells/phone.nix .";
+      init-bevy = "cp /home/${names.userName}/nix-shells/bevy.nix .";
+      init-ns = "cp /home/${names.userName}/nix-shells/dev.nix .";
+      init-wasm = "cp /home/${names.userName}/nix-shells/wasm.nix .";
+      init-phone = "cp /home/${names.userName}/nix-shells/phone.nix .";
 
       remarkable = "restream -s reMarkable -p";
     };
@@ -70,7 +79,7 @@
       extended = true;
       save = 100000;
       size = 100000;
-      path = "/home/robw/.zhistory";
+      path = "/home/${names.userName}/.zhistory";
     };
 
     historySubstringSearch = {
@@ -90,7 +99,7 @@
 
     initExtra = ''
       eval "$(zoxide init zsh)"
-      eval $(ssh-agent) > /home/robw/.sshstartup.log && ssh-add /home/robw/.ssh/keys/* 2>> /home/robw/.sshstartup.log
+      eval $(ssh-agent) > /home/${names.userName}/.sshstartup.log && ssh-add /home/${names.userName}/.ssh/keys/* 2>> /home/${names.userName}/.sshstartup.log
 
       export NIX_BUILD_SHELL="zsh"
 

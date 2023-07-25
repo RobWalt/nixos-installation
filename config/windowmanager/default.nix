@@ -1,4 +1,7 @@
 { pkgs, config, ... }:
+let
+  names = import ../names.nix { };
+in
 {
   # High DPI settings
   # hardware.video.hidpi.enable = true;
@@ -19,7 +22,7 @@
       lightdm.enable = true;
       autoLogin = {
         enable = true;
-        user = "robw";
+        user = "${names.userName}";
       };
       defaultSession = "none+i3";
     };
@@ -33,14 +36,15 @@
         enable = true;
         package = pkgs.i3-gaps;
         configFile = "/etc/i3.conf";
-        extraPackages = with pkgs; [
-          rofi
-          feh
-        ];
+        extraPackages = builtins.attrValues {
+          inherit (pkgs)
+            rofi
+            feh;
+        };
       };
     };
   };
 
-  environment.etc."i3.conf".source = ./i3conf.config;
+  environment.etc."i3.conf".text = pkgs.callPackage ./i3conf.nix { };
 
 }

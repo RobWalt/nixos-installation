@@ -15,7 +15,7 @@ with pkgs; mkShell {
       python3
       alsa-lib
       vulkan-loader
-      xlibsWrapper
+      xorg.libX11
       xorg.libXcursor
       xorg.libXrandr
       xorg.libXi

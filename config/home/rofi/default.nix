@@ -2,11 +2,11 @@
 {
   programs.rofi = {
     enable = true;
-    plugins = with pkgs; [
-      rofi-emoji
+    plugins = [
+      pkgs.rofi-emoji
     ];
     package = pkgs.rofi;
-    theme = builtins.toString (pkgs.writeText "rofi-theme" ''
+    theme = toString (pkgs.writeText "rofi-theme" ''
       * {
           al:                             #00000000;
           bg:                             #45475A;

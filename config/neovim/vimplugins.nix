@@ -1,22 +1,31 @@
-{ pkgs, lib, fetchFromGitHub, inputs, ... }:
+{ pkgs, lib, fetchFromGitHub, hlargs-src, yanky-src, ... }:
 let
   pluginGit = version: ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}";
     version = version;
-    src = builtins.fetchGit {
+    src = fetchGit {
       url = "https://github.com/${repo}.git";
       ref = ref;
     };
   };
   plugin = pluginGit "HEAD" "HEAD";
-  loadLuaConfig = with lib; path: concatStringsSep "\n" [
+  loadLuaConfig = path: lib.concatStringsSep "\n" [
     "lua << EOF"
-    (readFile path)
+    (lib.readFile path)
     "EOF"
   ];
+  loadLuaConfigNix = path:
+    let
+      fileContent = pkgs.callPackage path { };
+    in
+    lib.concatStringsSep "\n" [
+      "lua << EOF"
+      fileContent
+      "EOF"
+    ];
 in
 {
-  myvimplugins = with pkgs.vimPlugins; with lib;
+  pluginList = with pkgs.vimPlugins; with lib;
     [
       {
         plugin = zen-mode-nvim;
@@ -66,7 +75,7 @@ in
               wgsl
             ]
           ));
-        config = loadLuaConfig ./plugins/tree-sitter.lua;
+        config = loadLuaConfigNix ./plugins/tree-sitter.nix;
       }
       nvim-treesitter-context
       nvim-treesitter-refactor
@@ -173,7 +182,7 @@ in
           pkgs.vimUtils.buildVimPluginFrom2Nix {
             pname = "${lib.strings.sanitizeDerivationName "gbprod/yanky.nvim"}";
             version = "flakify";
-            src = inputs.yanky-src;
+            src = yanky-src;
           };
         config = loadLuaConfig ./plugins/yanky.lua;
       }
@@ -182,13 +191,13 @@ in
           pkgs.vimUtils.buildVimPluginFrom2Nix {
             pname = "${lib.strings.sanitizeDerivationName "m-demare/hlargs.nvim"}";
             version = "flakify";
-            src = inputs.hlargs-src;
+            src = hlargs-src;
           };
         config = loadLuaConfig ./plugins/hlargs.lua;
       }
     ];
 
-  myvimextraconfig =
+  extraConfig =
     let
       listOfContent = map loadLuaConfig [
         ./general.lua

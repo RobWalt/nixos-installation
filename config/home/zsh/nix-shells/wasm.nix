@@ -1,5 +1,5 @@
 let
-  moz_overlay = import (builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
+  moz_overlay = import (fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz);
   nixpkgs = import <nixpkgs> { overlays = [ moz_overlay ]; };
 in
 with nixpkgs;
@@ -19,7 +19,7 @@ stdenv.mkDerivation
     udev
     python3
     alsaLib
-    xlibsWrapper
+    xorg.libX11
     xorg.libXcursor
     xorg.libXrandr
     xorg.libXi

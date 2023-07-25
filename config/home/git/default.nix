@@ -5,7 +5,7 @@
     userName = "RobWalt";
     userEmail = "robwalter96@gmail.com";
     hooks = {
-      pre-commit = hooks/pre-commit.sh;
+      pre-commit = builtins.toFile "pre-commit.sh" (pkgs.callPackage hooks/pre-commit.nix { });
     };
     extraConfig = {
       commit.gpgsign = true;

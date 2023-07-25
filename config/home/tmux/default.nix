@@ -10,15 +10,15 @@
     keyMode = "vi";
     shell = "${pkgs.zsh}/bin/zsh";
 
-    plugins = with pkgs; [
+    plugins = [
       {
-        plugin = tmuxPlugins.tmux-fzf;
+        plugin = pkgs.tmuxPlugins.tmux-fzf;
         extraConfig = ''
           bind-key "l" run-shell -b "${pkgs.tmuxPlugins.tmux-fzf}/share/tmux-plugins/tmux-fzf/scripts/window.sh switch"
         '';
       }
       {
-        plugin = tmuxPlugins.battery;
+        plugin = pkgs.tmuxPlugins.battery;
         extraConfig = '' 
           set -g status-right 'Batt: #{battery_percentage} | %a %h-%d %H:%M '
         '';

@@ -1,9 +1,17 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, bat-catppuccin, ... }:
+let
+  names = import ../names.nix { };
+  bat-catppuccin-program = import ./bat { inherit pkgs bat-catppuccin; };
+in
 {
   home-manager.useGlobalPkgs = true;
-  home-manager.users.robw = { ... }:
+  home-manager.users.${names.userName} = { ... }:
     {
+      programs.home-manager.enable = true;
+
       home.stateVersion = config.system.stateVersion;
+      home.username = "${names.userName}";
+      home.homeDirectory = "/home/${names.userName}";
 
       imports = [
         ./alacritty
@@ -20,8 +28,11 @@
         "$HOME/.local/bin"
       ];
 
-      programs.home-manager.enable = true;
       programs.gpg.enable = true;
-
-    };
+      services.gpg-agent = {
+        enable = true;
+        defaultCacheTtl = 1800;
+        enableSshSupport = true;
+      };
+    } // bat-catppuccin-program;
 }

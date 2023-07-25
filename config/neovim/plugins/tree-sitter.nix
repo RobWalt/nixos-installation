@@ -1,9 +1,14 @@
+{ ... }:
+let
+  names = import ../../names.nix { };
+in
+'' 
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-  parser_install_dir = "/home/robw/.local/share/nvim/",
+  parser_install_dir = "/home/${names.userName}/.local/share/nvim/",
   ident = {
     enable = true,
   },
@@ -49,3 +54,4 @@ require('treesitter-context').setup {
     rust = true,
   }
 }
+''
