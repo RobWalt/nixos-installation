@@ -38,6 +38,10 @@ in
       # dependency of many things
       plenary-nvim
       popup-nvim
+      {
+        plugin = null-ls-nvim;
+        config = loadLuaConfig ./plugins/null-ls.lua;
+      }
 
       # LSP
       {

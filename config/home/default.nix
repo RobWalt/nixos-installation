@@ -1,7 +1,8 @@
-{ pkgs, config, lib, bat-catppuccin, ... }:
+{ pkgs, config, lib, bat-catppuccin, btop-catppuccin, ... }:
 let
   names = import ../names.nix { };
   bat-catppuccin-program = import ./bat { inherit pkgs bat-catppuccin; };
+  btop-catppuccin-program = import ./btop { inherit pkgs lib btop-catppuccin; };
 in
 {
   home-manager.useGlobalPkgs = true;
@@ -16,10 +17,12 @@ in
       imports = [
         ./alacritty
         ./dunst
+        bat-catppuccin-program
+        btop-catppuccin-program
         ./rofi
         ./tmux
-        ./zsh
         ./file-placement
+        ./zsh
         ./git
       ];
 
@@ -34,5 +37,5 @@ in
         defaultCacheTtl = 1800;
         enableSshSupport = true;
       };
-    } // bat-catppuccin-program;
+    };
 }

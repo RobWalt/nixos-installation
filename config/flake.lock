@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "btop-catppuccin": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686163899,
+        "narHash": "sha256-J3UezOQMDdxpflGax0rGBF/XMiKqdqZXuX4KMVGTxFk=",
+        "owner": "catppuccin",
+        "repo": "btop",
+        "rev": "89ff712eb62747491a76a7902c475007244ff202",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "btop",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -106,6 +122,7 @@
     "root": {
       "inputs": {
         "bat-catppuccin": "bat-catppuccin",
+        "btop-catppuccin": "btop-catppuccin",
         "flake-utils": "flake-utils",
         "hlargs-src": "hlargs-src",
         "home-manager": "home-manager",

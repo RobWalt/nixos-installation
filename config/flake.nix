@@ -23,6 +23,10 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
+    btop-catppuccin = {
+      url = "github:catppuccin/btop";
+      flake = false;
+    };
   };
   outputs =
     { nixpkgs
@@ -33,6 +37,7 @@
     , yanky-src
     , hlargs-src
     , bat-catppuccin
+    , btop-catppuccin
     , ...
     }:
     flake-utils.lib.eachDefaultSystem (system:
@@ -43,7 +48,7 @@
           specialArgs = {
             unstable = import unstable { inherit system; };
             oldpkgs = import old-nixpkgs { inherit system; };
-            inherit hlargs-src yanky-src bat-catppuccin;
+            inherit hlargs-src yanky-src bat-catppuccin btop-catppuccin;
           };
         in
         {
