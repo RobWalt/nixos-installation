@@ -1,4 +1,4 @@
-{}:
+_:
 {
   latte = import ./latte.nix { };
   frappe = import ./frappe.nix { };

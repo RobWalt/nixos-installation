@@ -1,11 +1,8 @@
-{ ... }:
-let
-  names = import ../../../names.nix { };
-in
+{ adminName, ... }:
 ''
   #!/bin/bash
 
-  sh /home/${names.userName}/.tmux/init-tmux-system.sh
-  sh /home/${names.userName}/.tmux/init-tmux-work.sh
-  sh /home/${names.userName}/.tmux/init-tmux-freetime.sh
+  sh /home/${adminName}/.tmux/init-tmux-system.sh
+  sh /home/${adminName}/.tmux/init-tmux-work.sh
+  sh /home/${adminName}/.tmux/init-tmux-freetime.sh
 ''

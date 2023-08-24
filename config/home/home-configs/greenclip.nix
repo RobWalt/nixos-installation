@@ -1,10 +1,7 @@
-{ ... }:
-let
-  names = import ../../names.nix { };
-in
+{ adminName, ... }:
 ''
   [greenclip]
-  history_file = "/home/${names.userName}/.cache/greenclip.history"
+  history_file = "/home/${adminName}/.cache/greenclip.history"
   max_history_length = 50
   max_selection_size_bytes = 0
   trim_space_from_selection = true

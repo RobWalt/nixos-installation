@@ -68,5 +68,18 @@
     "luasnip": {
       "autotrigger": true
     }
+  },
+  "test-module": {
+    "prefix": "testmod",
+    "body": [
+      "#[cfg(test)]",
+      "mod ${1:mod name} {",
+      "  #[test]",
+      "  fn ${2:test_name}() {",
+      "    ${3:todo!()}",
+      "  }",
+      "}"
+    ],
+    "description": "setup of test module"
   }
 }

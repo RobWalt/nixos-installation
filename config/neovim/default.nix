@@ -1,12 +1,12 @@
-{ pkgs, config, lib, hlargs-src, yanky-src, ... }:
+{ pkgs, config, lib, unstable, inputs, ... }:
 let
-  vimplugins = pkgs.callPackage ./vimplugins.nix { inherit hlargs-src yanky-src; };
+  vimplugins = pkgs.callPackage ./vimplugins.nix { inherit unstable inputs; };
 in
 {
   nixpkgs.overlays =
     [
       (self: super: {
-        aviac-neovim = super.neovim.override {
+        aviac-neovim = unstable.neovim.override {
           configure = {
             packages.main = {
               start = vimplugins.pluginList;
@@ -21,10 +21,16 @@ in
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
       aviac-neovim
-      gcc# needed for treesitter compilation
-      git# needed for treesitter download
+      ;
+    inherit (pkgs.nodePackages)
+      cspell# spelling checker code actions
+      ;
+    inherit (unstable)
+      # using unstable version see system packages
+      typst-lsp# typst lsp
+      statix# another nix lsp for lints and suggestions
+      rnix-lsp# nix lsp for formatting mainly
       manix# nix docs searcher
-      rnix-lsp# nix lsp
       marksman# markdown lsp
       ;
   };

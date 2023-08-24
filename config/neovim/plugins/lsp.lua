@@ -1,5 +1,15 @@
 vim.api.nvim_create_autocmd("BufWritePre",
-  { pattern = { "*.nix", "*.rs", "*.lua", "*.hs", "*.wgsl" }, command = "lua vim.lsp.buf.format()" })
+  {
+    pattern = {
+      "*.hs",
+      "*.lua",
+      "*.nix",
+      "*.rs",
+      "*.typ",
+      "*.wgsl"
+    },
+    command = "lua vim.lsp.buf.format()"
+  })
 
 local sigcfg = {
   doc_lines = 0,
@@ -30,6 +40,10 @@ local luacfg = {
     },
   },
 }
+
+-- doesn't work that well yet, using null-ls for now
+-- require('lspconfig').statix.setup({})        -- nix
+-- require('lspconfig').typst_lsp.setup({})     -- typst
 
 require('lspconfig').rnix.setup({})          -- nix
 require('lspconfig').wgsl_analyzer.setup({}) -- wgsl

@@ -1,29 +1,33 @@
-{ pkgs, config, lib, bat-catppuccin, btop-catppuccin, ... }:
+{ pkgs, config, lib, inputs, ... }:
 let
-  names = import ../names.nix { };
-  bat-catppuccin-program = import ./bat { inherit pkgs bat-catppuccin; };
-  btop-catppuccin-program = import ./btop { inherit pkgs lib btop-catppuccin; };
+  inherit (inputs) adminName;
+  importing = x: import x { inherit pkgs lib inputs; };
+  bat-catppuccin-program = importing ./bat;
+  btop-catppuccin-program = importing ./btop;
+  file-placement = importing ./file-placement;
+  git = importing ./git;
+  zsh = importing ./zsh;
 in
 {
   home-manager.useGlobalPkgs = true;
-  home-manager.users.${names.userName} = { ... }:
+  home-manager.users.${adminName} = { ... }:
     {
       programs.home-manager.enable = true;
 
       home.stateVersion = config.system.stateVersion;
-      home.username = "${names.userName}";
-      home.homeDirectory = "/home/${names.userName}";
+      home.username = "${adminName}";
+      home.homeDirectory = "/home/${adminName}";
 
       imports = [
         ./alacritty
         ./dunst
-        bat-catppuccin-program
-        btop-catppuccin-program
         ./rofi
         ./tmux
-        ./file-placement
-        ./zsh
-        ./git
+        bat-catppuccin-program
+        btop-catppuccin-program
+        file-placement
+        git
+        zsh
       ];
 
       home.sessionPath = [

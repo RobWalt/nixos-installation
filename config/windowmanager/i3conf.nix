@@ -1,7 +1,5 @@
-{ ... }:
-let
-  names = import ../names.nix { };
-in
+{ inputs, ... }:
+let inherit (inputs) adminName; in
 ''
   set $mod Mod4
 
@@ -24,7 +22,7 @@ in
   # type clipboard
   bindsym $mod+n exec "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'; sleep 0.1; xdotool type $(xclip -o -sel clip)"
 
-  bindsym $mod+p exec "ROFI_PASS_CONFIG='/home/${names.userName}/.config/rofi-pass/config' rofi-pass"
+  bindsym $mod+p exec "ROFI_PASS_CONFIG='/home/${adminName}/.config/rofi-pass/config' rofi-pass"
 
   # There also is the (new) i3-dmenu-desktop which only displays applications
   # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -32,7 +30,7 @@ in
   # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
   # feh
-  exec_always --no-startup-id "feh /home/${names.userName}/wallpaper/bg/ -z --bg-max --image-bg \"#345\""
+  exec_always --no-startup-id "feh /home/${adminName}/wallpaper/bg/ -z --bg-max --image-bg \"#345\""
 
   # greenclip
   exec_always --no-startup-id "killall -q greenclip || greenclip daemon"

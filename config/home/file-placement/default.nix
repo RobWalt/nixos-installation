@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
+  inherit (inputs) adminName;
   hoard-shell-plugin-path = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/Hyde46/hoard/main/src/shell/hoard.zsh";
     sha256 = "sha256:1qbz1csp218nmy2fgkcdq9ryh4zv47grc9q4bfqzpqvrzxgvig4c";
@@ -37,10 +38,10 @@ in
   home.file.".mygumscripts/git-commit.sh".source = ../zsh/scripts/glab/git-commit.sh;
 
   # tmux init stuff
-  home.file.".tmux/init-tmux-work.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-work.nix { };
+  home.file.".tmux/init-tmux-work.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-work.nix { inherit adminName; };
   home.file.".tmux/init-tmux-system.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-system.nix { };
-  home.file.".tmux/init-tmux-all.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-all.nix { };
-  home.file.".tmux/init-tmux-freetime.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-freetime.nix { };
+  home.file.".tmux/init-tmux-all.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-all.nix { inherit adminName; };
+  home.file.".tmux/init-tmux-freetime.sh".text = pkgs.callPackage ../tmux/scripts/init-tmux-freetime.nix { inherit adminName; };
 
   # nix shell creaters
   home.file.".nix-shells/bevy.nix".source = ../zsh/nix-shells/bevy.nix;
@@ -48,7 +49,7 @@ in
   home.file.".nix-shells/wasm.nix".source = ../zsh/nix-shells/wasm.nix;
   home.file.".nix-shells/phone.nix".source = ../zsh/nix-shells/phone.nix;
 
-  home.file.".config/greenclip.toml".text = pkgs.callPackage ../home-configs/greenclip.nix { };
+  home.file.".config/greenclip.toml".text = pkgs.callPackage ../home-configs/greenclip.nix { inherit adminName; };
 }
 # 
 # { pkgs, ... }:

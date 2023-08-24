@@ -1,35 +1,35 @@
 {
   "bevy-prelude": {
-    "prefix": "bprelude",
+    "prefix": "bprel",
     "body": [
       "use bevy::prelude::*;"
     ],
-    "description": "import bevy prelude"
+    "description": "Bevy Prelude"
   },
-  "define-component": {
+  "bevy-component": {
     "prefix": "bcomp",
     "body": [
       "#[derive(Debug, Clone, Component, Default, Reflect)]",
       "pub struct ${1:type_name};"
     ],
-    "description": "Define a bevy component"
+    "description": "Bevy Component"
   },
-  "define-newtype-component": {
+  "bevy-component-newtype": {
     "prefix": "bcompnt",
     "body": [
       "#[derive(Debug, Clone, Component, Deref, DerefMut, Default, Reflect)]",
       "pub struct ${1:type_name}(${2:inner});"
     ],
-    "description": "Define a bevy component newtype"
+    "description": "Bevy Component Newtype"
   },
-  "register-component-type-registry": {
-    "prefix": "bregcomp",
+  "bevy-register-type": {
+    "prefix": "bregt",
     "body": [
       ".register_type::<${1:component_name}>()"
     ],
-    "description": "Register component in type registry"
+    "description": "Bevy Register Type"
   },
-  "define-plugin": {
+  "bevy-plugin": {
     "prefix": "bplug",
     "body": [
       "pub struct ${1:plugin_name};",
@@ -40,9 +40,9 @@
       "  }",
       "}"
     ],
-    "description": "Define a bevy component newtype"
+    "description": "Bevy Plugin"
   },
-  "define-resource": {
+  "bevy-resource": {
     "prefix": "bres",
     "body": [
       "#[derive(Debug, Clone, Resource)]",
@@ -50,35 +50,74 @@
       "  ${2:field_name}: ${3:field_type}",
       "}"
     ],
-    "description": "Define a bevy resource"
+    "description": "Bevy Resource"
   },
-  "define-newtype-resource": {
+  "bevy-resource-newtype": {
     "prefix": "bresnt",
     "body": [
       "#[derive(Debug, Clone, Resource, Deref, DerefMut)]",
       "pub struct ${1:type_name}(${2:inner});"
     ],
-    "description": "Define a bevy resource newtype"
+    "description": "Bevy Resource Newtype"
   },
-  "assets-resource": {
-    "prefix": "basset",
+  "bevy-assets-resource": {
+    "prefix": "bass",
     "body": [
       "Res<Assets<$1>>"
     ],
-    "description": "Resource Assets"
+    "description": "Bevy Resource Assets"
   },
-  "assets-resource-mut": {
-    "prefix": "bmasset",
+  "bevy-assets-resource-mut": {
+    "prefix": "bmass",
     "body": [
       "ResMut<Assets<$1>>"
     ],
-    "description": "Mutable Resource Assets"
+    "description": "Bevy Mutable Resource Assets"
   },
-  "commands": {
-    "prefix": "comms",
+  "bevy-commands": {
+    "prefix": "bcomms",
     "body": [
       "mut commands: Commands"
     ],
-    "description": "Commands Argument"
+    "description": "Bevy Commands Argument"
+  },
+  "bevy-template-system-commands": {
+    "prefix": "btsysc",
+    "body": [
+      "pub fn ${1:system_name}(",
+      "  mut commands: Commands,",
+      ") {",
+      "${2:todo!(\"system code here\");}",
+      "}"
+    ],
+    "description": "Bevy Template System with commands"
+  },
+  "bevy-query": {
+    "prefix": "bqu",
+    "body": [
+      "Query<${1:components}>"
+    ],
+    "description": "Bevy Query"
+  },
+  "bevy-query-filtered": {
+    "prefix": "bquf",
+    "body": [
+      "Query<${1:components}, ${2:filters}>"
+    ],
+    "description": "Bevy Query with Filters"
+  },
+  "bevy-event-reader": {
+    "prefix": "bevr",
+    "body": [
+      "EventReader<${1:event_type}>"
+    ],
+    "description": "Bevy Event Reader"
+  },
+  "bevy-event-writer": {
+    "prefix": "bevw",
+    "body": [
+      "EventWriter<${1:event_type}>"
+    ],
+    "description": "Bevy Event Writer"
   }
 }

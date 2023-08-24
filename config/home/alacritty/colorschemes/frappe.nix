@@ -1,4 +1,4 @@
-{}:
+_:
 {
   # Default colors
   primary = {

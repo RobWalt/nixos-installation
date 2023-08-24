@@ -1,4 +1,5 @@
-{ pkgs, lib, btop-catppuccin, ... }:
+{ pkgs, lib, inputs, ... }:
+let inherit (inputs) btop-catppuccin; in
 {
   programs.btop = {
     enable = true;

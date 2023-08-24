@@ -1,11 +1,35 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
+let inherit (inputs) adminName; in
 {
   programs.git = {
     enable = true;
     userName = "RobWalt";
     userEmail = "robwalter96@gmail.com";
+    aliases = {
+      recent-branch = "branch --sort=-committerdate | head";
+      aa = "add -A";
+      st = "status";
+      sw = "switch";
+      co = "chechout";
+      cob = "checkout -b";
+      p = "push";
+      pp = "pull -p";
+      rh = "reset HEAD~";
+      re = "restore";
+      clean = "clean -d -f";
+      s = "stash";
+      sp = "stash pop";
+      sb = "stash branch";
+      px = "log -S";
+      ll = "log -L";
+      check-whitespace = "diff --ws-error-highlight=new";
+    };
     hooks = {
-      pre-commit = builtins.toFile "pre-commit.sh" (pkgs.callPackage hooks/pre-commit.nix { });
+      pre-commit = pkgs.writeTextFile {
+        name = "pre-commit.sh";
+        text = pkgs.callPackage hooks/pre-commit.nix { inherit adminName; };
+        executable = true;
+      };
     };
     extraConfig = {
       commit.gpgsign = true;

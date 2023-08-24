@@ -1,7 +1,5 @@
-{ pkgs, lib, ... }:
-let
-  names = import ../../names.nix { };
-in
+{ pkgs, lib, inputs, ... }:
+let inherit (inputs) adminName; in
 {
 
   imports = [
@@ -28,21 +26,12 @@ in
       glab-mr = "sh ~/.mygumscripts/glab-mr.sh";
       glab-checklist = "sh ~/.mygumscripts/glab-checklist.sh";
       git-commit = "sh ~/.mygumscripts/git-commit.sh";
-      git-recent-branches = "git branch --sort=-committerdate | head";
       glab-new-issue = "glab issue create";
 
       ccc = "cog commit chore";
       ccfe = "cog commit feat";
       ccfi = "cog commit fix";
       ccr = "cog commit refactor";
-      ga = "git add";
-      gaa = "git add -A";
-      gst = "git status";
-      gc = "git checkout";
-      gcb = "git checkout -b";
-      gp = "git push";
-      gpp = "git pull -p";
-      grh = "git reset HEAD~";
 
       tmuxa = "sh ~/.tmux/init-tmux-all.sh";
       tmuxf = "sh ~/.tmux/init-tmux-freetime.sh";
@@ -55,9 +44,6 @@ in
       l = "exa -l";
       ll = "exa -alh";
       lt = "exa --tree --header --icons --git";
-      tree1 = "lt --level=1";
-      tree2 = "lt --level=2";
-      tree3 = "lt --level=3";
 
       cat = "bat --theme=catppuccin";
 
@@ -66,10 +52,10 @@ in
       diff = "difft";
       find = "fd";
 
-      init-bevy = "cp /home/${names.userName}/nix-shells/bevy.nix .";
-      init-ns = "cp /home/${names.userName}/nix-shells/dev.nix .";
-      init-wasm = "cp /home/${names.userName}/nix-shells/wasm.nix .";
-      init-phone = "cp /home/${names.userName}/nix-shells/phone.nix .";
+      init-bevy = "cp /home/${adminName}/nix-shells/bevy.nix .";
+      init-ns = "cp /home/${adminName}/nix-shells/dev.nix .";
+      init-wasm = "cp /home/${adminName}/nix-shells/wasm.nix .";
+      init-phone = "cp /home/${adminName}/nix-shells/phone.nix .";
 
       remarkable = "restream -s reMarkable -p";
     };
@@ -79,7 +65,7 @@ in
       extended = true;
       save = 100000;
       size = 100000;
-      path = "/home/${names.userName}/.zhistory";
+      path = "/home/${adminName}/.zhistory";
     };
 
     historySubstringSearch = {
@@ -99,12 +85,7 @@ in
 
     initExtra = ''
       eval "$(zoxide init zsh)"
-      eval $(ssh-agent) > /home/${names.userName}/.sshstartup.log && ssh-add /home/${names.userName}/.ssh/keys/* 2>> /home/${names.userName}/.sshstartup.log
-
-      export NIX_BUILD_SHELL="zsh"
-
       source ~/.config/hoard/hoard.zsh
-
       fpath+=(~/.zfunc)
     '';
   };

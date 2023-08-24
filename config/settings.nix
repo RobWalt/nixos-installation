@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   nix.settings = {
 
     # cache options

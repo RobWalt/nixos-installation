@@ -17,6 +17,7 @@
     musescore# musescore
     peek# gif capturing tool
     qutebrowser-qt6# broswer with vim controls
+    librewolf# firefox based browser. Switching to it after googles ad DRM proposal
     rustdesk# remote connection to other computers
     spotify# music
     sniffnet# internet traffic viewer
@@ -49,6 +50,8 @@
     fd# better find
     fzf# fuzzy finder
     gh# github cli tool
+    gcc
+    git
     git-cliff
     git-lfs# git large file storage
     glab# gitlab cli tool
@@ -67,6 +70,7 @@
     networkmanagerapplet#wifi applet
     openssl# ssh
     pciutils
+    rage#simple modern encryption tool using the age format
     ranger# cli file manager
     restream# stream remarkable to pc screen
     ripgrep# better grep
@@ -153,19 +157,18 @@
     luajit
     lua-language-server
 
-    # gpg
-    pinentry# passphrase input
-    gnupg# key signing
-    gpgme# key signing
-    pass
-    rofi-pass
-
     # wasm
     #unstable.wasm-bindgen-cli # not always up to date
     wasm-pack
 
     # javascript 
     # nodejs
+
+    # podman 
+    podman
+    podman-compose
+    arion#nix docker-compose
+    colmena#nix deployment tool
 
     # for getting ADM GPU Name
     libdrm;

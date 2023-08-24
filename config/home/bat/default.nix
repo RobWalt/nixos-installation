@@ -1,4 +1,6 @@
-{ pkgs, bat-catppuccin, ... }: {
+{ pkgs, inputs, ... }:
+let inherit (inputs) bat-catppuccin; in
+{
   programs.bat = {
     enable = true;
     themes = {

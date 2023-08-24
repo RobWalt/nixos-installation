@@ -1,14 +1,11 @@
-{ ... }:
-let
-  names = import ../../names.nix { };
-in
+{ adminName, ... }:
 '' 
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-  parser_install_dir = "/home/${names.userName}/.local/share/nvim/",
+  parser_install_dir = "/home/${adminName}/.local/share/nvim/",
   ident = {
     enable = true,
   },

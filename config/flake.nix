@@ -39,32 +39,33 @@
     , bat-catppuccin
     , btop-catppuccin
     , ...
-    }:
-    flake-utils.lib.eachDefaultSystem (system:
-    {
-      packages.nixosConfigurations =
-        let
-          names = import ./names.nix { };
+    }@inputs:
+    let
+      buildSystem = nixpkgs.lib.nixosSystem;
+      myBuild = { hostName, adminName, system }: {
+        ${hostName} = buildSystem {
+          inherit system;
+
           specialArgs = {
             unstable = import unstable { inherit system; };
             oldpkgs = import old-nixpkgs { inherit system; };
-            inherit hlargs-src yanky-src bat-catppuccin btop-catppuccin;
+            inputs = inputs // { inherit hostName adminName; };
           };
-        in
-        {
-          ${names.hostName} = nixpkgs.lib.nixosSystem {
-            inherit
-              system# inherit system
-              specialArgs# make other args available
-              ;
 
-            # load modules
-            modules =
-              [
-                home-manager.nixosModules.home-manager
-                ./configuration.nix
-              ];
-          };
+          # load modules
+          modules =
+            [
+              home-manager.nixosModules.home-manager
+              ./configuration.nix
+            ];
         };
+      };
+    in
+    flake-utils.lib.eachDefaultSystem (system: {
+      packages.nixosConfigurations = myBuild {
+        inherit system;
+        hostName = "robw";
+        adminName = "robw";
+      };
     });
 }

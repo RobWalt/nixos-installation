@@ -1,7 +1,5 @@
-{ pkgs, config, ... }:
-let
-  names = import ../names.nix { };
-in
+{ pkgs, config, inputs, ... }:
+let inherit (inputs) adminName; in
 {
   # High DPI settings
   # hardware.video.hidpi.enable = true;
@@ -22,7 +20,7 @@ in
       lightdm.enable = true;
       autoLogin = {
         enable = true;
-        user = "${names.userName}";
+        user = "${adminName}";
       };
       defaultSession = "none+i3";
     };
@@ -45,6 +43,6 @@ in
     };
   };
 
-  environment.etc."i3.conf".text = pkgs.callPackage ./i3conf.nix { };
+  environment.etc."i3.conf".text = pkgs.callPackage ./i3conf.nix { inherit inputs; };
 
 }

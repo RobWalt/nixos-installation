@@ -1,4 +1,4 @@
-{}: {
+_: {
   # Default colors
   primary = {
     background = "#1E1E2E"; # base
